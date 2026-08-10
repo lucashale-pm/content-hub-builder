@@ -9,6 +9,7 @@ Create a self-contained static builder site inside this repository, ready to pub
 - Keep each component in `components/<component-name>/` with its specification, definition/schema, renderer, and placeholder assets. The builder reads registered definitions; it does not duplicate component markup.
 - Build a desktop-only workshop UI with a categorised component picker, editable page canvas, add/remove/duplicate/edit controls, and drag/reorder support. There is no minimum or maximum component count.
 - Render a mobile-only, recognisable preview for the selected GamesRadar+ or PC Gamer scenario.
+- Add a separate component explorer at `/explorer/`, linked from the builder. It shows the full registered catalogue grouped by category, with each component rendered in isolation and its available states, fields, options, and placeholder imagery visible.
 - Store a versioned draft containing brand, scenario, page metadata, and ordered component instances. Keep component definitions separate from participant content.
 - Auto-save the active draft locally; support compressed share links plus JSON download/import. No account, backend, upload, or collaborative-editing dependency.
 
@@ -20,6 +21,7 @@ Create a self-contained static builder site inside this repository, ready to pub
 
 ## Assumptions
 
+- The explorer is a read-only catalogue and does not modify workshop drafts.
 - The component list, categories, field requirements, placeholder imagery, and defaults will be supplied incrementally.
 - Participants author on desktop/laptop; the generated hub preview is mobile only.
 - Each participant receives an analogous brand-specific editorial brief.
