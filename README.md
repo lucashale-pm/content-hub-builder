@@ -2,6 +2,8 @@
 
 Workshop prototype for composing mobile content hubs from reusable components.
 
+The published site is available at `https://lucashale-pm.github.io/content-hub-builder/`. The root `index.html` forwards to the standalone builder in `builder/`, so the site also works when GitHub Pages is configured to publish the `main` branch root.
+
 ## Structure
 
 - `builder/` - standalone static builder site and registry.
