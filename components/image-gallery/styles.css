@@ -1,0 +1,6 @@
+.hub-image-gallery { background: var(--hub-gallery-background, #fff); color: var(--hub-gallery-ink, #1a1a1a); display: grid; gap: 12px; padding: 20px; }
+.hub-image-gallery__heading { font: 700 22px/1.1 var(--hub-gallery-display-font, Figtree, sans-serif); margin: 0; }
+.hub-image-gallery__track { display: flex; gap: 8px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.hub-image-gallery__track::-webkit-scrollbar { display: none; }
+.hub-image-gallery__item { aspect-ratio: 1; flex: 0 0 100%; overflow: hidden; scroll-snap-align: start; }
+.hub-image-gallery__image { display: block; height: 100%; object-fit: cover; width: 100%; }

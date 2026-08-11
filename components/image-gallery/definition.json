@@ -1,0 +1,24 @@
+{
+  "id": "image-gallery",
+  "name": "Image gallery",
+  "category": "Media",
+  "version": 1,
+  "renderer": "./renderer.js",
+  "fields": [
+    { "id": "heading", "label": "Heading", "type": "text", "required": false },
+    { "id": "images", "label": "Images", "type": "collection", "itemLabel": "Image", "maxItems": 6, "required": true, "itemFields": [
+      { "id": "imageUrl", "label": "Image URL", "type": "url", "required": true },
+      { "id": "imageAlt", "label": "Image description", "type": "text", "required": false }
+    ] }
+  ],
+  "defaults": {
+    "heading": "Grand Theft Auto VI gallery",
+    "images": [
+      { "imageUrl": "https://cdn.mos.cms.futurecdn.net/TbbGTvm9FSb2HURbzjwjob-750-80.jpg.webp", "imageAlt": "Grand Theft Auto VI promotional artwork." },
+      { "imageUrl": "https://cdn.mos.cms.futurecdn.net/Zq6E8sCZxZUE397u7sGsFd-750-80.jpg.webp", "imageAlt": "Grand Theft Auto VI promotional artwork." },
+      { "imageUrl": "https://cdn.mos.cms.futurecdn.net/2zcmMVFZfK5SnzosU2pXXm-1600-80.jpg.webp", "imageAlt": "Grand Theft Auto VI promotional artwork." },
+      { "imageUrl": "https://cdn.mos.cms.futurecdn.net/ARsUuo6sUMMyDEevm4pcZQ-1920-80.jpg.webp", "imageAlt": "Grand Theft Auto VI promotional artwork." },
+      { "imageUrl": "https://cdn.mos.cms.futurecdn.net/CcypEd2QXJLbEtKf48DEhA-650-80.jpg.webp", "imageAlt": "Grand Theft Auto VI promotional artwork." }
+    ]
+  }
+}

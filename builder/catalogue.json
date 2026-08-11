@@ -2,6 +2,11 @@
   "version": 1,
   "components": [
     {
+      "id": "image-gallery",
+      "source": "../components/image-gallery",
+      "definition": "../components/image-gallery/definition.json"
+    },
+    {
       "id": "page-content",
       "source": "../components/page-content",
       "definition": "../components/page-content/definition.json"
