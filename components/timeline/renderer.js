@@ -4,8 +4,8 @@ export function renderTimeline(values, theme) {
   const section = document.createElement("section");
   section.className = "hub-timeline";
   section.dataset.component = "timeline";
-  section.style.setProperty("--hub-timeline-background", theme?.color?.surface || "#161616");
-  section.style.setProperty("--hub-timeline-ink", theme?.color?.text || "#ffffff");
+  section.style.setProperty("--hub-timeline-background", theme?.color?.background || "#ffffff");
+  section.style.setProperty("--hub-timeline-ink", theme?.color?.ink || "#1a1a1a");
   section.style.setProperty("--hub-timeline-card-background", theme?.color?.background || "#ffffff");
   section.style.setProperty("--hub-timeline-card-ink", theme?.color?.ink || "#1a1a1a");
   section.style.setProperty("--hub-timeline-muted", theme?.color?.muted || "#737373");
