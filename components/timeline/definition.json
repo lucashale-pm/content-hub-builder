@@ -5,6 +5,7 @@
   "version": 1,
   "fields": [
     { "id": "heading", "label": "Heading", "type": "text", "required": true },
+    { "id": "subheading", "label": "Subheading", "type": "text", "required": false },
     {
       "id": "events",
       "label": "Timeline events",
@@ -16,6 +17,7 @@
         { "id": "year", "label": "Year", "type": "text", "required": true },
         { "id": "heading", "label": "Heading", "type": "text", "required": true },
         { "id": "paragraph", "label": "Paragraph", "type": "textarea", "required": true },
+        { "id": "author", "label": "Author", "type": "text", "required": false },
         { "id": "linkText", "label": "Link text", "type": "text", "required": false },
         { "id": "linkUrl", "label": "Link URL", "type": "url", "required": false }
       ]
@@ -24,13 +26,15 @@
     { "id": "followCtaUrl", "label": "Follow CTA URL", "type": "url", "required": false }
   ],
   "defaults": {
-    "heading": "Grand Theft Auto VI timeline",
+    "heading": "How we covered it",
+    "subheading": "Every major Grand Theft Auto VI update, through our editors' eyes",
     "events": [
       {
         "date": "May 2",
         "year": "2025",
         "heading": "Rockstar confirms a new release date",
         "paragraph": "Grand Theft Auto VI is now set to arrive on May 26, 2026, giving the studio more time to deliver its next open-world adventure.",
+        "author": "PC Gamer staff",
         "linkText": "Read the announcement",
         "linkUrl": "#"
       },
