@@ -1,0 +1,29 @@
+{
+  "id": "inline-poll",
+  "name": "Inline poll",
+  "category": "Engagement",
+  "version": 1,
+  "fields": [
+    { "id": "question", "label": "Question", "type": "textarea", "required": true },
+    {
+      "id": "answers",
+      "label": "Answers",
+      "type": "collection",
+      "required": true,
+      "itemLabel": "Answer",
+      "maxItems": 4,
+      "itemFields": [
+        { "id": "text", "label": "Answer text", "type": "text", "required": true }
+      ]
+    }
+  ],
+  "defaults": {
+    "question": "What are you most looking forward to about GTA 6?",
+    "answers": [
+      { "text": "An all-new map to explore" },
+      { "text": "A new story to enjoy" },
+      { "text": "Causing absolute chaos" },
+      { "text": "Multiplayer" }
+    ]
+  }
+}

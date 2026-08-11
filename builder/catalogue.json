@@ -2,6 +2,11 @@
   "version": 1,
   "components": [
     {
+      "id": "inline-poll",
+      "source": "../components/inline-poll",
+      "definition": "../components/inline-poll/definition.json"
+    },
+    {
       "id": "game-review",
       "source": "../components/game-review",
       "definition": "../components/game-review/definition.json"
