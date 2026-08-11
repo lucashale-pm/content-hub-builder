@@ -1,5 +1,5 @@
 .hub-inline-poll { display: grid; gap: 26px; padding: 28px 20px; }
-.hub-inline-poll[data-theme="gamesradar"] { background: var(--hub-poll-surface, #1f1f1f); border-radius: 24px; color: var(--hub-poll-text, #fff); }
+.hub-inline-poll[data-theme="gamesradar"] { background: var(--hub-poll-surface, #1f1f1f); border-radius: 24px; color: var(--hub-poll-text, #fff); margin-inline: 12px; }
 .hub-inline-poll[data-theme="pcgamer"] { background: var(--hub-poll-background, #fff); color: var(--hub-poll-ink, #1a1a1a); padding: 24px 28px; }
 .hub-inline-poll__question { font: 700 18px/1.12 var(--hub-poll-display-font, Figtree, sans-serif); margin: 0; text-align: center; }
 .hub-inline-poll[data-theme="pcgamer"] .hub-inline-poll__question { font: 700 18px/1.15 var(--hub-poll-display-font, "Roboto Condensed", sans-serif); }
