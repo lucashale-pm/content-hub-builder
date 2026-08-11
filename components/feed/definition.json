@@ -1,0 +1,64 @@
+{
+  "id": "feed",
+  "name": "Feed",
+  "category": "Content",
+  "version": 1,
+  "renderer": "./renderer.js",
+  "fields": [
+    { "id": "eyebrow", "label": "Feed eyebrow", "type": "text", "required": true },
+    { "id": "date", "label": "Feed date", "type": "text", "required": true },
+    { "id": "archiveLabel", "label": "Archive link label", "type": "text", "required": true },
+    { "id": "archiveHref", "label": "Archive link URL", "type": "url", "required": true },
+    { "id": "featured", "label": "Featured article", "type": "object", "required": true, "fields": [
+      { "id": "label", "label": "Label", "type": "text", "required": true },
+      { "id": "title", "label": "Title", "type": "textarea", "required": true },
+      { "id": "summary", "label": "Summary", "type": "textarea", "required": true },
+      { "id": "imageUrl", "label": "Feature image URL", "type": "url", "required": true },
+      { "id": "imageAlt", "label": "Feature image description", "type": "text", "required": true },
+      { "id": "author", "label": "Author", "type": "text", "required": true },
+      { "id": "avatarUrl", "label": "Author image URL", "type": "url", "required": true },
+      { "id": "posted", "label": "Posted label", "type": "text", "required": true },
+      { "id": "comments", "label": "Comment count", "type": "text", "required": true },
+      { "id": "reactions", "label": "Reaction count", "type": "text", "required": true },
+      { "id": "href", "label": "Article URL", "type": "url", "required": true }
+    ] },
+    { "id": "articles", "label": "Feed articles", "type": "collection", "required": true, "itemFields": [
+      { "id": "label", "label": "Label", "type": "text", "required": true },
+      { "id": "title", "label": "Title", "type": "textarea", "required": true },
+      { "id": "imageUrl", "label": "Thumbnail URL", "type": "url", "required": true },
+      { "id": "imageAlt", "label": "Thumbnail description", "type": "text", "required": true },
+      { "id": "author", "label": "Author", "type": "text", "required": true },
+      { "id": "avatarUrl", "label": "Author image URL", "type": "url", "required": true },
+      { "id": "posted", "label": "Posted label", "type": "text", "required": true },
+      { "id": "comments", "label": "Comment count", "type": "text", "required": true },
+      { "id": "reactions", "label": "Reaction count", "type": "text", "required": true },
+      { "id": "href", "label": "Article URL", "type": "url", "required": true }
+    ] },
+    { "id": "loadMoreLabel", "label": "Load more label", "type": "text", "required": true }
+  ],
+  "defaults": {
+    "eyebrow": "Today's GTA 6 feed",
+    "date": "August 11, 2026",
+    "archiveLabel": "View archive",
+    "archiveHref": "#archive",
+    "featured": {
+      "label": "Feature",
+      "title": "GTA 6 is shaping up to be Rockstar's most ambitious open world yet",
+      "summary": "From Vice City's changing districts to its two leads, here is everything that could make Grand Theft Auto VI the next defining sandbox.",
+      "imageUrl": "https://cdn.mos.cms.futurecdn.net/RWja8FWtZByoAbdqYrZSQ9-1920-80.jpg.webp",
+      "imageAlt": "Grand Theft Auto VI artwork showing protagonists Lucia and Jason overlooking Vice City.",
+      "author": "Maya Chen",
+      "avatarUrl": "./assets/maya-chen.png",
+      "posted": "Posted 3h ago",
+      "comments": "184",
+      "reactions": "2.4k",
+      "href": "#featured"
+    },
+    "articles": [
+      { "label": "News", "title": "GTA 6's next trailer has fans looking for every Vice City clue", "imageUrl": "https://cdn.mos.cms.futurecdn.net/RWja8FWtZByoAbdqYrZSQ9-1920-80.jpg.webp", "imageAlt": "Grand Theft Auto VI artwork.", "author": "Raj Patel", "avatarUrl": "./assets/raj-patel.png", "posted": "Posted 3h ago", "comments": "96", "reactions": "1.8k", "href": "#news" },
+      { "label": "Analysis", "title": "Why GTA 6's dual protagonists could change how Rockstar tells stories", "imageUrl": "https://cdn.mos.cms.futurecdn.net/RWja8FWtZByoAbdqYrZSQ9-1920-80.jpg.webp", "imageAlt": "Grand Theft Auto VI artwork.", "author": "Jordan Lee", "avatarUrl": "./assets/jordan-lee.png", "posted": "Posted 1d ago", "comments": "214", "reactions": "3.1k", "href": "#analysis" },
+      { "label": "Guide", "title": "Every GTA 6 character confirmed so far", "imageUrl": "https://cdn.mos.cms.futurecdn.net/RWja8FWtZByoAbdqYrZSQ9-1920-80.jpg.webp", "imageAlt": "Grand Theft Auto VI artwork.", "author": "Maya Chen", "avatarUrl": "./assets/maya-chen.png", "posted": "Posted 3d ago", "comments": "82", "reactions": "4.7k", "href": "#guide" }
+    ],
+    "loadMoreLabel": "Load more articles"
+  }
+}

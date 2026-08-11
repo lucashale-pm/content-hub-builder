@@ -1,4 +1,49 @@
 {
   "version": 1,
-  "components": []
+  "components": [
+    {
+      "id": "feed",
+      "source": "../components/feed",
+      "definition": "../components/feed/definition.json"
+    },
+    {
+      "id": "hero",
+      "source": "../components/hero",
+      "definition": "../components/hero/definition.json"
+    },
+    {
+      "id": "article-card",
+      "name": "Article card",
+      "category": "Content",
+      "source": "../components/article-card",
+      "fields": [
+        { "id": "imageUrl", "label": "Image URL", "type": "url", "required": false },
+        { "id": "headline", "label": "Headline", "type": "text", "required": true },
+        { "id": "dek", "label": "Supporting copy", "type": "textarea", "required": false },
+        { "id": "href", "label": "Link", "type": "url", "required": true }
+      ],
+      "defaults": {
+        "imageUrl": "",
+        "headline": "Example article headline",
+        "dek": "Supporting copy for the selected story.",
+        "href": "#"
+      }
+    },
+    {
+      "id": "content-carousel",
+      "name": "Content carousel",
+      "category": "Collections",
+      "source": "../components/content-carousel",
+      "fields": [
+        { "id": "title", "label": "Section heading", "type": "text", "required": true },
+        { "id": "items", "label": "Cards", "type": "collection", "required": true },
+        { "id": "imageRatio", "label": "Image ratio", "type": "select", "required": true, "options": ["landscape", "square"] }
+      ],
+      "defaults": {
+        "title": "Latest stories",
+        "items": [],
+        "imageRatio": "landscape"
+      }
+    }
+  ]
 }

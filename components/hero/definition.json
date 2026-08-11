@@ -1,0 +1,29 @@
+{
+  "id": "hero",
+  "name": "Hero",
+  "category": "Page introduction",
+  "version": 1,
+  "renderer": "./renderer.js",
+  "fields": [
+    { "id": "eyebrow", "label": "Eyebrow", "type": "text", "required": false },
+    { "id": "headline", "label": "Headline", "type": "text", "required": true },
+    { "id": "subheadline", "label": "Subheadline", "type": "textarea", "required": true },
+    { "id": "mediaType", "label": "Media type", "type": "select", "options": ["image", "video"], "required": true },
+    { "id": "mediaUrl", "label": "Image or video URL", "type": "url", "required": true },
+    { "id": "mediaPoster", "label": "Video poster image URL", "type": "url", "required": false },
+    { "id": "mediaAlt", "label": "Image description", "type": "text", "required": true },
+    { "id": "followers", "label": "Followers", "type": "text", "required": true },
+    { "id": "updated", "label": "Last updated", "type": "text", "required": true }
+  ],
+  "defaults": {
+    "eyebrow": "Trending topic",
+    "headline": "Grand Theft Auto VI",
+    "subheadline": "All the latest GTA 6 news, trailers, characters, and everything we know before Vice City opens its doors.",
+    "mediaType": "image",
+    "mediaUrl": "https://cdn.mos.cms.futurecdn.net/RWja8FWtZByoAbdqYrZSQ9-1920-80.jpg.webp",
+    "mediaPoster": "",
+    "mediaAlt": "Grand Theft Auto VI artwork showing protagonists Lucia and Jason overlooking Vice City.",
+    "followers": "124k followers",
+    "updated": "Updated today"
+  }
+}

@@ -4,7 +4,7 @@ export type ContentSelection =
 
 export interface SectionConfig {
   readonly id: string;
-  readonly component: string;
+  readonly component: "content-carousel" | "content-grid";
   readonly title: string;
   readonly selection: ContentSelection;
   readonly options?: Readonly<Record<string, string | number | boolean>>;

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>Hero component preview</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      body { background: #eef1f5; color: #171a21; font-family: Inter, ui-sans-serif, system-ui, sans-serif; margin: 0; padding: 32px 20px; }
+      main { margin: auto; max-width: 760px; }
+      .preview-title { font-size: 32px; font-weight: 700; margin: 0 0 8px; }
+      .controls { align-items: center; display: flex; gap: 10px; margin: 20px 0; }
+      select { font: inherit; padding: 8px; }
+      #preview { box-shadow: 0 16px 40px rgb(20 25 35 / 20%); margin: auto; max-width: 375px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="preview-title">Hero</p>
+      <p>Isolated component preview. Switch theme to check token adaptation.</p>
+      <label class="controls">Theme <select id="theme"><option value="gamesradar">GamesRadar+</option><option value="pcgamer">PC Gamer</option></select></label>
+      <div id="preview"></div>
+    </main>
+    <script type="module" src="./preview.js"></script>
+  </body>
+</html>

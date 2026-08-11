@@ -1,7 +1,17 @@
 # Future builder contract
 
-The builder edits page composition and participant content. It must not alter component implementation or source content records.
+Builder may edit page configs and choose a theme. It must not alter content records or component implementation.
 
-Each registered component provides a stable ID, category, field schema, defaults, validation, preview renderer, and optional placeholder assets.
+Allowed controls:
 
-Drafts contain the selected brand/scenario and an ordered list of component instances. Each instance has a generated ID, component definition ID, and field values.
+- Theme: `gamesradar` or `pcgamer`.
+- Page: title plus ordered sections.
+- Section: supported component, title, content selection, declared options.
+
+Validation rules:
+
+- Component name must be registered.
+- IDs unique per page.
+- `tags` selection needs at least one tag and positive limit.
+- `ids` selection preserves authored order.
+- Renderer receives resolved content; it does not parse Markdown or fetch URLs.

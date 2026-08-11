@@ -1,16 +1,25 @@
-# Content hub builder
+# Content Hubs
 
-Workshop prototype for composing mobile content hubs from reusable components.
+Composable hub foundation. Content stays separate from display. Pages compose sections. Themes change brand styling only.
 
-The published site is available at `https://lucashale-pm.github.io/content-hub-builder/`. The root `index.html` forwards to the standalone builder in `builder/`, so the site also works when GitHub Pages is configured to publish the `main` branch root.
+## Flow
 
-## Structure
+`content/*.md` or media URL -> `content-index.ts` -> card -> collection/carousel -> page config -> renderer`
 
-- `builder/` - standalone static builder site and registry.
-- `components/` - reusable component contracts and implementations.
-- `content/` - portable example content and media references.
-- `pages/` - page composition examples.
-- `themes/` - GamesRadar+ and PC Gamer theme tokens.
-- `docs/` - builder contract and workshop plan.
+## Start
 
-The builder is intentionally data-driven. Components remain independently owned in their own folders and are added to the builder registry as they are developed.
+1. Add article Markdown in `content/articles/`; include front matter matching `src/content/types.ts`.
+2. Add remote media by URL in `content/media/index.ts`.
+3. Pick items in a page config under `pages/`.
+4. Render config through `src/pages/render-page.ts`; pass `gamesradar` or `pcgamer` theme.
+
+No page component reads files, selects items, or contains brand values. Keep those jobs separate.
+
+## Folders
+
+- `content/`: portable source material.
+- `components/`: component contracts and specs; no brand styling.
+- `pages/`: page composition/configuration only.
+- `themes/`: per-brand token overrides.
+- `src/`: small integration contracts and examples.
+- `docs/`: rules for future builder.
