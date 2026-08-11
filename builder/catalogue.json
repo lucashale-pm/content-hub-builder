@@ -2,6 +2,11 @@
   "version": 1,
   "components": [
     {
+      "id": "timeline",
+      "source": "../components/timeline",
+      "definition": "../components/timeline/definition.json"
+    },
+    {
       "id": "image-gallery",
       "source": "../components/image-gallery",
       "definition": "../components/image-gallery/definition.json"

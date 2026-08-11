@@ -1,0 +1,13 @@
+.hub-timeline { background: var(--hub-timeline-background, #fff); color: var(--hub-timeline-ink, #1a1a1a); display: grid; gap: 22px; padding: 24px 20px; }
+.hub-timeline__heading { font: 700 26px/1.08 var(--hub-timeline-display-font, Figtree, sans-serif); margin: 0; }
+.hub-timeline__list { display: grid; gap: 0; list-style: none; margin: 0; padding: 0; }
+.hub-timeline__event { border-left: 1px solid var(--hub-timeline-border, #e6e6e6); display: grid; gap: 8px; margin-left: 6px; padding: 0 0 28px 22px; position: relative; }
+.hub-timeline__event:last-child { padding-bottom: 0; }
+.hub-timeline__marker { background: var(--hub-timeline-background, #fff); border: 3px solid var(--hub-timeline-accent, #ff6600); border-radius: 50%; height: 13px; left: -7px; position: absolute; top: 3px; width: 13px; }
+.hub-timeline__date { color: var(--hub-timeline-accent, #ff6600); font: 700 13px/1.2 var(--hub-timeline-body-font, Figtree, sans-serif); letter-spacing: .04em; margin: 0; text-transform: uppercase; }
+.hub-timeline__event-heading { font: 700 20px/1.14 var(--hub-timeline-display-font, Figtree, sans-serif); margin: 0; }
+.hub-timeline__paragraph { color: var(--hub-timeline-muted, #737373); font: 400 16px/1.5 var(--hub-timeline-body-font, Figtree, sans-serif); margin: 0; }
+.hub-timeline__link, .hub-timeline__cta { color: var(--hub-timeline-accent, #ff6600); font: 700 15px/1.25 var(--hub-timeline-body-font, Figtree, sans-serif); text-decoration: none; }
+.hub-timeline__link::after, .hub-timeline__cta::after { content: " →"; }
+.hub-timeline__cta { border-top: 1px solid var(--hub-timeline-border, #e6e6e6); padding-top: 18px; }
+.hub-timeline__link:hover, .hub-timeline__cta:hover { text-decoration: underline; }
