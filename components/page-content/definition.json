@@ -1,0 +1,22 @@
+{
+  "id": "page-content",
+  "name": "Direct on page content",
+  "category": "Editorial",
+  "version": 1,
+  "renderer": "./renderer.js",
+  "fields": [
+    { "id": "heading", "label": "Heading", "type": "text", "required": false },
+    { "id": "subheading", "label": "Subheading", "type": "text", "required": false },
+    { "id": "paragraphs", "label": "Paragraphs", "type": "collection", "itemLabel": "Paragraph", "required": false, "itemFields": [
+      { "id": "text", "label": "Paragraph", "type": "textarea", "required": false }
+    ] }
+  ],
+  "defaults": {
+    "heading": "Welcome to Vice City",
+    "subheading": "Everything you need to know about Grand Theft Auto VI.",
+    "paragraphs": [
+      { "text": "This hub brings together the latest news, trailers, guides, and analysis from the world of GTA 6." },
+      { "text": "Check back often as new stories arrive." }
+    ]
+  }
+}

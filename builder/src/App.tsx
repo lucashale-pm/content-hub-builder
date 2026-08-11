@@ -4,6 +4,7 @@ import heroDefinition from "../../components/hero/definition.json";
 import feedDefinition from "../../components/feed/definition.json";
 import steamDataDefinition from "../../components/steam-data/definition.json";
 import verticalVideoDefinition from "../../components/vertical-video/definition.json";
+import pageContentDefinition from "../../components/page-content/definition.json";
 // Component renderers remain source-owned. React only hosts their DOM output.
 // @ts-ignore
 import { renderHero } from "../../components/hero/renderer.js";
@@ -13,18 +14,20 @@ import { renderFeed } from "../../components/feed/renderer.js";
 import { renderSteamData } from "../../components/steam-data/renderer.js";
 // @ts-ignore
 import { renderVerticalVideo } from "../../components/vertical-video/renderer.js";
+// @ts-ignore
+import { renderPageContent } from "../../components/page-content/renderer.js";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type Values = Record<string, unknown>;
-type Field = { id: string; label: string; type: string; required?: boolean; options?: string[]; fields?: Field[]; itemFields?: Field[] };
+type Field = { id: string; label: string; type: string; required?: boolean; options?: string[]; fields?: Field[]; itemFields?: Field[]; itemLabel?: string };
 type Definition = { id: string; name: string; category: string; fields: Field[]; defaults: Values };
 type Instance = { id: string; componentId: string; values: Values };
 type Draft = { version: number; brand: keyof typeof themes; scenario: string; pageTitle: string; instances: Instance[] };
 
-const definitions = [heroDefinition, feedDefinition, steamDataDefinition, verticalVideoDefinition] as Definition[];
+const definitions = [heroDefinition, feedDefinition, steamDataDefinition, verticalVideoDefinition, pageContentDefinition] as Definition[];
 const byId = new Map(definitions.map((definition) => [definition.id, definition]));
-const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo };
+const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent };
 const themes = {
   gamesradar: { brand: "gamesradar", color: { accent: "#ff6600", surface: "#161616", text: "#ffffff", background: "#ffffff", ink: "#1a1a1a", muted: "#737373", border: "#e6e6e6", labelNews: "#008a80", labelAnalysis: "#7156c8", labelGuide: "#a85c00" }, font: { display: "Figtree, sans-serif", body: "Figtree, sans-serif" }, typography: { h1: { fontFamily: "Figtree, sans-serif", fontSize: "clamp(40px, 13vw, 64px)", fontWeight: 400, lineHeight: ".9", letterSpacing: "-.04em" } }, radius: { card: "16px" } },
   pcgamer: { brand: "pcgamer", color: { accent: "#e31b23", surface: "#111111", text: "#ffffff", background: "#ffffff", ink: "#1a1a1a", muted: "#737373", border: "#e6e6e6", labelNews: "#b11f26", labelAnalysis: "#6b55ab", labelGuide: "#9c5900" }, font: { display: "Roboto Condensed, sans-serif", body: "Arial, sans-serif" }, typography: { h1: { fontFamily: "Roboto Condensed, sans-serif", fontSize: "clamp(40px, 13vw, 62px)", fontWeight: 700, lineHeight: ".92", letterSpacing: "-.025em" } }, radius: { card: "0px" } },
@@ -50,7 +53,7 @@ function FieldEditor({ fields, values, onChange }: { fields: Field[]; values: Va
     {field.type === "select" ? <select id={field.id} className="h-9 rounded-md border border-zinc-200 bg-white px-2 text-sm" value={String(values[field.id] || "")} onChange={(event) => update([field.id], event.target.value)}>{field.options?.map((option) => <option key={option}>{option}</option>)}</select> : null}
     {!["textarea", "select", "object", "collection"].includes(field.type) ? <input id={field.id} className="h-9 rounded-md border border-zinc-200 bg-white px-3 text-sm" type={field.type === "url" ? "url" : "text"} value={String(values[field.id] || "")} onChange={(event) => update([field.id], event.target.value)} /> : null}
     {field.type === "object" && <fieldset className="grid gap-3 rounded-md border border-zinc-200 p-3"><legend className="px-1 text-xs font-semibold">{field.label}</legend><FieldEditor fields={field.fields || []} values={(values[field.id] as Values) || {}} onChange={(next) => update([field.id], next)} /></fieldset>}
-    {field.type === "collection" && <fieldset className="grid gap-3 rounded-md border border-zinc-200 p-3"><legend className="px-1 text-xs font-semibold">{field.label}</legend>{((values[field.id] as Values[]) || []).map((item, index) => <div key={index} className="rounded border border-zinc-100 p-3"><div className="mb-2 flex items-center justify-between text-xs font-medium">Article {index + 1}<Button variant="ghost" size="sm" onClick={() => update([field.id], ((values[field.id] as Values[]) || []).filter((_, itemIndex) => itemIndex !== index))}>Remove</Button></div><FieldEditor fields={field.itemFields || []} values={item} onChange={(next) => { const items = [...((values[field.id] as Values[]) || [])]; items[index] = next; update([field.id], items); }} /></div>)}<Button variant="outline" size="sm" onClick={() => update([field.id], [...((values[field.id] as Values[]) || []), emptyValues(field.itemFields || [])])}><Plus className="size-3" /> Add article</Button></fieldset>}
+    {field.type === "collection" && <fieldset className="grid gap-3 rounded-md border border-zinc-200 p-3"><legend className="px-1 text-xs font-semibold">{field.label}</legend>{((values[field.id] as Values[]) || []).map((item, index) => <div key={index} className="rounded border border-zinc-100 p-3"><div className="mb-2 flex items-center justify-between text-xs font-medium">{field.itemLabel || "Item"} {index + 1}<Button variant="ghost" size="sm" onClick={() => update([field.id], ((values[field.id] as Values[]) || []).filter((_, itemIndex) => itemIndex !== index))}>Remove</Button></div><FieldEditor fields={field.itemFields || []} values={item} onChange={(next) => { const items = [...((values[field.id] as Values[]) || [])]; items[index] = next; update([field.id], items); }} /></div>)}<Button variant="outline" size="sm" onClick={() => update([field.id], [...((values[field.id] as Values[]) || []), emptyValues(field.itemFields || [])])}><Plus className="size-3" /> Add {field.itemLabel?.toLowerCase() || "item"}</Button></fieldset>}
   </div>)}</div>;
 }
 
