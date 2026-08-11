@@ -11,4 +11,5 @@
 .hub-key-info__item dd { font: 400 16px/1.35 var(--hub-key-info-body-font, Figtree, sans-serif); margin: 0; }
 .hub-key-info__platforms { align-items: center; display: flex; gap: 10px; min-height: 22px; }
 .hub-key-info__platforms img { display: block; height: 20px; max-width: 28px; object-fit: contain; width: 24px; }
+.hub-key-info__pc { align-items: center; border: 1px solid currentColor; display: inline-flex; font: 700 10px/1 var(--hub-key-info-body-font, Figtree, sans-serif); height: 20px; justify-content: center; width: 24px; }
 .hub-key-info__trigger:focus-visible { outline: 2px solid var(--hub-key-info-accent, #ff6600); outline-offset: 4px; }

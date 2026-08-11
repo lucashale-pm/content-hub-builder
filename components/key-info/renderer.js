@@ -1,5 +1,5 @@
 const text = (value) => typeof value === "string" ? value.trim() : "";
-const platformIcons = { PC: "https://cdn.simpleicons.org/windows/1a1a1a", PlayStation: "https://cdn.simpleicons.org/playstation/1a1a1a", Xbox: "https://cdn.simpleicons.org/xbox/1a1a1a", "Nintendo Switch": "https://cdn.simpleicons.org/nintendoswitch/1a1a1a" };
+const platformIcons = { PlayStation: "https://cdn.simpleicons.org/playstation/1a1a1a", Xbox: "https://cdn-icons-png.flaticon.com/512/1/1321.png", "Nintendo Switch": "https://cdn-icons-png.flaticon.com/512/871/871377.png" };
 const infoFields = [["Release date", "releaseDate"], ["Platforms", "platforms"], ["Streaming services", "streamingServices"], ["Genres", "genres"], ["Franchise", "franchise"], ["Game publisher / developer", "publisherDeveloper"], ["Movie & TV studio / distributor", "movieTvStudioDistributor"], ["Time to beat", "timeToBeat"], ["Game Pass", "gamePass"]];
 
 export function renderKeyInfo(values, theme) {
@@ -42,6 +42,13 @@ export function renderKeyInfo(values, theme) {
     if (key === "platforms" && Array.isArray(value)) {
       description.className = "hub-key-info__platforms";
       value.forEach((platform) => {
+        if (platform === "PC") {
+          const label = document.createElement("span");
+          label.className = "hub-key-info__pc";
+          label.textContent = "PC";
+          description.append(label);
+          return;
+        }
         if (!platformIcons[platform]) return;
         const image = document.createElement("img");
         image.src = platformIcons[platform];
