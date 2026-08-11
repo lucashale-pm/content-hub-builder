@@ -1,0 +1,13 @@
+{
+  "id": "vertical-video",
+  "name": "Vertical video",
+  "category": "Video",
+  "version": 1,
+  "renderer": "./renderer.js",
+  "fields": [
+    { "id": "heading", "label": "Heading", "type": "text", "required": true }
+  ],
+  "defaults": {
+    "heading": "Watch the latest"
+  }
+}

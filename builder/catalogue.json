@@ -2,6 +2,11 @@
   "version": 1,
   "components": [
     {
+      "id": "vertical-video",
+      "source": "../components/vertical-video",
+      "definition": "../components/vertical-video/definition.json"
+    },
+    {
       "id": "steam-data",
       "source": "../components/steam-data",
       "definition": "../components/steam-data/definition.json"
