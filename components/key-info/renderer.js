@@ -30,6 +30,7 @@ export function renderKeyInfo(values, theme) {
   content.className = "hub-key-info__content";
   const list = document.createElement("dl");
   list.className = "hub-key-info__list";
+  let detailCount = 0;
   infoFields.forEach(([label, key]) => {
     const value = values[key];
     if (!text(value) && !(Array.isArray(value) && value.length)) return;
@@ -51,9 +52,11 @@ export function renderKeyInfo(values, theme) {
     } else description.textContent = text(value);
     item.append(term, description);
     list.append(item);
+    detailCount += 1;
   });
   content.append(list);
   trigger.addEventListener("click", () => { const expanded = trigger.getAttribute("aria-expanded") === "true"; trigger.setAttribute("aria-expanded", String(!expanded)); section.classList.toggle("is-collapsed", expanded); });
   section.append(trigger, content);
+  section.hidden = detailCount === 0;
   return section;
 }

@@ -14,7 +14,9 @@ export function renderGameReview(values, theme) {
 
   const scores = document.createElement("div");
   scores.className = "hub-game-review__scores";
-  const scoreItems = [["GR+ Score", text(values.grScore), "is-gr"], ["Your score", "+", "is-user"], ["User score", text(values.userScore), "is-community"]];
+  const scoreItems = [["GR+ Score", text(values.grScore), "is-gr"]];
+  if (values.showCommunityScores) scoreItems.push(["Your score", "+", "is-user"], ["User score", text(values.userScore), "is-community"]);
+  scores.style.setProperty("--hub-review-score-count", String(scoreItems.length));
   scoreItems.forEach(([label, score, modifier]) => {
     const item = document.createElement("div");
     item.className = "hub-game-review__score";

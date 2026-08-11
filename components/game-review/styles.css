@@ -1,5 +1,5 @@
 .hub-game-review { background: var(--hub-review-background, #fff); color: var(--hub-review-ink, #1a1a1a); display: grid; gap: 18px; padding: 24px 20px; }
-.hub-game-review__scores { display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); }
+.hub-game-review__scores { display: grid; gap: 10px; grid-template-columns: repeat(var(--hub-review-score-count, 3), 1fr); }
 .hub-game-review__score { align-items: center; display: grid; gap: 10px; justify-items: center; text-align: center; }
 .hub-game-review__score-label { font: 700 13px/1.15 var(--hub-review-body-font, Figtree, sans-serif); margin: 0; }
 .hub-game-review__badge { align-items: center; border: 1px solid var(--hub-review-border, #e6e6e6); border-radius: 50%; display: flex; font: 700 18px/1 var(--hub-review-display-font, Figtree, sans-serif); height: 54px; justify-content: center; width: 54px; }
