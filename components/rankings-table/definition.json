@@ -7,7 +7,6 @@
     { "id": "displayType", "label": "Display type", "type": "select", "required": true, "options": ["Rankings", "Table"] },
     { "id": "heading", "label": "Heading", "type": "text", "required": false },
     { "id": "subheading", "label": "Subheading", "type": "textarea", "required": false },
-    { "id": "rowCtaText", "label": "Row CTA text", "type": "text", "required": false },
     {
       "id": "rows",
       "label": "Rows",
@@ -15,12 +14,10 @@
       "required": true,
       "itemLabel": "Row",
       "itemFields": [
-        { "id": "rank", "label": "Rank", "type": "text", "required": false },
         { "id": "title", "label": "Game / item title", "type": "text", "required": true },
         { "id": "iconUrl", "label": "Small image URL", "type": "url", "required": false },
         { "id": "value", "label": "Table value", "type": "text", "required": false },
-        { "id": "movement", "label": "Ranking movement", "type": "select", "required": false, "options": ["same", "up", "down"] },
-        { "id": "movementText", "label": "Movement text", "type": "text", "required": false },
+        { "id": "ctaText", "label": "Row CTA text", "type": "text", "required": false },
         { "id": "ctaUrl", "label": "Row CTA URL", "type": "url", "required": false }
       ]
     },
@@ -31,13 +28,12 @@
     "displayType": "Rankings",
     "heading": "Power Rankings",
     "subheading": "Editor-curated rankings of games, hardware, and topics",
-    "rowCtaText": "Read more",
     "rows": [
-      { "rank": "1", "title": "Elden Ring: Nightreign", "iconUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUERPsCDI_bEZOJ7yDIrcGzsTBPK-QSvfGeogSxH6XwMERU4Gsvze2Xr6oC1SOJoPegfb3Xw&s=10", "movement": "same", "movementText": "-" },
-      { "rank": "2", "title": "Metaphor: ReFantazio", "iconUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGgqNSEZhkXGcvEFXTLhTJ-U_56C9fsqHILGcs1M0focYuKJkPvblL88XsB2y1jPsEDOjXfQ&s=10", "movement": "down", "movementText": "-1" },
-      { "rank": "3", "title": "Switch 2", "iconUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjoeSJD-maaNd40HZzP9bXE7K-9hLPQmo1FrGv1QFEZUBiTqT_xZxbKhBoTD__ETcvFlLFyg&s=10", "movement": "same", "movementText": "-" },
-      { "rank": "4", "title": "The Witcher 4", "iconUrl": "https://i.ytimg.com/vi/YrtCnL62pB8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAtAoVLs1BZrYCcmeM1rww0vdcCkg", "movement": "up", "movementText": "+1" },
-      { "rank": "5", "title": "GTA VI", "iconUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp9QhAqExpEt5DMUmmh31szAeOq3OulK8yrOghKQISbhlTRrH78eHSaoI89uGSkJmAWomLBw&s=10", "movement": "same", "movementText": "-" }
+      { "title": "Elden Ring: Nightreign", "iconUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUERPsCDI_bEZOJ7yDIrcGzsTBPK-QSvfGeogSxH6XwMERU4Gsvze2Xr6oC1SOJoPegfb3Xw&s=10", "ctaText": "Read more", "ctaUrl": "#" },
+      { "title": "Metaphor: ReFantazio", "iconUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGgqNSEZhkXGcvEFXTLhTJ-U_56C9fsqHILGcs1M0focYuKJkPvblL88XsB2y1jPsEDOjXfQ&s=10" },
+      { "title": "Switch 2", "iconUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjoeSJD-maaNd40HZzP9bXE7K-9hLPQmo1FrGv1QFEZUBiTqT_xZxbKhBoTD__ETcvFlLFyg&s=10" },
+      { "title": "The Witcher 4", "iconUrl": "https://i.ytimg.com/vi/YrtCnL62pB8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAtAoVLs1BZrYCcmeM1rww0vdcCkg" },
+      { "title": "GTA VI", "iconUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp9QhAqExpEt5DMUmmh31szAeOq3OulK8yrOghKQISbhlTRrH78eHSaoI89uGSkJmAWomLBw&s=10" }
     ],
     "footerCtaText": "See full rankings",
     "footerCtaUrl": "#"

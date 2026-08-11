@@ -33,13 +33,12 @@ export function renderRankingsTable(values, theme) {
     rows.forEach((row, index) => {
       const item = document.createElement("li");
       item.className = "hub-rankings-table__row";
-      if (isRanking) { const rank = document.createElement("span"); rank.className = "hub-rankings-table__rank"; rank.textContent = text(row.rank) || String(index + 1); item.append(rank); }
+      if (isRanking) { const rank = document.createElement("span"); rank.className = "hub-rankings-table__rank"; rank.textContent = String(index + 1); item.append(rank); }
       const iconUrl = text(row.iconUrl);
       if (iconUrl) { const image = document.createElement("img"); image.className = "hub-rankings-table__icon"; image.src = iconUrl; image.alt = ""; item.append(image); }
       const title = document.createElement("p"); title.className = "hub-rankings-table__title"; title.textContent = text(row.title); item.append(title);
       if (!isRanking && text(row.value)) { const value = document.createElement("span"); value.className = "hub-rankings-table__value"; value.textContent = text(row.value); item.append(value); }
-      if (isRanking && text(row.movementText)) { const movement = document.createElement("span"); movement.className = `hub-rankings-table__movement is-${text(row.movement) || "same"}`; movement.textContent = `${text(row.movement) === "up" ? "↑ " : text(row.movement) === "down" ? "↓ " : ""}${text(row.movementText)}`; item.append(movement); }
-      const ctaText = text(values.rowCtaText); const ctaUrl = text(row.ctaUrl);
+      const ctaText = text(row.ctaText); const ctaUrl = text(row.ctaUrl);
       if (ctaText && ctaUrl) { const link = document.createElement("a"); link.className = "hub-rankings-table__row-cta"; link.href = ctaUrl; link.textContent = ctaText; item.append(link); }
       list.append(item);
     });

@@ -2,7 +2,7 @@
 
 Purpose: Present ranked games, products, or a plain table of items.
 
-States: Rankings or table mode; optional row image, movement, row CTA, and footer CTA.
+States: Rankings or table mode; optional row image, row CTA, and footer CTA.
 
 Constraints: Empty rows do not render. Cards intentionally have no dividing lines.
 
