@@ -11,6 +11,4 @@ export type RankingsTableProps = {
   heading?: string;
   subheading?: string;
   rows: RankingsTableRow[];
-  footerCtaText?: string;
-  footerCtaUrl?: string;
 };

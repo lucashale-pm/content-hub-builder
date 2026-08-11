@@ -44,8 +44,6 @@ export function renderRankingsTable(values, theme) {
     });
     section.append(list);
   }
-  const footerText = text(values.footerCtaText); const footerUrl = text(values.footerCtaUrl);
-  if (footerText && footerUrl) { const link = document.createElement("a"); link.className = "hub-rankings-table__footer-cta"; link.href = footerUrl; link.textContent = footerText; section.append(link); }
   section.hidden = !heading && !subheading && !rows.length;
   return section;
 }

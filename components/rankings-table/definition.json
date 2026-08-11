@@ -20,9 +20,7 @@
         { "id": "ctaText", "label": "Row CTA text", "type": "text", "required": false },
         { "id": "ctaUrl", "label": "Row CTA URL", "type": "url", "required": false }
       ]
-    },
-    { "id": "footerCtaText", "label": "Footer CTA text", "type": "text", "required": false },
-    { "id": "footerCtaUrl", "label": "Footer CTA URL", "type": "url", "required": false }
+    }
   ],
   "defaults": {
     "displayType": "Rankings",
@@ -34,8 +32,6 @@
       { "title": "Switch 2", "iconUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjoeSJD-maaNd40HZzP9bXE7K-9hLPQmo1FrGv1QFEZUBiTqT_xZxbKhBoTD__ETcvFlLFyg&s=10" },
       { "title": "The Witcher 4", "iconUrl": "https://i.ytimg.com/vi/YrtCnL62pB8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAtAoVLs1BZrYCcmeM1rww0vdcCkg" },
       { "title": "GTA VI", "iconUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp9QhAqExpEt5DMUmmh31szAeOq3OulK8yrOghKQISbhlTRrH78eHSaoI89uGSkJmAWomLBw&s=10" }
-    ],
-    "footerCtaText": "See full rankings",
-    "footerCtaUrl": "#"
+    ]
   }
 }
