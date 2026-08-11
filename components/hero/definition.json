@@ -13,7 +13,8 @@
     { "id": "mediaPoster", "label": "Video poster image URL", "type": "url", "required": false },
     { "id": "mediaAlt", "label": "Image description", "type": "text", "required": true },
     { "id": "followers", "label": "Followers", "type": "text", "required": true },
-    { "id": "updated", "label": "Last updated", "type": "text", "required": true }
+    { "id": "updated", "label": "Last updated", "type": "text", "required": true },
+    { "id": "followButtonText", "label": "Follow button text", "type": "text", "required": true }
   ],
   "defaults": {
     "eyebrow": "Trending topic",
@@ -24,6 +25,7 @@
     "mediaPoster": "",
     "mediaAlt": "Grand Theft Auto VI artwork showing protagonists Lucia and Jason overlooking Vice City.",
     "followers": "124k followers",
-    "updated": "Updated today"
+    "updated": "Updated today",
+    "followButtonText": "Follow"
   }
 }

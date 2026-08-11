@@ -94,6 +94,20 @@ export function renderHero(values, theme = fallbackTheme) {
   meta.append(separator);
   addText(meta, "time", "hub-hero__updated", values.updated);
   content.append(meta);
+  const followText = text(values.followButtonText);
+  if (followText) {
+    const follow = document.createElement("button");
+    follow.className = "hub-hero__follow";
+    follow.type = "button";
+    follow.textContent = followText;
+    follow.setAttribute("aria-pressed", "false");
+    follow.addEventListener("click", () => {
+      const following = follow.getAttribute("aria-pressed") === "true";
+      follow.setAttribute("aria-pressed", String(!following));
+      follow.textContent = following ? followText : "Following";
+    });
+    content.append(follow);
+  }
   component.append(content);
 
   return component;
