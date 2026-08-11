@@ -1,7 +1,7 @@
 {
   "id": "rankings-table",
-  "name": "Rankings table",
-  "category": "Content",
+  "name": "Table",
+  "category": "Rankings",
   "version": 1,
   "fields": [
     { "id": "displayType", "label": "Display type", "type": "select", "required": true, "options": ["Rankings", "Table"] },
