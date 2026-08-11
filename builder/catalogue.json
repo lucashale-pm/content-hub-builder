@@ -2,6 +2,11 @@
   "version": 1,
   "components": [
     {
+      "id": "steam-data",
+      "source": "../components/steam-data",
+      "definition": "../components/steam-data/definition.json"
+    },
+    {
       "id": "feed",
       "source": "../components/feed",
       "definition": "../components/feed/definition.json"

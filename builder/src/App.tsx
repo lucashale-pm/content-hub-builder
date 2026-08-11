@@ -2,11 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { Component, Eye, MonitorSmartphone, Plus, Trash2, Wrench } from "lucide-react";
 import heroDefinition from "../../components/hero/definition.json";
 import feedDefinition from "../../components/feed/definition.json";
+import steamDataDefinition from "../../components/steam-data/definition.json";
 // Component renderers remain source-owned. React only hosts their DOM output.
 // @ts-ignore
 import { renderHero } from "../../components/hero/renderer.js";
 // @ts-ignore
 import { renderFeed } from "../../components/feed/renderer.js";
+// @ts-ignore
+import { renderSteamData } from "../../components/steam-data/renderer.js";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -16,9 +19,9 @@ type Definition = { id: string; name: string; category: string; fields: Field[];
 type Instance = { id: string; componentId: string; values: Values };
 type Draft = { version: number; brand: keyof typeof themes; scenario: string; pageTitle: string; instances: Instance[] };
 
-const definitions = [heroDefinition, feedDefinition] as Definition[];
+const definitions = [heroDefinition, feedDefinition, steamDataDefinition] as Definition[];
 const byId = new Map(definitions.map((definition) => [definition.id, definition]));
-const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed };
+const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData };
 const themes = {
   gamesradar: { brand: "gamesradar", color: { accent: "#ff6600", surface: "#161616", text: "#ffffff", background: "#ffffff", ink: "#1a1a1a", muted: "#737373", border: "#e6e6e6", labelNews: "#008a80", labelAnalysis: "#7156c8", labelGuide: "#a85c00" }, font: { display: "Figtree, sans-serif", body: "Figtree, sans-serif" }, typography: { h1: { fontFamily: "Figtree, sans-serif", fontSize: "clamp(40px, 13vw, 64px)", fontWeight: 400, lineHeight: ".9", letterSpacing: "-.04em" } }, radius: { card: "16px" } },
   pcgamer: { brand: "pcgamer", color: { accent: "#e31b23", surface: "#111111", text: "#ffffff", background: "#ffffff", ink: "#1a1a1a", muted: "#737373", border: "#e6e6e6", labelNews: "#b11f26", labelAnalysis: "#6b55ab", labelGuide: "#9c5900" }, font: { display: "Roboto Condensed, sans-serif", body: "Arial, sans-serif" }, typography: { h1: { fontFamily: "Roboto Condensed, sans-serif", fontSize: "clamp(40px, 13vw, 62px)", fontWeight: 700, lineHeight: ".92", letterSpacing: "-.025em" } }, radius: { card: "0px" } },

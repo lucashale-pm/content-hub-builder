@@ -1,0 +1,13 @@
+{
+  "id": "steam-data",
+  "name": "Steam data",
+  "category": "Data embeds",
+  "version": 1,
+  "renderer": "./renderer.js",
+  "fields": [
+    { "id": "appId", "label": "Steam app ID", "type": "text", "required": true }
+  ],
+  "defaults": {
+    "appId": "3240220"
+  }
+}
