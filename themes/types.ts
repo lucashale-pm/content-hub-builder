@@ -2,6 +2,7 @@ export interface Theme {
   readonly brand: "gamesradar" | "pcgamer";
   readonly color: {
     readonly accent: string;
+    readonly rankingAccent: string;
     readonly surface: string;
     readonly text: string;
     readonly background: string;

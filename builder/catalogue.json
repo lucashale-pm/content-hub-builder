@@ -2,6 +2,11 @@
   "version": 1,
   "components": [
     {
+      "id": "rankings-table",
+      "source": "../components/rankings-table",
+      "definition": "../components/rankings-table/definition.json"
+    },
+    {
       "id": "inline-poll",
       "source": "../components/inline-poll",
       "definition": "../components/inline-poll/definition.json"

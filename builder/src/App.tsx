@@ -10,6 +10,7 @@ import timelineDefinition from "../../components/timeline/definition.json";
 import gameReviewDefinition from "../../components/game-review/definition.json";
 import keyInfoDefinition from "../../components/key-info/definition.json";
 import inlinePollDefinition from "../../components/inline-poll/definition.json";
+import rankingsTableDefinition from "../../components/rankings-table/definition.json";
 // Component renderers remain source-owned. React only hosts their DOM output.
 // @ts-ignore
 import { renderHero } from "../../components/hero/renderer.js";
@@ -31,6 +32,8 @@ import { renderGameReview } from "../../components/game-review/renderer.js";
 import { renderKeyInfo } from "../../components/key-info/renderer.js";
 // @ts-ignore
 import { renderInlinePoll } from "../../components/inline-poll/renderer.js";
+// @ts-ignore
+import { renderRankingsTable } from "../../components/rankings-table/renderer.js";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -40,12 +43,12 @@ type Definition = { id: string; name: string; category: string; fields: Field[];
 type Instance = { id: string; componentId: string; values: Values };
 type Draft = { version: number; brand: keyof typeof themes; scenario: string; pageTitle: string; instances: Instance[] };
 
-const definitions = [heroDefinition, feedDefinition, steamDataDefinition, verticalVideoDefinition, pageContentDefinition, imageGalleryDefinition, timelineDefinition, gameReviewDefinition, keyInfoDefinition, inlinePollDefinition] as Definition[];
+const definitions = [heroDefinition, feedDefinition, steamDataDefinition, verticalVideoDefinition, pageContentDefinition, imageGalleryDefinition, timelineDefinition, gameReviewDefinition, keyInfoDefinition, inlinePollDefinition, rankingsTableDefinition] as Definition[];
 const byId = new Map(definitions.map((definition) => [definition.id, definition]));
-const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent, "image-gallery": renderImageGallery, timeline: renderTimeline, "game-review": renderGameReview, "key-info": renderKeyInfo, "inline-poll": renderInlinePoll };
+const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent, "image-gallery": renderImageGallery, timeline: renderTimeline, "game-review": renderGameReview, "key-info": renderKeyInfo, "inline-poll": renderInlinePoll, "rankings-table": renderRankingsTable };
 const themes = {
-  gamesradar: { brand: "gamesradar", color: { accent: "#ff6600", surface: "#161616", text: "#ffffff", background: "#ffffff", ink: "#1a1a1a", muted: "#737373", border: "#e6e6e6", labelNews: "#008a80", labelAnalysis: "#7156c8", labelGuide: "#a85c00" }, font: { display: "Figtree, sans-serif", body: "Figtree, sans-serif" }, typography: { h1: { fontFamily: "Figtree, sans-serif", fontSize: "clamp(40px, 13vw, 64px)", fontWeight: 400, lineHeight: ".9", letterSpacing: "-.04em" } }, radius: { card: "16px" } },
-  pcgamer: { brand: "pcgamer", color: { accent: "#e31b23", surface: "#111111", text: "#ffffff", background: "#ffffff", ink: "#1a1a1a", muted: "#737373", border: "#e6e6e6", labelNews: "#b11f26", labelAnalysis: "#6b55ab", labelGuide: "#9c5900" }, font: { display: "Roboto Condensed, sans-serif", body: "Arial, sans-serif" }, typography: { h1: { fontFamily: "Roboto Condensed, sans-serif", fontSize: "clamp(40px, 13vw, 62px)", fontWeight: 700, lineHeight: ".92", letterSpacing: "-.025em" } }, radius: { card: "0px" } },
+  gamesradar: { brand: "gamesradar", color: { accent: "#ff6600", rankingAccent: "#6bdd73", surface: "#161616", text: "#ffffff", background: "#ffffff", ink: "#1a1a1a", muted: "#737373", border: "#e6e6e6", labelNews: "#008a80", labelAnalysis: "#7156c8", labelGuide: "#a85c00" }, font: { display: "Figtree, sans-serif", body: "Figtree, sans-serif" }, typography: { h1: { fontFamily: "Figtree, sans-serif", fontSize: "clamp(40px, 13vw, 64px)", fontWeight: 400, lineHeight: ".9", letterSpacing: "-.04em" } }, radius: { card: "16px" } },
+  pcgamer: { brand: "pcgamer", color: { accent: "#e31b23", rankingAccent: "#e31b23", surface: "#111111", text: "#ffffff", background: "#ffffff", ink: "#1a1a1a", muted: "#737373", border: "#e6e6e6", labelNews: "#b11f26", labelAnalysis: "#6b55ab", labelGuide: "#9c5900" }, font: { display: "Roboto Condensed, sans-serif", body: "Arial, sans-serif" }, typography: { h1: { fontFamily: "Roboto Condensed, sans-serif", fontSize: "clamp(40px, 13vw, 62px)", fontWeight: 700, lineHeight: ".92", letterSpacing: "-.025em" } }, radius: { card: "0px" } },
 };
 
 const clone = <T,>(value: T): T => JSON.parse(JSON.stringify(value));
