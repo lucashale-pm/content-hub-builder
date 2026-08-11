@@ -2,6 +2,16 @@
   "version": 1,
   "components": [
     {
+      "id": "game-review",
+      "source": "../components/game-review",
+      "definition": "../components/game-review/definition.json"
+    },
+    {
+      "id": "key-info",
+      "source": "../components/key-info",
+      "definition": "../components/key-info/definition.json"
+    },
+    {
       "id": "timeline",
       "source": "../components/timeline",
       "definition": "../components/timeline/definition.json"

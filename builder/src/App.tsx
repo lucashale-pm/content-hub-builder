@@ -7,6 +7,8 @@ import verticalVideoDefinition from "../../components/vertical-video/definition.
 import pageContentDefinition from "../../components/page-content/definition.json";
 import imageGalleryDefinition from "../../components/image-gallery/definition.json";
 import timelineDefinition from "../../components/timeline/definition.json";
+import gameReviewDefinition from "../../components/game-review/definition.json";
+import keyInfoDefinition from "../../components/key-info/definition.json";
 // Component renderers remain source-owned. React only hosts their DOM output.
 // @ts-ignore
 import { renderHero } from "../../components/hero/renderer.js";
@@ -22,6 +24,10 @@ import { renderPageContent } from "../../components/page-content/renderer.js";
 import { renderImageGallery } from "../../components/image-gallery/renderer.js";
 // @ts-ignore
 import { renderTimeline } from "../../components/timeline/renderer.js";
+// @ts-ignore
+import { renderGameReview } from "../../components/game-review/renderer.js";
+// @ts-ignore
+import { renderKeyInfo } from "../../components/key-info/renderer.js";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -31,9 +37,9 @@ type Definition = { id: string; name: string; category: string; fields: Field[];
 type Instance = { id: string; componentId: string; values: Values };
 type Draft = { version: number; brand: keyof typeof themes; scenario: string; pageTitle: string; instances: Instance[] };
 
-const definitions = [heroDefinition, feedDefinition, steamDataDefinition, verticalVideoDefinition, pageContentDefinition, imageGalleryDefinition, timelineDefinition] as Definition[];
+const definitions = [heroDefinition, feedDefinition, steamDataDefinition, verticalVideoDefinition, pageContentDefinition, imageGalleryDefinition, timelineDefinition, gameReviewDefinition, keyInfoDefinition] as Definition[];
 const byId = new Map(definitions.map((definition) => [definition.id, definition]));
-const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent, "image-gallery": renderImageGallery, timeline: renderTimeline };
+const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent, "image-gallery": renderImageGallery, timeline: renderTimeline, "game-review": renderGameReview, "key-info": renderKeyInfo };
 const themes = {
   gamesradar: { brand: "gamesradar", color: { accent: "#ff6600", surface: "#161616", text: "#ffffff", background: "#ffffff", ink: "#1a1a1a", muted: "#737373", border: "#e6e6e6", labelNews: "#008a80", labelAnalysis: "#7156c8", labelGuide: "#a85c00" }, font: { display: "Figtree, sans-serif", body: "Figtree, sans-serif" }, typography: { h1: { fontFamily: "Figtree, sans-serif", fontSize: "clamp(40px, 13vw, 64px)", fontWeight: 400, lineHeight: ".9", letterSpacing: "-.04em" } }, radius: { card: "16px" } },
   pcgamer: { brand: "pcgamer", color: { accent: "#e31b23", surface: "#111111", text: "#ffffff", background: "#ffffff", ink: "#1a1a1a", muted: "#737373", border: "#e6e6e6", labelNews: "#b11f26", labelAnalysis: "#6b55ab", labelGuide: "#9c5900" }, font: { display: "Roboto Condensed, sans-serif", body: "Arial, sans-serif" }, typography: { h1: { fontFamily: "Roboto Condensed, sans-serif", fontSize: "clamp(40px, 13vw, 62px)", fontWeight: 700, lineHeight: ".92", letterSpacing: "-.025em" } }, radius: { card: "0px" } },
@@ -43,7 +49,7 @@ const clone = <T,>(value: T): T => JSON.parse(JSON.stringify(value));
 const initialDraft = (): Draft => ({ version: 1, brand: "gamesradar", scenario: "GTA 6", pageTitle: "GTA 6 hub", instances: [{ id: crypto.randomUUID(), componentId: "hero", values: clone(heroDefinition.defaults) }] });
 function storedDraft(): Draft { try { return JSON.parse(localStorage.getItem("content-hub-workshop-draft") || "") as Draft; } catch { return initialDraft(); } }
 function setAtPath(value: Values, path: string[], next: unknown): Values { const copy = clone(value); let cursor: Record<string, unknown> = copy; path.slice(0, -1).forEach((key) => { cursor[key] = typeof cursor[key] === "object" && cursor[key] ? clone(cursor[key]) : {}; cursor = cursor[key] as Record<string, unknown>; }); cursor[path.at(-1)!] = next; return copy; }
-function emptyValues(fields: Field[]): Values { return Object.fromEntries(fields.map((field) => [field.id, field.type === "object" ? emptyValues(field.fields || []) : field.type === "collection" ? [] : ""])); }
+function emptyValues(fields: Field[]): Values { return Object.fromEntries(fields.map((field) => [field.id, field.type === "object" ? emptyValues(field.fields || []) : ["collection", "checkboxes"].includes(field.type) ? [] : ""])); }
 function isValues(value: unknown): value is Values { return typeof value === "object" && value !== null && !Array.isArray(value); }
 function parseDraft(value: unknown): Draft | null {
   if (!isValues(value) || !["gamesradar", "pcgamer"].includes(String(value.brand)) || typeof value.pageTitle !== "string" || !Array.isArray(value.instances)) return null;
@@ -74,7 +80,8 @@ function FieldEditor({ fields, values, onChange }: { fields: Field[]; values: Va
     {field.type !== "object" && field.type !== "collection" && <label className="text-xs font-semibold text-zinc-700" htmlFor={field.id}>{field.label}{field.required && <span className="text-red-600"> *</span>}</label>}
     {field.type === "textarea" ? <textarea id={field.id} className="min-h-20 rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm" value={String(values[field.id] || "")} onChange={(event) => update([field.id], event.target.value)} /> : null}
     {field.type === "select" ? <select id={field.id} className="h-9 rounded-md border border-zinc-200 bg-white px-2 text-sm" value={String(values[field.id] || "")} onChange={(event) => update([field.id], event.target.value)}>{field.options?.map((option) => <option key={option}>{option}</option>)}</select> : null}
-    {!["textarea", "select", "object", "collection"].includes(field.type) ? <input id={field.id} className="h-9 rounded-md border border-zinc-200 bg-white px-3 text-sm" type={field.type === "url" ? "url" : "text"} value={String(values[field.id] || "")} onChange={(event) => update([field.id], event.target.value)} /> : null}
+    {field.type === "checkboxes" ? <div className="grid grid-cols-2 gap-2">{field.options?.map((option) => { const current = Array.isArray(values[field.id]) ? values[field.id] as string[] : []; const selected = current.includes(option); return <label key={option} className="flex items-center gap-2 rounded-md border border-zinc-200 bg-white px-2 py-2 text-xs"><input type="checkbox" checked={selected} onChange={() => update([field.id], selected ? current.filter((item) => item !== option) : [...current, option])} />{option}</label>; })}</div> : null}
+    {!["textarea", "select", "checkboxes", "object", "collection"].includes(field.type) ? <input id={field.id} className="h-9 rounded-md border border-zinc-200 bg-white px-3 text-sm" type={field.type === "url" ? "url" : "text"} value={String(values[field.id] || "")} onChange={(event) => update([field.id], event.target.value)} /> : null}
     {field.type === "object" && <fieldset className="grid gap-3 rounded-md border border-zinc-200 p-3"><legend className="px-1 text-xs font-semibold">{field.label}</legend><FieldEditor fields={field.fields || []} values={(values[field.id] as Values) || {}} onChange={(next) => update([field.id], next)} /></fieldset>}
     {field.type === "collection" && <fieldset className="grid gap-3 rounded-md border border-zinc-200 p-3"><legend className="px-1 text-xs font-semibold">{field.label}</legend>{((values[field.id] as Values[]) || []).map((item, index) => <div key={index} className="rounded border border-zinc-100 p-3"><div className="mb-2 flex items-center justify-between text-xs font-medium">{field.itemLabel || "Item"} {index + 1}<Button variant="ghost" size="sm" onClick={() => update([field.id], ((values[field.id] as Values[]) || []).filter((_, itemIndex) => itemIndex !== index))}>Remove</Button></div><FieldEditor fields={field.itemFields || []} values={item} onChange={(next) => { const items = [...((values[field.id] as Values[]) || [])]; items[index] = next; update([field.id], items); }} /></div>)}<Button variant="outline" size="sm" disabled={((values[field.id] as Values[]) || []).length >= (field.maxItems || Infinity)} onClick={() => update([field.id], [...((values[field.id] as Values[]) || []), emptyValues(field.itemFields || [])])}><Plus className="size-3" /> Add {field.itemLabel?.toLowerCase() || "item"}</Button></fieldset>}
   </div>)}</div>;

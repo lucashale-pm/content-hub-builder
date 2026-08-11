@@ -1,0 +1,18 @@
+{
+  "id": "game-review",
+  "name": "Game review",
+  "category": "Game info",
+  "version": 1,
+  "fields": [
+    { "id": "grScore", "label": "GR+ score", "type": "text", "required": true },
+    { "id": "userScore", "label": "User score", "type": "text", "required": false },
+    { "id": "reviewLinkText", "label": "Full review link text", "type": "text", "required": false },
+    { "id": "reviewLinkUrl", "label": "Full review link URL", "type": "url", "required": false }
+  ],
+  "defaults": {
+    "grScore": "9",
+    "userScore": "9.5",
+    "reviewLinkText": "Read the full review",
+    "reviewLinkUrl": "#"
+  }
+}

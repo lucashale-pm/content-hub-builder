@@ -1,0 +1,30 @@
+{
+  "id": "key-info",
+  "name": "Key info",
+  "category": "Game info",
+  "version": 1,
+  "fields": [
+    { "id": "heading", "label": "Heading", "type": "text", "required": true },
+    { "id": "releaseDate", "label": "Release date", "type": "text", "required": false },
+    { "id": "platforms", "label": "Platforms", "type": "checkboxes", "required": false, "options": ["PC", "PlayStation", "Xbox", "Nintendo Switch"] },
+    { "id": "streamingServices", "label": "Streaming services", "type": "text", "required": false },
+    { "id": "genres", "label": "Genres", "type": "text", "required": false },
+    { "id": "franchise", "label": "Franchise", "type": "text", "required": false },
+    { "id": "publisherDeveloper", "label": "Game publisher / developer", "type": "text", "required": false },
+    { "id": "movieTvStudioDistributor", "label": "Movie & TV studio / distributor", "type": "text", "required": false },
+    { "id": "timeToBeat", "label": "Time to beat", "type": "text", "required": false },
+    { "id": "gamePass", "label": "Game Pass", "type": "text", "required": false }
+  ],
+  "defaults": {
+    "heading": "Key info",
+    "releaseDate": "May 26, 2026",
+    "platforms": ["PlayStation", "Xbox"],
+    "streamingServices": "",
+    "genres": "Action-adventure, open world",
+    "franchise": "Grand Theft Auto",
+    "publisherDeveloper": "Rockstar Games",
+    "movieTvStudioDistributor": "",
+    "timeToBeat": "",
+    "gamePass": "Not announced"
+  }
+}
