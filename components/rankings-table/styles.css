@@ -1,5 +1,5 @@
 .hub-rankings-table { display: grid; gap: 16px; padding: 24px 16px; }
-.hub-rankings-table[data-theme="gamesradar"] { background: var(--hub-rankings-surface, #161616); color: var(--hub-rankings-text, #fff); }
+.hub-rankings-table[data-theme="gamesradar"] { background: var(--hub-rankings-background, #fff); color: var(--hub-rankings-ink, #1a1a1a); }
 .hub-rankings-table[data-theme="pcgamer"] { background: var(--hub-rankings-background, #fff); color: var(--hub-rankings-ink, #1a1a1a); }
 .hub-rankings-table__header { display: grid; gap: 6px; padding: 4px 32px 4px; }
 .hub-rankings-table__header h2 { font: 700 28px/1 var(--hub-rankings-display-font, Figtree, sans-serif); margin: 0; }
