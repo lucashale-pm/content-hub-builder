@@ -7,7 +7,7 @@
 .hub-stance__profile > img { background: var(--hub-stance-border, #e6e6e6); border-radius: 50%; height: 32px; object-fit: cover; width: 32px; }
 .hub-stance__profile > div { display: grid; gap: 2px; }
 .hub-stance__name-line { align-items: center; display: flex; flex-wrap: wrap; gap: 5px; }
-.hub-stance__flair { background: var(--hub-stance-flair-background, #737373); border-radius: 999px; color: var(--hub-stance-flair-ink, #fff); display: inline-flex; font: 700 9px/1 var(--hub-stance-body-font, Figtree, sans-serif); letter-spacing: .02em; padding: 3px 5px; text-transform: uppercase; }
+.hub-stance__flair { border-radius: 999px; display: inline-flex; font: 700 9px/1 var(--hub-stance-body-font, Figtree, sans-serif); letter-spacing: .02em; padding: 3px 5px; text-transform: uppercase; }
 .hub-stance__profile strong { font: 700 12px/1.2 var(--hub-stance-body-font, Figtree, sans-serif); }.hub-stance__profile span { color: var(--hub-stance-muted, #737373); font: 400 10px/1.2 var(--hub-stance-body-font, Figtree, sans-serif); }
 .hub-stance__card > h3 { font: 700 16px/1.2 var(--hub-stance-display-font, Figtree, sans-serif); margin: 0; }
 .hub-stance__body { color: var(--hub-stance-muted, #737373); font: 400 13px/1.5 var(--hub-stance-body-font, Figtree, sans-serif); margin: 0; }

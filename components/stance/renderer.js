@@ -5,8 +5,8 @@ function flair(item, className) {
   const label = document.createElement("span");
   label.className = className;
   label.textContent = text(item.flairText);
-  label.style.setProperty("--hub-stance-flair-background", text(item.flairColor) || "#737373");
-  label.style.setProperty("--hub-stance-flair-ink", text(item.flairTextColor) === "Black" ? "#111111" : "#ffffff");
+  label.style.backgroundColor = text(item.flairColor) || "#737373";
+  label.style.color = text(item.flairTextColor) === "Black" ? "#111111" : "#ffffff";
   return label;
 }
 
