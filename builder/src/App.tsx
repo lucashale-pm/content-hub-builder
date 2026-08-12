@@ -47,7 +47,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type Values = Record<string, unknown>;
-type Field = { id: string; label: string; type: string; required?: boolean; options?: string[]; fields?: Field[]; itemFields?: Field[]; itemLabel?: string; maxItems?: number };
+type Field = { id: string; label: string; type: string; required?: boolean; options?: string[]; fields?: Field[]; itemFields?: Field[]; itemLabel?: string; maxItems?: number; showWhen?: { field: string; equals: string } };
 type Definition = { id: string; name: string; category: string; fields: Field[]; defaults: Values };
 type Instance = { id: string; componentId: string; values: Values };
 type Draft = { version: number; brand: keyof typeof themes; scenario: string; pageTitle: string; instances: Instance[] };
@@ -91,7 +91,7 @@ function ComponentHost({ componentId, values, theme }: { componentId: string; va
 
 function FieldEditor({ fields, values, onChange }: { fields: Field[]; values: Values; onChange: (next: Values) => void }) {
   const update = (path: string[], value: unknown) => onChange(setAtPath(values, path, value));
-  return <div className="grid gap-4">{fields.map((field) => <div key={field.id} className="grid gap-1.5">
+  return <div className="grid gap-4">{fields.filter((field) => !field.showWhen || values[field.showWhen.field] === field.showWhen.equals).map((field) => <div key={field.id} className="grid gap-1.5">
     {!["object", "collection", "toggle"].includes(field.type) && <label className="text-xs font-semibold text-zinc-700" htmlFor={field.id}>{field.label}{field.required && <span className="text-red-600"> *</span>}</label>}
     {field.type === "textarea" ? <textarea id={field.id} className="min-h-20 rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm" value={String(values[field.id] || "")} onChange={(event) => update([field.id], event.target.value)} /> : null}
     {field.type === "select" ? <select id={field.id} className="h-9 rounded-md border border-zinc-200 bg-white px-2 text-sm" value={String(values[field.id] || "")} onChange={(event) => update([field.id], event.target.value)}>{field.options?.map((option) => <option key={option}>{option}</option>)}</select> : null}

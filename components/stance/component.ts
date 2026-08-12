@@ -8,10 +8,8 @@ export type StanceItem = {
   body?: string;
   sourceText?: string;
   sourceUrl?: string;
-  twoChoices?: StanceChoice[];
-  spiceChoices?: StanceChoice[];
   selectedChoice?: string;
   comments?: StanceComment[];
 };
 
-export type StanceProps = { heading?: string; subheading?: string; voteMode: "2 choices" | "5 choices"; stances: StanceItem[] };
+export type StanceProps = { heading?: string; subheading?: string; voteMode: "2 choices" | "5 choices"; twoChoices?: StanceChoice[]; spiceChoices?: StanceChoice[]; stances: StanceItem[] };

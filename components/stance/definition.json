@@ -8,6 +8,33 @@
     { "id": "subheading", "label": "Section subheading", "type": "text", "required": false },
     { "id": "voteMode", "label": "Audience response choices", "type": "select", "required": false, "options": ["2 choices", "5 choices"] },
     {
+      "id": "twoChoices",
+      "label": "2-choice responses",
+      "type": "collection",
+      "required": false,
+      "itemLabel": "Response",
+      "maxItems": 2,
+      "showWhen": { "field": "voteMode", "equals": "2 choices" },
+      "itemFields": [
+        { "id": "label", "label": "Label", "type": "text", "required": false },
+        { "id": "percent", "label": "Vote percentage", "type": "text", "required": false }
+      ]
+    },
+    {
+      "id": "spiceChoices",
+      "label": "5-choice spice responses",
+      "type": "collection",
+      "required": false,
+      "itemLabel": "Response",
+      "maxItems": 5,
+      "showWhen": { "field": "voteMode", "equals": "5 choices" },
+      "itemFields": [
+        { "id": "emoji", "label": "Emoji", "type": "text", "required": false },
+        { "id": "label", "label": "Label", "type": "text", "required": false },
+        { "id": "percent", "label": "Vote percentage", "type": "text", "required": false }
+      ]
+    },
+    {
       "id": "stances",
       "label": "Stances",
       "type": "collection",
@@ -22,31 +49,6 @@
         { "id": "sourceText", "label": "Source link text", "type": "text", "required": false },
         { "id": "sourceUrl", "label": "Source link URL", "type": "url", "required": false },
         { "id": "selectedChoice", "label": "Selected choice label", "type": "text", "required": false },
-        {
-          "id": "twoChoices",
-          "label": "2-choice responses",
-          "type": "collection",
-          "required": false,
-          "itemLabel": "Response",
-          "maxItems": 2,
-          "itemFields": [
-            { "id": "label", "label": "Label", "type": "text", "required": false },
-            { "id": "percent", "label": "Vote percentage", "type": "text", "required": false }
-          ]
-        },
-        {
-          "id": "spiceChoices",
-          "label": "5-choice spice responses",
-          "type": "collection",
-          "required": false,
-          "itemLabel": "Response",
-          "maxItems": 5,
-          "itemFields": [
-            { "id": "emoji", "label": "Emoji", "type": "text", "required": false },
-            { "id": "label", "label": "Label", "type": "text", "required": false },
-            { "id": "percent", "label": "Vote percentage", "type": "text", "required": false }
-          ]
-        },
         {
           "id": "comments",
           "label": "Visible comments",
@@ -66,6 +68,8 @@
     "heading": "Editor stances",
     "subheading": "Expert perspectives - you decide",
     "voteMode": "2 choices",
+    "twoChoices": [{ "label": "Agree", "percent": "68%" }, { "label": "Disagree", "percent": "32%" }],
+    "spiceChoices": [{ "emoji": "🧊", "label": "Ice cold", "percent": "8%" }, { "emoji": "😐", "label": "Mild", "percent": "12%" }, { "emoji": "🌶️", "label": "Spicy", "percent": "22%" }, { "emoji": "🔥", "label": "Hot", "percent": "38%" }, { "emoji": "💀", "label": "Nuclear", "percent": "20%" }],
     "stances": [
       {
         "author": "Maya Chen",
@@ -76,8 +80,6 @@
         "sourceText": "From: The Turn-Based Renaissance · 18 min read",
         "sourceUrl": "#",
         "selectedChoice": "Agree",
-        "twoChoices": [{ "label": "Agree", "percent": "68%" }, { "label": "Disagree", "percent": "32%" }],
-        "spiceChoices": [{ "emoji": "🧊", "label": "Ice cold", "percent": "8%" }, { "emoji": "😐", "label": "Mild", "percent": "12%" }, { "emoji": "🌶️", "label": "Spicy", "percent": "22%" }, { "emoji": "🔥", "label": "Hot", "percent": "38%" }, { "emoji": "💀", "label": "Nuclear", "percent": "20%" }],
         "comments": [{ "username": "@rpg_fan_99", "text": "Absolutely agree. I can pause turn-based whenever, and it respects my time.", "upvotes": "142 upvotes" }, { "username": "@action_junkie", "text": "Strongly disagree, nothing beats real-time skill expression.", "upvotes": "43 upvotes" }]
       }
     ]
