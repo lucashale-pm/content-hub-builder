@@ -4,6 +4,8 @@ export interface Theme {
     readonly accent: string;
     readonly rankingAccent: string;
     readonly contributionAccent: string;
+    readonly contributionIconSurface: string;
+    readonly contributionProgressSurface: string;
     readonly surface: string;
     readonly text: string;
     readonly background: string;
