@@ -2,6 +2,11 @@
   "version": 1,
   "components": [
     {
+      "id": "stance",
+      "source": "../components/stance",
+      "definition": "../components/stance/definition.json"
+    },
+    {
       "id": "featured-article",
       "source": "../components/featured-article",
       "definition": "../components/featured-article/definition.json"

@@ -1,0 +1,85 @@
+{
+  "id": "stance",
+  "name": "Stance",
+  "category": "Community",
+  "version": 1,
+  "fields": [
+    { "id": "heading", "label": "Section heading", "type": "text", "required": false },
+    { "id": "subheading", "label": "Section subheading", "type": "text", "required": false },
+    { "id": "voteMode", "label": "Audience response choices", "type": "select", "required": false, "options": ["2 choices", "5 choices"] },
+    {
+      "id": "stances",
+      "label": "Stances",
+      "type": "collection",
+      "required": false,
+      "itemLabel": "Stance",
+      "itemFields": [
+        { "id": "author", "label": "Author name", "type": "text", "required": false },
+        { "id": "role", "label": "Author role / score", "type": "text", "required": false },
+        { "id": "avatarUrl", "label": "Author image URL", "type": "url", "required": false },
+        { "id": "statement", "label": "Stance statement", "type": "textarea", "required": false },
+        { "id": "body", "label": "Supporting copy", "type": "textarea", "required": false },
+        { "id": "sourceText", "label": "Source link text", "type": "text", "required": false },
+        { "id": "sourceUrl", "label": "Source link URL", "type": "url", "required": false },
+        { "id": "selectedChoice", "label": "Selected choice label", "type": "text", "required": false },
+        {
+          "id": "twoChoices",
+          "label": "2-choice responses",
+          "type": "collection",
+          "required": false,
+          "itemLabel": "Response",
+          "maxItems": 2,
+          "itemFields": [
+            { "id": "label", "label": "Label", "type": "text", "required": false },
+            { "id": "percent", "label": "Vote percentage", "type": "text", "required": false }
+          ]
+        },
+        {
+          "id": "spiceChoices",
+          "label": "5-choice spice responses",
+          "type": "collection",
+          "required": false,
+          "itemLabel": "Response",
+          "maxItems": 5,
+          "itemFields": [
+            { "id": "emoji", "label": "Emoji", "type": "text", "required": false },
+            { "id": "label", "label": "Label", "type": "text", "required": false },
+            { "id": "percent", "label": "Vote percentage", "type": "text", "required": false }
+          ]
+        },
+        {
+          "id": "comments",
+          "label": "Visible comments",
+          "type": "collection",
+          "required": false,
+          "itemLabel": "Comment",
+          "itemFields": [
+            { "id": "username", "label": "Username", "type": "text", "required": false },
+            { "id": "text", "label": "Comment", "type": "textarea", "required": false },
+            { "id": "upvotes", "label": "Upvotes", "type": "text", "required": false }
+          ]
+        }
+      ]
+    }
+  ],
+  "defaults": {
+    "heading": "Editor stances",
+    "subheading": "Expert perspectives - you decide",
+    "voteMode": "2 choices",
+    "stances": [
+      {
+        "author": "Maya Chen",
+        "role": "Reviews Editor · 94% agreement score",
+        "avatarUrl": "https://cdn.mos.cms.futurecdn.net/RWja8FWtZByoAbdqYrZSQ9-1920-80.jpg.webp",
+        "statement": "Turn-based combat isn't just nostalgic - it's outpacing action RPGs",
+        "body": "Recent data shows completion rates for turn-based games are up 34% compared to action-heavy releases. The deliberate pacing allows complex systems to breathe, creating a deeper connection between mechanics and player choice.",
+        "sourceText": "From: The Turn-Based Renaissance · 18 min read",
+        "sourceUrl": "#",
+        "selectedChoice": "Agree",
+        "twoChoices": [{ "label": "Agree", "percent": "68%" }, { "label": "Disagree", "percent": "32%" }],
+        "spiceChoices": [{ "emoji": "🧊", "label": "Ice cold", "percent": "8%" }, { "emoji": "😐", "label": "Mild", "percent": "12%" }, { "emoji": "🌶️", "label": "Spicy", "percent": "22%" }, { "emoji": "🔥", "label": "Hot", "percent": "38%" }, { "emoji": "💀", "label": "Nuclear", "percent": "20%" }],
+        "comments": [{ "username": "@rpg_fan_99", "text": "Absolutely agree. I can pause turn-based whenever, and it respects my time.", "upvotes": "142 upvotes" }, { "username": "@action_junkie", "text": "Strongly disagree, nothing beats real-time skill expression.", "upvotes": "43 upvotes" }]
+      }
+    ]
+  }
+}

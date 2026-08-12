@@ -14,6 +14,7 @@ import "../../components/inline-poll/styles.css";
 import "../../components/rankings-table/styles.css";
 import "../../components/contribution-tracker/styles.css";
 import "../../components/featured-article/styles.css";
+import "../../components/stance/styles.css";
 import App from "./App";
 
 createRoot(document.querySelector("#root")!).render(<StrictMode><App /></StrictMode>);
