@@ -225,6 +225,29 @@ export default function App() {
     } catch { setImportMessage("Could not import this JSON file."); }
   };
   const theme = themes[draft.brand];
+  useEffect(() => {
+    const cleanups: Array<() => void> = [];
+    definitions.forEach((definition) => {
+      const button = Array.from(document.querySelectorAll("button")).find((element) => element.firstElementChild?.textContent === definition.name);
+      const renderer = renderers[definition.id];
+      if (!button || !renderer) return;
+      const preview = document.createElement("div");
+      preview.className = "pointer-events-none mb-2 h-14 overflow-hidden rounded border border-zinc-100 bg-zinc-50";
+      preview.setAttribute("aria-hidden", "true");
+      const canvas = document.createElement("div");
+      canvas.style.width = "390px";
+      canvas.style.transform = "scale(.145)";
+      canvas.style.transformOrigin = "top left";
+      const component = renderer(clone(definition.defaults), theme) as HTMLElement & { cleanup?: () => void };
+      canvas.append(component);
+      preview.append(canvas);
+      button.prepend(preview);
+      button.classList.remove("min-h-14", "px-2", "py-1.5");
+      button.classList.add("min-h-28", "p-2");
+      cleanups.push(() => { component.cleanup?.(); preview.remove(); button.classList.remove("min-h-28", "p-2"); button.classList.add("min-h-14", "px-2", "py-1.5"); });
+    });
+    return () => cleanups.forEach((cleanup) => cleanup());
+  }, [mode, selectedComponentId, selectedInstanceId, theme]);
   const title = mode === "builder" ? "Builder" : "Component viewer";
   if (fullPreview) return <div className="relative flex h-screen items-center justify-center bg-zinc-950 p-8"><Button className="absolute left-6 top-6" variant="outline" onClick={() => setFullPreview(false)}><X className="size-4" /> Return to builder</Button><div className="h-[min(860px,calc(100vh-64px))] w-[390px] overflow-hidden rounded-[42px] border-[8px] border-zinc-800 bg-white shadow-2xl"><div className="h-full overflow-y-auto">{draft.instances.map((instance) => <ComponentHost key={instance.id} componentId={instance.componentId} values={instance.values} theme={theme} />)}</div></div></div>;
   return <div className="grid h-screen grid-cols-[248px_minmax(340px,1fr)_minmax(580px,2fr)] overflow-hidden bg-zinc-100">
