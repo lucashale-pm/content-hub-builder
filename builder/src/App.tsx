@@ -59,7 +59,24 @@ type Definition = { id: string; name: string; category: string; fields: Field[];
 type Instance = { id: string; componentId: string; values: Values };
 type Draft = { version: number; brand: keyof typeof themes; scenario: string; pageTitle: string; instances: Instance[] };
 
-const definitions = [heroDefinition, feedDefinition, steamDataDefinition, verticalVideoDefinition, pageContentDefinition, imageGalleryDefinition, timelineDefinition, gameReviewDefinition, keyInfoDefinition, inlinePollDefinition, rankingsTableDefinition, contributionTrackerDefinition, featuredArticleDefinition, stanceDefinition, countdownDefinition, editorHighlightDefinition] as Definition[];
+const definitions = [
+  heroDefinition,
+  countdownDefinition,
+  featuredArticleDefinition,
+  feedDefinition,
+  pageContentDefinition,
+  verticalVideoDefinition,
+  imageGalleryDefinition,
+  inlinePollDefinition,
+  rankingsTableDefinition,
+  timelineDefinition,
+  gameReviewDefinition,
+  keyInfoDefinition,
+  steamDataDefinition,
+  editorHighlightDefinition,
+  stanceDefinition,
+  contributionTrackerDefinition,
+] as Definition[];
 const byId = new Map(definitions.map((definition) => [definition.id, definition]));
 const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent, "image-gallery": renderImageGallery, timeline: renderTimeline, "game-review": renderGameReview, "key-info": renderKeyInfo, "inline-poll": renderInlinePoll, "rankings-table": renderRankingsTable, "contribution-tracker": renderContributionTracker, "featured-article": renderFeaturedArticle, stance: renderStance, countdown: renderCountdown, "editor-highlight": renderEditorHighlight };
 const themes = { wireframe: wireframeTheme };
