@@ -1,7 +1,7 @@
 .hub-contribution-tracker { background: var(--hub-contribution-background, #fff); color: var(--hub-contribution-ink, #1a1a1a); display: grid; gap: 32px; padding: 24px 16px; }
-.hub-contribution-tracker__heading { font: 700 30px/1 var(--hub-contribution-display-font, Figtree, sans-serif); margin: 0; text-transform: uppercase; }
+.hub-contribution-tracker__heading { font: 700 30px/1 var(--hub-contribution-display-font, Figtree, sans-serif); margin: 0; }
 .hub-contribution-tracker__panel { border: 2px solid var(--hub-contribution-accent, #009b8f); border-radius: 28px; display: grid; gap: 20px; padding: 26px 24px 24px; }
-.hub-contribution-tracker__expertise { color: var(--hub-contribution-accent, #009b8f); font: 700 19px/1.1 var(--hub-contribution-display-font, Figtree, sans-serif); margin: 0; text-transform: uppercase; }
+.hub-contribution-tracker__expertise { color: var(--hub-contribution-accent, #009b8f); font: 700 19px/1.1 var(--hub-contribution-display-font, Figtree, sans-serif); margin: 0; }
 .hub-contribution-tracker__actions { display: grid; gap: 8px; grid-template-columns: repeat(4, 1fr); }
 .hub-contribution-tracker__action { align-items: center; color: inherit; display: grid; font: 500 16px/1.2 var(--hub-contribution-body-font, Figtree, sans-serif); gap: 10px; justify-items: center; text-decoration: none; }
 .hub-contribution-tracker__action img { background: var(--hub-contribution-icon-surface, #f2f2f4); border-radius: 50%; height: 64px; padding: 19px; width: 64px; }

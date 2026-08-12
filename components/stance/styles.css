@@ -1,6 +1,6 @@
 .hub-stance { background: var(--hub-stance-background, #fff); color: var(--hub-stance-ink, #1a1a1a); display: grid; gap: 20px; padding: 24px 16px; }
 .hub-stance__header { display: grid; gap: 4px; }
-.hub-stance__header h2 { font: 700 18px/1.2 var(--hub-stance-display-font, Figtree, sans-serif); margin: 0; text-transform: uppercase; }
+.hub-stance__header h2 { font: 700 18px/1.2 var(--hub-stance-display-font, Figtree, sans-serif); margin: 0; }
 .hub-stance__header p { color: var(--hub-stance-muted, #737373); font: 400 13px/1.25 var(--hub-stance-body-font, Figtree, sans-serif); margin: 0; }
 .hub-stance__card { border: 1px solid var(--hub-stance-border, #e6e6e6); border-radius: 16px; display: grid; gap: 14px; padding: 16px; }
 .hub-stance__profile { align-items: center; display: flex; gap: 10px; min-height: 32px; }
