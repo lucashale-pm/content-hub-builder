@@ -6,6 +6,7 @@
 .hub-key-info.is-collapsed .hub-key-info__content { display: none; }
 .hub-key-info__list { display: grid; gap: 0 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; }
 .hub-key-info__item { border-bottom: 1px solid var(--hub-key-info-border, #e6e6e6); display: grid; gap: 6px; padding: 14px 0; }
+.hub-key-info__heading { font-size: var(--hub-text-2xl); font-weight: var(--hub-weight-bold); }.hub-key-info__label { font-size: var(--hub-text-sm); font-weight: var(--hub-weight-semibold); }.hub-key-info__value { font-size: var(--hub-text-base); font-weight: var(--hub-weight-normal); }.hub-key-info__purchase-heading { font-size: var(--hub-text-xl); font-weight: var(--hub-weight-bold); }
 .hub-key-info__item:nth-last-child(-n + 2) { border-bottom: 0; }
 .hub-key-info__item dt { color: var(--hub-key-info-muted, #737373); font: 700 13px/1.2 var(--hub-key-info-body-font, Figtree, sans-serif); }
 .hub-key-info__item dd { font: 400 16px/1.35 var(--hub-key-info-body-font, Figtree, sans-serif); margin: 0; }

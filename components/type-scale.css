@@ -1,0 +1,17 @@
+/* Shared mobile type scale. Mirrors Tailwind: text-xs/sm/base/lg/xl/2xl/3xl + normal/medium/semibold/bold. */
+:where([data-component]) {
+  --hub-text-xs: var(--hub-type-label, 12px);
+  --hub-text-sm: var(--hub-type-small, 14px);
+  --hub-text-base: var(--hub-type-body, 16px);
+  --hub-text-lg: 18px;
+  --hub-text-xl: var(--hub-type-h3, 20px);
+  --hub-text-2xl: var(--hub-type-h2, 24px);
+  --hub-text-3xl: 30px;
+  --hub-weight-normal: 400;
+  --hub-weight-medium: 500;
+  --hub-weight-semibold: 600;
+  --hub-weight-bold: 700;
+}
+
+/* Keep browser defaults inside isolated component previews on this same scale. */
+:where([data-component]) :where(button, input, textarea, select) { font: inherit; }

@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import "../../components/type-scale.css";
 import "../../components/hero/styles.css";
 import "../../components/feed/styles.css";
 import "../../components/steam-data/styles.css";

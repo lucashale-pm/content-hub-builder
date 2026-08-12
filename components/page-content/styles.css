@@ -1,4 +1,5 @@
 .hub-page-content { background: var(--hub-content-background, #fff); color: var(--hub-content-ink, #1a1a1a); display: grid; gap: 12px; padding: 24px 16px; }
+.hub-page-content h2 { font-size: var(--hub-text-2xl); font-weight: var(--hub-weight-bold); }.hub-page-content h3 { font-size: var(--hub-text-lg); font-weight: var(--hub-weight-semibold); }.hub-page-content p { font-size: var(--hub-text-base); font-weight: var(--hub-weight-normal); }
 .hub-page-content__heading { font: 700 26px/1.08 var(--hub-content-display-font, Figtree, sans-serif); margin: 0; }
 .hub-page-content__subheading { color: var(--hub-content-muted, #737373); font: 600 17px/1.35 var(--hub-content-body-font, Figtree, sans-serif); margin: 0; }
 .hub-page-content__paragraph { font: 400 16px/1.5 var(--hub-content-body-font, Figtree, sans-serif); margin: 0; }

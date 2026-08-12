@@ -25,5 +25,13 @@ export interface Theme {
       readonly letterSpacing: string;
     };
   };
+  readonly typeScale: {
+    readonly display: string;
+    readonly h2: string;
+    readonly h3: string;
+    readonly body: string;
+    readonly small: string;
+    readonly label: string;
+  };
   readonly radius: { readonly card: string };
 }

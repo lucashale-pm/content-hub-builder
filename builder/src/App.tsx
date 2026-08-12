@@ -112,6 +112,8 @@ function ComponentHost({ componentId, values, theme }: { componentId: string; va
     const renderer = renderers[componentId];
     if (!host.current || !renderer) return;
     const component = renderer(values, theme) as HTMLElement & { cleanup?: () => void };
+    const scale = (theme as { typeScale?: Record<string, string> } | undefined)?.typeScale;
+    if (scale) Object.entries({ display: scale.display, h2: scale.h2, h3: scale.h3, body: scale.body, small: scale.small, label: scale.label }).forEach(([name, value]) => component.style.setProperty(`--hub-type-${name}`, value));
     host.current.replaceChildren(component);
     return () => component.cleanup?.();
   }, [componentId, values, theme]);

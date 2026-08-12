@@ -7,5 +7,6 @@ export const pcgamerTheme: Theme = {
   typography: {
     h1: { fontFamily: "Roboto Condensed, sans-serif", fontSize: "clamp(40px, 13vw, 62px)", fontWeight: 700, lineHeight: ".92", letterSpacing: "-.025em" },
   },
+  typeScale: { display: "48px", h2: "24px", h3: "20px", body: "16px", small: "14px", label: "12px" },
   radius: { card: "0px" },
 };

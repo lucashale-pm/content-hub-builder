@@ -8,6 +8,7 @@ export const wireframeTheme: Theme = {
     labelNews: "#525252", labelAnalysis: "#525252", labelGuide: "#525252",
   },
   font: { display: "Arial, sans-serif", body: "Arial, sans-serif" },
-  typography: { h1: { fontFamily: "Arial, sans-serif", fontSize: "clamp(40px, 13vw, 56px)", fontWeight: 700, lineHeight: ".98", letterSpacing: "-.035em" } },
+  typography: { h1: { fontFamily: "Arial, sans-serif", fontSize: "48px", fontWeight: 700, lineHeight: "1", letterSpacing: "-.035em" } },
+  typeScale: { display: "48px", h2: "24px", h3: "20px", body: "16px", small: "14px", label: "12px" },
   radius: { card: "12px" },
 };

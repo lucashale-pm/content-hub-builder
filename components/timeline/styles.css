@@ -20,6 +20,7 @@
 .hub-timeline__link, .hub-timeline__cta { color: var(--hub-timeline-accent, #ff6600); font: 700 14px/1.25 var(--hub-timeline-body-font, Figtree, sans-serif); text-decoration: none; }
 .hub-timeline__link::after { content: " →"; }
 .hub-timeline__cta { align-items: center; border: 2px solid currentColor; border-radius: 12px; display: flex; justify-content: center; margin-top: 16px; padding: 12px; }
+.hub-timeline__heading { font-size: var(--hub-text-2xl); font-weight: var(--hub-weight-bold); }.hub-timeline__subheading, .hub-timeline__paragraph { font-size: var(--hub-text-base); font-weight: var(--hub-weight-normal); }.hub-timeline__event-heading { font-size: var(--hub-text-lg); font-weight: var(--hub-weight-bold); }.hub-timeline__date, .hub-timeline__author { font-size: var(--hub-text-xs); font-weight: var(--hub-weight-semibold); }.hub-timeline__link, .hub-timeline__cta { font-size: var(--hub-text-sm); font-weight: var(--hub-weight-semibold); }
 .hub-timeline__cta::after { content: " ○"; }
 .hub-timeline__link:hover, .hub-timeline__cta:hover { text-decoration: underline; }
 .hub-timeline__trigger:focus-visible { outline: 2px solid var(--hub-timeline-accent, #ff6600); outline-offset: -2px; }

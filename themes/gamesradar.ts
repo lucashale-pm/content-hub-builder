@@ -7,5 +7,6 @@ export const gamesradarTheme: Theme = {
   typography: {
     h1: { fontFamily: "Figtree, sans-serif", fontSize: "clamp(40px, 13vw, 64px)", fontWeight: 400, lineHeight: ".9", letterSpacing: "-.04em" },
   },
+  typeScale: { display: "48px", h2: "24px", h3: "20px", body: "16px", small: "14px", label: "12px" },
   radius: { card: "16px" },
 };
