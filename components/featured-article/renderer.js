@@ -19,7 +19,16 @@ export function renderFeaturedArticle(values, theme) {
   if (text(values.title)) { const title = document.createElement("h3"); title.textContent = text(values.title); body.append(title); }
   if (text(values.summary)) { const summary = document.createElement("p"); summary.className = "hub-featured-article__summary"; summary.textContent = text(values.summary); body.append(summary); }
   const metaParts = [["author", values.author], ["posted", values.posted], ["comments", values.comments], ["reactions", values.reactions]].filter(([, value]) => text(value));
-  if (metaParts.length) { const meta = document.createElement("div"); meta.className = "hub-featured-article__meta"; if (text(values.avatarUrl) && text(values.author)) { const avatar = document.createElement("img"); avatar.src = text(values.avatarUrl); avatar.alt = ""; meta.append(avatar); } metaParts.forEach(([name, value]) => { const item = document.createElement("span"); item.className = `hub-featured-article__${name}`; item.textContent = text(value); meta.append(item); }); body.append(meta); }
+  if (metaParts.length) {
+    const meta = document.createElement("div"); meta.className = "hub-featured-article__meta";
+    if (text(values.avatarUrl) && text(values.author)) { const avatar = document.createElement("img"); avatar.className = "hub-featured-article__avatar"; avatar.src = text(values.avatarUrl); avatar.alt = ""; meta.append(avatar); }
+    metaParts.forEach(([name, value]) => {
+      const item = document.createElement("span"); item.className = `hub-featured-article__${name}`;
+      if (name === "comments" || name === "reactions") { const icon = document.createElement("img"); icon.className = "hub-featured-article__metric-icon"; icon.src = `https://cdn.jsdelivr.net/npm/lucide-static@0.468.0/icons/${name === "comments" ? "message-circle" : "heart"}.svg`; icon.alt = ""; item.append(icon); }
+      item.append(document.createTextNode(text(value))); meta.append(item);
+    });
+    body.append(meta);
+  }
   article.append(body); section.append(article);
   section.hidden = !heading && !text(values.title) && !text(values.imageUrl);
   return section;

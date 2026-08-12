@@ -8,6 +8,8 @@
 .hub-featured-article__body h3 { font: 700 24px/1.08 var(--hub-featured-display-font, Figtree, sans-serif); margin: 0; }
 .hub-featured-article__summary { color: var(--hub-featured-muted, #737373); font: 400 16px/1.4 var(--hub-featured-body-font, Figtree, sans-serif); margin: 0; }
 .hub-featured-article__meta { align-items: center; color: var(--hub-featured-muted, #737373); display: flex; flex-wrap: wrap; font: 400 12px/1.2 var(--hub-featured-body-font, Figtree, sans-serif); gap: 7px; }
-.hub-featured-article__meta img { border-radius: 50%; height: 24px; object-fit: cover; width: 24px; }
+.hub-featured-article__avatar { border-radius: 50%; height: 24px; object-fit: cover; width: 24px; }
 .hub-featured-article__author { color: var(--hub-featured-ink, #1a1a1a); font-weight: 700; }.hub-featured-article__posted::before, .hub-featured-article__comments::before, .hub-featured-article__reactions::before { color: var(--hub-featured-muted, #737373); content: "· "; }
+.hub-featured-article__comments, .hub-featured-article__reactions { align-items: center; display: inline-flex; gap: 3px; }
+.hub-featured-article__metric-icon { display: block; height: 12px; opacity: .7; width: 12px; }
 .hub-featured-article__card:focus-visible { outline: 3px solid var(--hub-featured-accent, #ff6600); outline-offset: -3px; }
