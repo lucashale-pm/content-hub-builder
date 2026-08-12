@@ -17,7 +17,7 @@ export function renderKeyInfo(values, theme) {
   const trigger = document.createElement("button");
   trigger.className = "hub-key-info__trigger";
   trigger.type = "button";
-  trigger.setAttribute("aria-expanded", "true");
+  trigger.setAttribute("aria-expanded", "false");
   const title = document.createElement("h2");
   title.className = "hub-key-info__heading";
   title.textContent = heading;
@@ -62,6 +62,7 @@ export function renderKeyInfo(values, theme) {
     detailCount += 1;
   });
   content.append(list);
+  section.classList.add("is-collapsed");
   trigger.addEventListener("click", () => { const expanded = trigger.getAttribute("aria-expanded") === "true"; trigger.setAttribute("aria-expanded", String(!expanded)); section.classList.toggle("is-collapsed", expanded); });
   section.append(trigger, content);
   section.hidden = detailCount === 0;
