@@ -1,0 +1,30 @@
+{
+  "id": "editor-highlight",
+  "name": "Editor highlight",
+  "category": "Community",
+  "version": 1,
+  "fields": [
+    { "id": "heading", "label": "Heading", "type": "text", "required": false },
+    { "id": "subheading", "label": "Subheading", "type": "text", "required": false },
+    { "id": "editors", "label": "Editors", "type": "collection", "required": true, "itemLabel": "Editor", "maxItems": 12, "itemFields": [
+      { "id": "imageUrl", "label": "Editor image URL", "type": "url", "required": false },
+      { "id": "imageAlt", "label": "Editor image description", "type": "text", "required": false },
+      { "id": "name", "label": "Name", "type": "text", "required": false },
+      { "id": "title", "label": "Job title", "type": "text", "required": false },
+      { "id": "favoriteGame", "label": "Favourite game", "type": "text", "required": false },
+      { "id": "favoriteGameImageUrl", "label": "Favourite game image URL", "type": "url", "required": false },
+      { "id": "favoriteGameImageAlt", "label": "Favourite game image description", "type": "text", "required": false },
+      { "id": "followLabel", "label": "Follow button text", "type": "text", "required": false },
+      { "id": "followUrl", "label": "Follow button URL", "type": "url", "required": false }
+    ] }
+  ],
+  "defaults": {
+    "heading": "Your GTA 6 editors",
+    "subheading": "Experts behind every take",
+    "editors": [
+      { "imageUrl": "./assets/maya-chen.png", "imageAlt": "Maya Chen", "name": "Maya Chen", "title": "Reviews Editor", "favoriteGame": "Elden Ring: Nightreign", "favoriteGameImageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUERPsCDI_bEZOJ7yDIrcGzsTBPK-QSvfGeogSxH6XwMERU4Gsvze2Xr6oC1SOJoPegfb3Xw&s=10", "favoriteGameImageAlt": "Elden Ring: Nightreign", "followLabel": "Follow", "followUrl": "#maya" },
+      { "imageUrl": "./assets/jordan-lee.png", "imageAlt": "Jordan Lee", "name": "Jordan Lee", "title": "RPG Lead", "favoriteGame": "Metaphor: ReFantazio", "favoriteGameImageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGgqNSEZhkXGcvEFXTLhTJ-U_56C9fsqHILGcs1M0focYuKJkPvblL88XsB2y1jPsEDOjXfQ&s=10", "favoriteGameImageAlt": "Metaphor: ReFantazio", "followLabel": "Follow", "followUrl": "#jordan" },
+      { "imageUrl": "./assets/raj-patel.png", "imageAlt": "Raj Patel", "name": "Raj Patel", "title": "News Writer", "favoriteGame": "GTA VI", "favoriteGameImageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp9QhAqExpEt5DMUmmh31szAeOq3OulK8yrOghKQISbhlTRrH78eHSaoI89uGSkJmAWomLBw&s=10", "favoriteGameImageAlt": "Grand Theft Auto VI", "followLabel": "Follow", "followUrl": "#raj" }
+    ]
+  }
+}

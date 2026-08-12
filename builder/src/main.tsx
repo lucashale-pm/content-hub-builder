@@ -16,6 +16,7 @@ import "../../components/contribution-tracker/styles.css";
 import "../../components/featured-article/styles.css";
 import "../../components/stance/styles.css";
 import "../../components/countdown/styles.css";
+import "../../components/editor-highlight/styles.css";
 import App from "./App";
 
 createRoot(document.querySelector("#root")!).render(<StrictMode><App /></StrictMode>);

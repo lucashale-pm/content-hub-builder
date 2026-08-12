@@ -1,0 +1,1 @@
+export type EditorHighlightProps = { heading?: string; subheading?: string; editors: Array<{ imageUrl?: string; imageAlt?: string; name?: string; title?: string; favoriteGame?: string; favoriteGameImageUrl?: string; favoriteGameImageAlt?: string; followLabel?: string; followUrl?: string }> };
