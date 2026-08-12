@@ -80,6 +80,12 @@ const definitions = [
 const byId = new Map(definitions.map((definition) => [definition.id, definition]));
 const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent, "image-gallery": renderImageGallery, timeline: renderTimeline, "game-review": renderGameReview, "key-info": renderKeyInfo, "inline-poll": renderInlinePoll, "rankings-table": renderRankingsTable, "contribution-tracker": renderContributionTracker, "featured-article": renderFeaturedArticle, stance: renderStance, countdown: renderCountdown, "editor-highlight": renderEditorHighlight };
 const themes = { wireframe: wireframeTheme };
+const selectorPreviewScales: Record<string, number> = {
+  hero: 0.34, countdown: 0.34, "featured-article": 0.33, feed: 0.33,
+  "page-content": 0.34, "vertical-video": 0.34, "image-gallery": 0.34, "inline-poll": 0.34,
+  "rankings-table": 0.34, timeline: 0.32, "game-review": 0.32, "key-info": 0.32,
+  "steam-data": 0.34, "editor-highlight": 0.32, stance: 0.32, "contribution-tracker": 0.32,
+};
 
 const clone = <T,>(value: T): T => JSON.parse(JSON.stringify(value));
 const initialDraft = (): Draft => ({ version: 1, brand: "wireframe", scenario: "GTA 6", pageTitle: "GTA 6 hub", instances: [{ id: crypto.randomUUID(), componentId: "hero", values: clone(heroDefinition.defaults) }] });
@@ -244,11 +250,8 @@ export default function App() {
       button.classList.remove("min-h-14", "px-2", "py-1.5");
       button.classList.add("h-80", "p-2");
       button.prepend(preview);
-      const componentHeight = Math.max(component.scrollHeight, component.getBoundingClientRect().height, 1);
-      const scale = Math.max(preview.clientWidth / 390, preview.clientHeight / componentHeight);
+      const scale = selectorPreviewScales[definition.id] ?? 0.34;
       canvas.style.transform = `scale(${scale})`;
-      canvas.style.marginLeft = `${Math.min(0, (preview.clientWidth - (390 * scale)) / 2)}px`;
-      canvas.style.marginTop = `${Math.min(0, (preview.clientHeight - (componentHeight * scale)) / 2)}px`;
       cleanups.push(() => { component.cleanup?.(); preview.remove(); button.classList.remove("h-80", "p-2"); button.classList.add("min-h-14", "px-2", "py-1.5"); });
     });
     return () => cleanups.forEach((cleanup) => cleanup());
