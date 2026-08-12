@@ -2,7 +2,7 @@ const text = (value) => typeof value === "string" ? value.trim() : "";
 
 export function renderRankingsTable(values, theme) {
   const section = document.createElement("section");
-  const brand = theme?.brand === "pcgamer" ? "pcgamer" : "gamesradar";
+  const brand = ["pcgamer", "gamesradar", "wireframe"].includes(theme?.brand) ? theme.brand : "wireframe";
   const isRanking = values.displayType !== "Table";
   section.className = "hub-rankings-table";
   section.dataset.component = "rankings-table";

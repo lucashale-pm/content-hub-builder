@@ -2,7 +2,7 @@ const text = (value) => typeof value === "string" ? value.trim() : "";
 
 export function renderInlinePoll(values, theme) {
   const section = document.createElement("section");
-  const brand = theme?.brand === "pcgamer" ? "pcgamer" : "gamesradar";
+  const brand = ["pcgamer", "gamesradar", "wireframe"].includes(theme?.brand) ? theme.brand : "wireframe";
   section.className = "hub-inline-poll";
   section.dataset.component = "inline-poll";
   section.dataset.theme = brand;

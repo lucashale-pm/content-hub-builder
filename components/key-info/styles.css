@@ -1,4 +1,4 @@
-.hub-key-info { background: var(--hub-key-info-background, #fff); color: var(--hub-key-info-ink, #1a1a1a); display: grid; gap: 16px; padding: 24px 20px; }
+.hub-key-info { background: var(--hub-key-info-background, #fff); color: var(--hub-key-info-ink, #1a1a1a); display: grid; gap: 16px; padding: 24px 16px; }
 .hub-key-info__trigger { align-items: center; appearance: none; background: transparent; border: 0; color: inherit; cursor: pointer; display: flex; justify-content: space-between; padding: 0; text-align: left; width: 100%; }
 .hub-key-info__heading { font: 700 26px/1.08 var(--hub-key-info-display-font, Figtree, sans-serif); margin: 0; }
 .hub-key-info__chevron { color: var(--hub-key-info-accent, #ff6600); font-size: 24px; transition: transform .18s ease; }

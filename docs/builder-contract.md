@@ -4,7 +4,7 @@ Builder may edit page configs and choose a theme. It must not alter content reco
 
 Allowed controls:
 
-- Theme: `gamesradar` or `pcgamer`.
+- Theme: workshop preview always uses `wireframe`; brand themes remain available for downstream rendering.
 - Page: title plus ordered sections.
 - Section: supported component, title, content selection, declared options.
 

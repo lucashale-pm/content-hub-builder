@@ -16,7 +16,7 @@
 
 .hub-hero__media-frame { aspect-ratio: 16 / 9; overflow: hidden; position: relative; }
 .hub-hero__media { display: block; height: 100%; object-fit: cover; width: 100%; }
-.hub-hero__content { display: grid; gap: 8px; padding: 20px; width: 100%; }
+.hub-hero__content { display: grid; gap: 8px; padding: 24px 16px; width: 100%; }
 .hub-hero__eyebrow { background: color-mix(in srgb, var(--hub-accent) 18%, white); border: 1px solid var(--hub-accent); border-radius: 4px; color: var(--hub-accent); font: 800 10px/1 var(--hub-body-font); justify-self: start; letter-spacing: .06em; margin: 0; padding: 4px 8px; text-transform: uppercase; }
 .hub-hero__headline { font-family: var(--hub-h1-font-family); font-size: var(--hub-h1-font-size); font-weight: var(--hub-h1-font-weight); letter-spacing: var(--hub-h1-letter-spacing); line-height: var(--hub-h1-line-height); margin: 0; text-wrap: balance; }
 .hub-hero__subheadline { font: 400 15px / 1.4 var(--hub-body-font); margin: 0; max-width: 42ch; opacity: .9; }

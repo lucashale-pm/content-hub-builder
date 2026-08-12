@@ -6,6 +6,7 @@ const fireworkScripts = [
 const feeds = {
   pcgamer: { channel: "pc_gamer", playlist: "oN1W89" },
   gamesradar: { channel: "gamesradar", playlist: "o0WjAj" },
+  wireframe: { channel: "gamesradar", playlist: "o0WjAj" },
 };
 
 function ensureFireworkScripts() {
@@ -22,7 +23,7 @@ function ensureFireworkScripts() {
 
 export function renderVerticalVideo(values, theme) {
   ensureFireworkScripts();
-  const brand = theme?.brand === "pcgamer" ? "pcgamer" : "gamesradar";
+  const brand = ["pcgamer", "gamesradar", "wireframe"].includes(theme?.brand) ? theme.brand : "wireframe";
   const feed = feeds[brand];
   const section = document.createElement("section");
   section.className = "hub-vertical-video";

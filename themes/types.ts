@@ -1,5 +1,5 @@
 export interface Theme {
-  readonly brand: "gamesradar" | "pcgamer";
+  readonly brand: "gamesradar" | "pcgamer" | "wireframe";
   readonly color: {
     readonly accent: string;
     readonly rankingAccent: string;
