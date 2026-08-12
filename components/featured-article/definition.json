@@ -7,7 +7,7 @@
     { "id": "contentType", "label": "Content type", "type": "radio", "required": false, "options": ["Article", "YouTube video"] },
     { "id": "heading", "label": "Section heading", "type": "text", "required": false },
     { "id": "subheading", "label": "Video subheading", "type": "textarea", "required": false, "showWhen": { "field": "contentType", "equals": "YouTube video" } },
-    { "id": "videoUrl", "label": "YouTube URL (blank uses brand default)", "type": "url", "required": false, "showWhen": { "field": "contentType", "equals": "YouTube video" } },
+    { "id": "videoUrl", "label": "YouTube URL", "type": "url", "required": false, "showWhen": { "field": "contentType", "equals": "YouTube video" } },
     { "id": "label", "label": "Label", "type": "text", "required": false, "showWhen": { "field": "contentType", "equals": "Article" } },
     { "id": "title", "label": "Title", "type": "textarea", "required": false, "showWhen": { "field": "contentType", "equals": "Article" } },
     { "id": "summary", "label": "Summary", "type": "textarea", "required": false, "showWhen": { "field": "contentType", "equals": "Article" } },
@@ -35,6 +35,6 @@
     "comments": "184",
     "reactions": "2.4k",
     "href": "#",
-    "videoUrl": ""
+    "videoUrl": "https://www.youtube.com/watch?v=LDlHHOv6MN8"
   }
 }
