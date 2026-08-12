@@ -63,8 +63,6 @@
           "itemFields": [
             { "id": "username", "label": "Username", "type": "text", "required": false },
             { "id": "flairText", "label": "Audience flair text", "type": "text", "required": false },
-            { "id": "flairColor", "label": "Audience flair color", "type": "color", "required": false },
-            { "id": "flairTextColor", "label": "Audience flair text color", "type": "radio", "required": false, "options": ["White", "Black"] },
             { "id": "text", "label": "Comment", "type": "textarea", "required": false },
             { "id": "upvotes", "label": "Upvotes", "type": "text", "required": false }
           ]
