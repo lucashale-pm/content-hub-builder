@@ -1,4 +1,12 @@
 const text = (value) => typeof value === "string" ? value.trim() : "";
+const defaultVideos = { gamesradar: "https://www.youtube.com/watch?v=LDlHHOv6MN8", pcgamer: "https://www.youtube.com/watch?v=Q6_KYI3gnFE" };
+function youtubeEmbedUrl(value) {
+  try {
+    const url = new URL(value);
+    const id = url.hostname === "youtu.be" ? url.pathname.slice(1) : url.searchParams.get("v") || url.pathname.split("/").at(-1);
+    return id ? "https://www.youtube-nocookie.com/embed/" + id : "";
+  } catch { return ""; }
+}
 
 export function renderFeaturedArticle(values, theme) {
   const section = document.createElement("section");
@@ -12,6 +20,16 @@ export function renderFeaturedArticle(values, theme) {
   section.style.setProperty("--hub-featured-body-font", theme?.font?.body || "Figtree, sans-serif");
   const heading = text(values.heading);
   if (heading) { const title = document.createElement("h2"); title.className = "hub-featured-article__heading"; title.textContent = heading; section.append(title); }
+  const isVideo = values.contentType === "YouTube video";
+  if (isVideo) {
+    const subheading = text(values.subheading);
+    if (subheading) { const copy = document.createElement("p"); copy.className = "hub-featured-article__subheading"; copy.textContent = subheading; section.append(copy); }
+    const source = text(values.videoUrl) || defaultVideos[theme?.brand === "pcgamer" ? "pcgamer" : "gamesradar"];
+    const embedUrl = youtubeEmbedUrl(source);
+    if (embedUrl) { const video = document.createElement("iframe"); video.className = "hub-featured-article__video"; video.src = embedUrl; video.title = heading || "Featured YouTube video"; video.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"; video.allowFullscreen = true; section.append(video); }
+    section.hidden = !heading && !subheading && !embedUrl;
+    return section;
+  }
   const article = document.createElement(text(values.href) ? "a" : "article"); article.className = "hub-featured-article__card";
   if (article instanceof HTMLAnchorElement) article.href = text(values.href);
   if (text(values.imageUrl)) { const media = document.createElement("div"); media.className = "hub-featured-article__media"; const image = document.createElement("img"); image.src = text(values.imageUrl); image.alt = text(values.imageAlt); media.append(image); if (text(values.label)) { const label = document.createElement("span"); label.className = "hub-featured-article__label"; label.textContent = text(values.label); media.append(label); } article.append(media); }

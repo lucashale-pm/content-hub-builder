@@ -70,7 +70,12 @@ function upgradeStanceValues(values: Values): Values {
     spiceChoices: Array.isArray(values.spiceChoices) ? values.spiceChoices : Array.isArray(firstStance?.spiceChoices) ? firstStance.spiceChoices : clone(stanceDefinition.defaults.spiceChoices),
   };
 }
-function storedDraft(): Draft { try { const draft = JSON.parse(localStorage.getItem("content-hub-workshop-draft") || "") as Draft; return { ...draft, instances: Array.isArray(draft.instances) ? draft.instances.map((instance) => instance.componentId === "stance" ? { ...instance, values: upgradeStanceValues(instance.values) } : instance) : [] }; } catch { return initialDraft(); } }
+function upgradeInstanceValues(componentId: string, values: Values): Values {
+  if (componentId === "stance") return upgradeStanceValues(values);
+  if (componentId === "featured-article" && !values.contentType) return { ...values, contentType: "Article" };
+  return values;
+}
+function storedDraft(): Draft { try { const draft = JSON.parse(localStorage.getItem("content-hub-workshop-draft") || "") as Draft; return { ...draft, instances: Array.isArray(draft.instances) ? draft.instances.map((instance) => ({ ...instance, values: upgradeInstanceValues(instance.componentId, instance.values) })) : [] }; } catch { return initialDraft(); } }
 function setAtPath(value: Values, path: string[], next: unknown): Values { const copy = clone(value); let cursor: Record<string, unknown> = copy; path.slice(0, -1).forEach((key) => { cursor[key] = typeof cursor[key] === "object" && cursor[key] ? clone(cursor[key]) : {}; cursor = cursor[key] as Record<string, unknown>; }); cursor[path.at(-1)!] = next; return copy; }
 function emptyValues(fields: Field[]): Values { return Object.fromEntries(fields.map((field) => [field.id, field.type === "object" ? emptyValues(field.fields || []) : ["collection", "checkboxes"].includes(field.type) ? [] : ""])); }
 function isValues(value: unknown): value is Values { return typeof value === "object" && value !== null && !Array.isArray(value); }
@@ -81,7 +86,7 @@ function parseDraft(value: unknown): Draft | null {
   for (const instance of value.instances) {
     if (!isValues(instance) || typeof instance.id !== "string" || !instance.id || ids.has(instance.id) || typeof instance.componentId !== "string" || !byId.has(instance.componentId) || !isValues(instance.values)) return null;
     ids.add(instance.id);
-    instances.push({ id: instance.id, componentId: instance.componentId, values: instance.values });
+    instances.push({ id: instance.id, componentId: instance.componentId, values: upgradeInstanceValues(instance.componentId, instance.values) });
   }
   return { version: typeof value.version === "number" ? value.version : 1, brand: value.brand as Draft["brand"], scenario: typeof value.scenario === "string" ? value.scenario : "", pageTitle: value.pageTitle, instances };
 }

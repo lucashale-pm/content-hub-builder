@@ -1,5 +1,7 @@
-export type FeaturedArticleProps = {
+export type FeaturedContentProps = {
+  contentType: "Article" | "YouTube video";
   heading?: string;
+  subheading?: string;
   label?: string;
   title: string;
   summary?: string;
@@ -11,4 +13,5 @@ export type FeaturedArticleProps = {
   comments?: string;
   reactions?: string;
   href?: string;
+  videoUrl?: string;
 };
