@@ -2,14 +2,14 @@
 .hub-rankings-table[data-theme="gamesradar"] { background: var(--hub-rankings-background, #fff); color: var(--hub-rankings-ink, #1a1a1a); }
 .hub-rankings-table[data-theme="pcgamer"] { background: var(--hub-rankings-background, #fff); color: var(--hub-rankings-ink, #1a1a1a); }
 .hub-rankings-table[data-theme="wireframe"] { background: var(--hub-rankings-background, #fff); color: var(--hub-rankings-ink, #1a1a1a); }
-.hub-rankings-table__header { display: grid; gap: 6px; padding: 4px 32px 4px; }
+.hub-rankings-table__header { display: grid; gap: 6px; padding: 4px 0; }
 .hub-rankings-table__header h2 { font: 700 28px/1 var(--hub-rankings-display-font, Figtree, sans-serif); margin: 0; }
-.hub-rankings-table__header p { color: color-mix(in srgb, currentColor 72%, transparent); font: 500 16px/1.2 var(--hub-rankings-body-font, Figtree, sans-serif); margin: 0; max-width: 290px; }
+.hub-rankings-table__header p { color: currentColor; font: 500 16px/1.2 var(--hub-rankings-body-font, Figtree, sans-serif); margin: 0; max-width: 290px; }
 .hub-rankings-table__rows { display: grid; gap: 18px; list-style: none; margin: 0; padding: 0; }
 .hub-rankings-table__row { align-items: center; background: var(--hub-rankings-background, #fff); border: 1px solid var(--hub-rankings-border, #e6e6e6); border-radius: 22px; display: grid; gap: 12px; grid-template-columns: 32px 34px minmax(0, 1fr) auto; min-height: 74px; padding: 12px 20px; }
 .hub-rankings-table[data-display="table"] .hub-rankings-table__row { grid-template-columns: 34px minmax(0, 1fr) auto; }
 .hub-rankings-table[data-theme="pcgamer"] .hub-rankings-table__row { background: #fff; border-color: var(--hub-rankings-border, #e6e6e6); border-radius: 0; }
-.hub-rankings-table__header h2 { font-size: var(--hub-text-3xl); font-weight: var(--hub-weight-bold); }.hub-rankings-table__header p { font-size: var(--hub-text-base); font-weight: var(--hub-weight-normal); }.hub-rankings-table__rank { font-size: var(--hub-text-2xl); font-weight: var(--hub-weight-bold); }.hub-rankings-table__title { font-size: var(--hub-text-lg); font-weight: var(--hub-weight-bold); }.hub-rankings-table__value, .hub-rankings-table__row-cta { font-size: var(--hub-text-sm); font-weight: var(--hub-weight-semibold); }
+.hub-rankings-table__header h2 { font-size: var(--hub-text-2xl); font-weight: var(--hub-weight-bold); }.hub-rankings-table__header p { font-size: var(--hub-text-base); font-weight: var(--hub-weight-normal); }.hub-rankings-table__rank { font-size: var(--hub-text-2xl); font-weight: var(--hub-weight-bold); }.hub-rankings-table__title { font-size: var(--hub-text-lg); font-weight: var(--hub-weight-bold); }.hub-rankings-table__value, .hub-rankings-table__row-cta { font-size: var(--hub-text-sm); font-weight: var(--hub-weight-semibold); }
 .hub-rankings-table__rank { font: 700 30px/1 var(--hub-rankings-display-font, Figtree, sans-serif); }
 .hub-rankings-table__icon { border-radius: 50%; display: block; height: 34px; object-fit: cover; width: 34px; }
 .hub-rankings-table__title { font: 700 18px/1.12 var(--hub-rankings-display-font, Figtree, sans-serif); margin: 0; }

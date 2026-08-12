@@ -11,4 +11,4 @@
 .hub-inline-poll[data-theme="pcgamer"] .hub-inline-poll__choice.is-selected, .hub-inline-poll[data-theme="pcgamer"] .hub-inline-poll__choice:hover { background: var(--hub-poll-accent, #e31b23); }
 .hub-inline-poll[data-theme="wireframe"] .hub-inline-poll__choice { border-color: var(--hub-poll-ink, #1a1a1a); color: var(--hub-poll-ink, #1a1a1a); }.hub-inline-poll[data-theme="wireframe"] .hub-inline-poll__choice.is-selected, .hub-inline-poll[data-theme="wireframe"] .hub-inline-poll__choice:hover { background: var(--hub-poll-ink, #1a1a1a); color: var(--hub-poll-background, #fff); }
 .hub-inline-poll__choice:focus-visible { outline: 2px solid var(--hub-poll-accent, #ff6600); outline-offset: 3px; }
-.hub-inline-poll__question { font-size: var(--hub-text-lg); font-weight: var(--hub-weight-bold); }.hub-inline-poll__choice { font-size: var(--hub-text-sm); font-weight: var(--hub-weight-semibold); }
+.hub-inline-poll__question { font-size: var(--hub-text-2xl); font-weight: var(--hub-weight-bold); }.hub-inline-poll__choice { font-size: var(--hub-text-sm); font-weight: var(--hub-weight-semibold); }
