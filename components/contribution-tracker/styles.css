@@ -10,7 +10,6 @@
 .hub-contribution-tracker__rank-line p:last-child { color: var(--hub-contribution-accent, #009b8f); font-weight: 700; }
 .hub-contribution-tracker__progress { background: var(--hub-contribution-progress-surface, #eceef0); border-radius: 999px; height: 10px; overflow: hidden; }
 .hub-contribution-tracker__progress span { background: var(--hub-contribution-accent, #009b8f); display: block; height: 100%; }
-.hub-contribution-tracker__ranks { color: var(--hub-contribution-muted, #737373); font: 400 12px/1.35 var(--hub-contribution-body-font, Figtree, sans-serif); margin: 0; }
 .hub-contribution-tracker__cards { display: flex; gap: 16px; margin-right: -20px; overflow-x: auto; overscroll-behavior-x: contain; padding: 0 20px 2px 0; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .hub-contribution-tracker__cards::-webkit-scrollbar { display: none; }
 .hub-contribution-tracker__card { border: 2px solid var(--hub-contribution-border, #e6e6e6); border-radius: 22px; display: grid; flex: 0 0 calc(100% - 64px); gap: 14px; min-height: 208px; padding: 24px; scroll-snap-align: start; }

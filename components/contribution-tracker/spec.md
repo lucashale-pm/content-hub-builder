@@ -2,7 +2,7 @@
 
 Purpose: Encourage community contributions by showing actions, rank progress, ranks, and optional contribution prompts.
 
-States: Any actions, ranks, and cards can be added or removed; empty rows do not render.
+States: Any actions and cards can be added or removed; rank data is retained for a configurable contributor system; empty rows do not render.
 
 Constraints: Up to four actions and cards. Progress is clamped to 0–100.
 

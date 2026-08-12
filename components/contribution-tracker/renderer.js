@@ -41,8 +41,6 @@ export function renderContributionTracker(values, theme) {
   rankLine.append(rank, progressText); panel.append(rankLine);
   const progress = document.createElement("div"); progress.className = "hub-contribution-tracker__progress";
   const fill = document.createElement("span"); const percent = Math.max(0, Math.min(100, Number.parseFloat(text(values.progressPercent)) || 0)); fill.style.width = `${percent}%`; progress.append(fill); panel.append(progress);
-  const ranks = Array.isArray(values.ranks) ? values.ranks.filter((rank) => text(rank?.name)) : [];
-  if (ranks.length) { const list = document.createElement("p"); list.className = "hub-contribution-tracker__ranks"; list.textContent = `Ranks: ${ranks.map((rank) => `${text(rank.name)}${text(rank.threshold) ? ` (${text(rank.threshold)})` : ""}`).join(" · ")}`; panel.append(list); }
   section.append(panel);
   const cards = Array.isArray(values.cards) ? values.cards.filter((card) => text(card?.heading)).slice(0, 4) : [];
   if (cards.length) { const list = document.createElement("div"); list.className = "hub-contribution-tracker__cards"; cards.forEach((card) => { const item = document.createElement("article"); item.className = "hub-contribution-tracker__card"; const title = document.createElement("h3"); title.textContent = text(card.heading); item.append(title); if (text(card.body)) { const body = document.createElement("p"); body.textContent = text(card.body); item.append(body); } if (text(card.ctaText) && text(card.ctaUrl)) { const link = document.createElement("a"); link.href = text(card.ctaUrl); link.textContent = text(card.ctaText); item.append(link); } list.append(item); }); section.append(list); }
