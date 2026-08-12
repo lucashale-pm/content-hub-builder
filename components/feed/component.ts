@@ -17,8 +17,6 @@ export interface FeedArticle {
 export interface FeedProps {
   readonly eyebrow: string;
   readonly date: string;
-  readonly archiveLabel: string;
-  readonly archiveHref: string;
   readonly featured: FeedArticle;
   readonly articles: readonly FeedArticle[];
   readonly loadMoreLabel: string;
