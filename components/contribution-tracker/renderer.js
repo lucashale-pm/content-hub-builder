@@ -13,7 +13,7 @@ export function renderContributionTracker(values, theme) {
   section.style.setProperty("--hub-contribution-background", theme?.color?.background || "#ffffff");
   section.style.setProperty("--hub-contribution-ink", theme?.color?.ink || "#1a1a1a");
   section.style.setProperty("--hub-contribution-muted", theme?.color?.muted || "#737373");
-  section.style.setProperty("--hub-contribution-accent", theme?.color?.contributionAccent || theme?.color?.accent || "#009b8f");
+  section.style.setProperty("--hub-contribution-accent", theme?.color?.accent || "#ff6600");
   section.style.setProperty("--hub-contribution-icon-surface", theme?.color?.contributionIconSurface || "#f2f2f4");
   section.style.setProperty("--hub-contribution-progress-surface", theme?.color?.contributionProgressSurface || "#eceef0");
   section.style.setProperty("--hub-contribution-border", theme?.color?.border || "#e6e6e6");
