@@ -1,0 +1,14 @@
+{
+  "id": "countdown",
+  "name": "Countdown",
+  "category": "Content",
+  "version": 1,
+  "fields": [
+    { "id": "heading", "label": "Heading", "type": "text", "required": false },
+    { "id": "targetDateTime", "label": "Countdown date and time", "type": "datetime-local", "required": true }
+  ],
+  "defaults": {
+    "heading": "Grand Theft Auto VI arrives in",
+    "targetDateTime": "2027-01-01T00:00"
+  }
+}

@@ -14,6 +14,7 @@ import rankingsTableDefinition from "../../components/rankings-table/definition.
 import contributionTrackerDefinition from "../../components/contribution-tracker/definition.json";
 import featuredArticleDefinition from "../../components/featured-article/definition.json";
 import stanceDefinition from "../../components/stance/definition.json";
+import countdownDefinition from "../../components/countdown/definition.json";
 // Component renderers remain source-owned. React only hosts their DOM output.
 // @ts-ignore
 import { renderHero } from "../../components/hero/renderer.js";
@@ -43,6 +44,8 @@ import { renderContributionTracker } from "../../components/contribution-tracker
 import { renderFeaturedArticle } from "../../components/featured-article/renderer.js";
 // @ts-ignore
 import { renderStance } from "../../components/stance/renderer.js";
+// @ts-ignore
+import { renderCountdown } from "../../components/countdown/renderer.js";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -52,9 +55,9 @@ type Definition = { id: string; name: string; category: string; fields: Field[];
 type Instance = { id: string; componentId: string; values: Values };
 type Draft = { version: number; brand: keyof typeof themes; scenario: string; pageTitle: string; instances: Instance[] };
 
-const definitions = [heroDefinition, feedDefinition, steamDataDefinition, verticalVideoDefinition, pageContentDefinition, imageGalleryDefinition, timelineDefinition, gameReviewDefinition, keyInfoDefinition, inlinePollDefinition, rankingsTableDefinition, contributionTrackerDefinition, featuredArticleDefinition, stanceDefinition] as Definition[];
+const definitions = [heroDefinition, feedDefinition, steamDataDefinition, verticalVideoDefinition, pageContentDefinition, imageGalleryDefinition, timelineDefinition, gameReviewDefinition, keyInfoDefinition, inlinePollDefinition, rankingsTableDefinition, contributionTrackerDefinition, featuredArticleDefinition, stanceDefinition, countdownDefinition] as Definition[];
 const byId = new Map(definitions.map((definition) => [definition.id, definition]));
-const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent, "image-gallery": renderImageGallery, timeline: renderTimeline, "game-review": renderGameReview, "key-info": renderKeyInfo, "inline-poll": renderInlinePoll, "rankings-table": renderRankingsTable, "contribution-tracker": renderContributionTracker, "featured-article": renderFeaturedArticle, stance: renderStance };
+const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent, "image-gallery": renderImageGallery, timeline: renderTimeline, "game-review": renderGameReview, "key-info": renderKeyInfo, "inline-poll": renderInlinePoll, "rankings-table": renderRankingsTable, "contribution-tracker": renderContributionTracker, "featured-article": renderFeaturedArticle, stance: renderStance, countdown: renderCountdown };
 const themes = {
   gamesradar: { brand: "gamesradar", color: { accent: "#ff6600", rankingAccent: "#6bdd73", contributionIconSurface: "#f2f2f4", contributionProgressSurface: "#eceef0", surface: "#161616", text: "#ffffff", background: "#ffffff", ink: "#1a1a1a", muted: "#737373", border: "#e6e6e6", labelNews: "#008a80", labelAnalysis: "#7156c8", labelGuide: "#a85c00" }, font: { display: "Figtree, sans-serif", body: "Figtree, sans-serif" }, typography: { h1: { fontFamily: "Figtree, sans-serif", fontSize: "clamp(40px, 13vw, 64px)", fontWeight: 400, lineHeight: ".9", letterSpacing: "-.04em" } }, radius: { card: "16px" } },
   pcgamer: { brand: "pcgamer", color: { accent: "#e31b23", rankingAccent: "#e31b23", contributionIconSurface: "#f2f2f2", contributionProgressSurface: "#e7e7e7", surface: "#111111", text: "#ffffff", background: "#ffffff", ink: "#1a1a1a", muted: "#737373", border: "#e6e6e6", labelNews: "#b11f26", labelAnalysis: "#6b55ab", labelGuide: "#9c5900" }, font: { display: "Roboto Condensed, sans-serif", body: "Arial, sans-serif" }, typography: { h1: { fontFamily: "Roboto Condensed, sans-serif", fontSize: "clamp(40px, 13vw, 62px)", fontWeight: 700, lineHeight: ".92", letterSpacing: "-.025em" } }, radius: { card: "0px" } },
@@ -99,7 +102,13 @@ function instanceHeading(instance: Instance): string {
 
 function ComponentHost({ componentId, values, theme }: { componentId: string; values: Values; theme: unknown }) {
   const host = useRef<HTMLDivElement>(null);
-  useEffect(() => { const renderer = renderers[componentId]; if (host.current && renderer) host.current.replaceChildren(renderer(values, theme)); }, [componentId, values, theme]);
+  useEffect(() => {
+    const renderer = renderers[componentId];
+    if (!host.current || !renderer) return;
+    const component = renderer(values, theme) as HTMLElement & { cleanup?: () => void };
+    host.current.replaceChildren(component);
+    return () => component.cleanup?.();
+  }, [componentId, values, theme]);
   return <div ref={host} />;
 }
 
@@ -113,7 +122,7 @@ function FieldEditor({ fields, values, onChange }: { fields: Field[]; values: Va
     {field.type === "radio" ? <fieldset className="grid gap-2 rounded-md border border-zinc-200 p-3"><legend className="px-1 text-xs font-semibold">{field.label}</legend><div className="grid grid-cols-2 gap-2">{field.options?.map((option) => <label key={option} className="flex items-center gap-2 rounded-md border border-zinc-200 bg-white px-2 py-2 text-xs"><input type="radio" name={`${radioGroup}-${field.id}`} value={option} checked={values[field.id] === option} onChange={() => update([field.id], option)} />{option}</label>)}</div></fieldset> : null}
     {field.type === "checkboxes" ? <div className="grid grid-cols-2 gap-2">{field.options?.map((option) => { const current = Array.isArray(values[field.id]) ? values[field.id] as string[] : []; const selected = current.includes(option); return <label key={option} className="flex items-center gap-2 rounded-md border border-zinc-200 bg-white px-2 py-2 text-xs"><input type="checkbox" checked={selected} onChange={() => update([field.id], selected ? current.filter((item) => item !== option) : [...current, option])} />{option}</label>; })}</div> : null}
     {field.type === "toggle" ? <label className="flex items-center gap-2 rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm"><input id={field.id} type="checkbox" checked={Boolean(values[field.id])} onChange={(event) => update([field.id], event.target.checked)} />{field.label}</label> : null}
-    {!["textarea", "select", "radio", "checkboxes", "toggle", "object", "collection"].includes(field.type) ? <input id={field.id} className="h-9 rounded-md border border-zinc-200 bg-white px-3 text-sm" type={field.type === "color" ? "color" : field.type === "url" ? "url" : "text"} value={field.type === "color" ? String(values[field.id] || "#000000") : String(values[field.id] || "")} onChange={(event) => update([field.id], event.target.value)} /> : null}
+    {!["textarea", "select", "radio", "checkboxes", "toggle", "object", "collection"].includes(field.type) ? <input id={field.id} className="h-9 rounded-md border border-zinc-200 bg-white px-3 text-sm" type={field.type === "color" ? "color" : field.type === "url" ? "url" : field.type === "datetime-local" ? "datetime-local" : "text"} min={field.type === "datetime-local" ? new Date().toISOString().slice(0, 16) : undefined} value={field.type === "color" ? String(values[field.id] || "#000000") : String(values[field.id] || "")} onChange={(event) => update([field.id], event.target.value)} /> : null}
     {field.type === "object" && <fieldset className="grid gap-3 rounded-md border border-zinc-200 p-3"><legend className="px-1 text-xs font-semibold">{field.label}</legend><FieldEditor fields={field.fields || []} values={(values[field.id] as Values) || {}} onChange={(next) => update([field.id], next)} /></fieldset>}
     {field.type === "collection" && <fieldset className="grid gap-3 rounded-md border border-zinc-200 p-3"><legend className="px-1 text-xs font-semibold">{field.label}</legend>{((values[field.id] as Values[]) || []).map((item, index) => <div key={index} className="rounded border border-zinc-100 p-3"><div className="mb-2 flex items-center justify-between text-xs font-medium">{field.itemLabel || "Item"} {index + 1}{!field.fixedItems && <Button variant="ghost" size="sm" onClick={() => update([field.id], ((values[field.id] as Values[]) || []).filter((_, itemIndex) => itemIndex !== index))}>Remove</Button>}</div><FieldEditor fields={field.itemFields || []} values={item} onChange={(next) => { const items = [...((values[field.id] as Values[]) || [])]; items[index] = next; update([field.id], items); }} /></div>)}{!field.fixedItems && <Button variant="outline" size="sm" disabled={((values[field.id] as Values[]) || []).length >= (field.maxItems || Infinity)} onClick={() => update([field.id], [...((values[field.id] as Values[]) || []), emptyValues(field.itemFields || [])])}><Plus className="size-3" /> Add {field.itemLabel?.toLowerCase() || "item"}</Button>}</fieldset>}
   </div>)}</div>;

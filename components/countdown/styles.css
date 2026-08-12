@@ -1,0 +1,6 @@
+.hub-countdown { background: var(--hub-countdown-background, #fff); color: var(--hub-countdown-ink, #1a1a1a); display: grid; gap: 16px; padding: 24px 16px; }
+.hub-countdown__heading { font: 700 26px/1.05 var(--hub-countdown-display-font, Figtree, sans-serif); letter-spacing: -.035em; margin: 0; }
+.hub-countdown__timer { display: grid; gap: 8px; grid-template-columns: repeat(3, 1fr); margin: 0; }
+.hub-countdown__unit { border-left: 2px solid var(--hub-countdown-accent, #ff6600); display: grid; gap: 3px; min-width: 0; padding-left: 9px; }
+.hub-countdown__value { font: 700 clamp(38px, 12vw, 52px)/.9 var(--hub-countdown-display-font, Figtree, sans-serif); letter-spacing: -.06em; }
+.hub-countdown__label { color: var(--hub-countdown-muted, #737373); font: 700 10px/1.1 var(--hub-countdown-body-font, Figtree, sans-serif); letter-spacing: .08em; text-transform: uppercase; }
