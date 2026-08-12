@@ -232,7 +232,7 @@ export default function App() {
       const renderer = renderers[definition.id];
       if (!button || !renderer) return;
       const preview = document.createElement("div");
-      preview.className = "pointer-events-none mb-2 h-24 overflow-hidden rounded border border-zinc-100 bg-zinc-50";
+      preview.className = "pointer-events-none mb-2 h-64 overflow-hidden rounded border border-zinc-100 bg-zinc-50";
       preview.setAttribute("aria-hidden", "true");
       const canvas = document.createElement("div");
       canvas.style.width = "390px";
@@ -244,8 +244,8 @@ export default function App() {
       button.prepend(preview);
       button.parentElement?.classList.replace("grid-cols-3", "grid-cols-2");
       button.classList.remove("min-h-14", "px-2", "py-1.5");
-      button.classList.add("min-h-40", "p-2");
-      cleanups.push(() => { component.cleanup?.(); preview.remove(); button.classList.remove("min-h-40", "p-2"); button.classList.add("min-h-14", "px-2", "py-1.5"); });
+      button.classList.add("h-80", "p-2");
+      cleanups.push(() => { component.cleanup?.(); preview.remove(); button.classList.remove("h-80", "p-2"); button.classList.add("min-h-14", "px-2", "py-1.5"); });
     });
     return () => cleanups.forEach((cleanup) => cleanup());
   }, [mode, selectedComponentId, selectedInstanceId, theme]);
