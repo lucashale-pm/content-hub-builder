@@ -81,7 +81,6 @@ export function renderHero(values, theme = fallbackTheme) {
 
   const content = document.createElement("div");
   content.className = "hub-hero__content";
-  if (text(values.eyebrow)) addText(content, "p", "hub-hero__eyebrow", values.eyebrow);
   addText(content, "h1", "hub-hero__headline", values.headline);
   addText(content, "p", "hub-hero__subheadline", values.subheadline);
 

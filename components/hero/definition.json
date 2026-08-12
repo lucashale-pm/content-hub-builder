@@ -5,7 +5,6 @@
   "version": 1,
   "renderer": "./renderer.js",
   "fields": [
-    { "id": "eyebrow", "label": "Eyebrow", "type": "text", "required": false },
     { "id": "headline", "label": "Headline", "type": "text", "required": true },
     { "id": "subheadline", "label": "Subheadline", "type": "textarea", "required": true },
     { "id": "mediaType", "label": "Media type", "type": "select", "options": ["image", "video"], "required": true },
@@ -17,7 +16,6 @@
     { "id": "followButtonText", "label": "Follow button text", "type": "text", "required": true }
   ],
   "defaults": {
-    "eyebrow": "Trending topic",
     "headline": "Grand Theft Auto VI",
     "subheadline": "All the latest GTA 6 news, trailers, characters, and everything we know before Vice City opens its doors.",
     "mediaType": "image",
