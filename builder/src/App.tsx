@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { Component, Download, Eye, GripVertical, MonitorSmartphone, Plus, Trash2, Upload, Wrench, X } from "lucide-react";
+import { Component, Download, Eye, GripVertical, MonitorSmartphone, PanelLeftClose, PanelLeftOpen, Pencil, Plus, Trash2, Upload, Wrench, X } from "lucide-react";
 import heroDefinition from "../../components/hero/definition.json";
 import feedDefinition from "../../components/feed/definition.json";
 import steamDataDefinition from "../../components/steam-data/definition.json";
@@ -80,11 +80,11 @@ const definitions = [
 const byId = new Map(definitions.map((definition) => [definition.id, definition]));
 const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent, "image-gallery": renderImageGallery, timeline: renderTimeline, "game-review": renderGameReview, "key-info": renderKeyInfo, "inline-poll": renderInlinePoll, "rankings-table": renderRankingsTable, "contribution-tracker": renderContributionTracker, "featured-article": renderFeaturedArticle, stance: renderStance, countdown: renderCountdown, "editor-highlight": renderEditorHighlight };
 const themes = { wireframe: wireframeTheme };
-const selectorPreviewScales: Record<string, number> = {
-  hero: 0.34, countdown: 0.34, "featured-article": 0.33, feed: 0.33,
-  "page-content": 0.34, "vertical-video": 0.34, "image-gallery": 0.34, "inline-poll": 0.34,
-  "rankings-table": 0.34, timeline: 0.32, "game-review": 0.32, "key-info": 0.32,
-  "steam-data": 0.34, "editor-highlight": 0.32, stance: 0.32, "contribution-tracker": 0.32,
+const selectorPreviewSettings: Record<string, { scale: number; expand?: boolean }> = {
+  hero: { scale: 1 }, countdown: { scale: 0.96 }, "featured-article": { scale: 0.98 }, feed: { scale: 0.96 },
+  "page-content": { scale: 1 }, "vertical-video": { scale: 0.94 }, "image-gallery": { scale: 1 }, "inline-poll": { scale: 0.98 },
+  "rankings-table": { scale: 0.94 }, timeline: { scale: 0.9 }, "game-review": { scale: 1 }, "key-info": { scale: 0.94, expand: true },
+  "steam-data": { scale: 0.94 }, "editor-highlight": { scale: 0.92 }, stance: { scale: 0.92 }, "contribution-tracker": { scale: 0.92 },
 };
 
 const clone = <T,>(value: T): T => JSON.parse(JSON.stringify(value));
@@ -128,8 +128,10 @@ function instanceHeading(instance: Instance): string {
   const candidates = [values.heading, values.headline, values.title, (values.feature as Values | undefined)?.headline];
   return candidates.find((value) => typeof value === "string" && value.trim()) as string || "";
 }
-function ComponentHost({ componentId, values, theme }: { componentId: string; values: Values; theme: unknown }) {
+function ComponentHost({ componentId, values, theme, onSelect }: { componentId: string; values: Values; theme: unknown; onSelect?: () => void }) {
   const host = useRef<HTMLDivElement>(null);
+  const onSelectRef = useRef(onSelect);
+  onSelectRef.current = onSelect;
   useEffect(() => {
     const renderer = renderers[componentId];
     if (!host.current || !renderer) return;
@@ -139,7 +141,10 @@ function ComponentHost({ componentId, values, theme }: { componentId: string; va
     host.current.replaceChildren(component);
     return () => component.cleanup?.();
   }, [componentId, values, theme]);
-  return <div ref={host} />;
+  return <div ref={(element) => {
+    host.current = element;
+    if (element) element.onclick = onSelect ? () => onSelectRef.current?.() : null;
+  }} />;
 }
 
 function FieldEditor({ fields, values, onChange }: { fields: Field[]; values: Values; onChange: (next: Values) => void }) {
@@ -169,19 +174,48 @@ function FieldEditor({ fields, values, onChange }: { fields: Field[]; values: Va
 
 export default function App() {
   const [mode, setMode] = useState<"builder" | "viewer">("builder");
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [fullPreview, setFullPreview] = useState(false);
   const [draft, setDraft] = useState<Draft>(storedDraft);
   const [selectedComponentId, setSelectedComponentId] = useState("hero");
   const [selectedInstanceId, setSelectedInstanceId] = useState<string | null>(null);
   const [draggedInstanceId, setDraggedInstanceId] = useState<string | null>(null);
+  const [instancePendingDelete, setInstancePendingDelete] = useState<Instance | null>(null);
   const [importMessage, setImportMessage] = useState("");
   const importInputRef = useRef<HTMLInputElement>(null);
+  const builderPaneRef = useRef<HTMLDivElement>(null);
+  const authoringSectionRef = useRef<HTMLElement>(null);
+  const addedPanelRef = useRef<HTMLElement>(null);
+  const editPanelRef = useRef<HTMLDetailsElement>(null);
   const [newValues, setNewValues] = useState<Record<string, Values>>(() => Object.fromEntries(definitions.map((definition) => [definition.id, clone(definition.defaults)])));
   const [viewerValues, setViewerValues] = useState<Record<string, Values>>(() => Object.fromEntries(definitions.map((definition) => [definition.id, clone(definition.defaults)])));
   useEffect(() => { setDraft((current) => ({ ...current, instances: current.instances.map((instance) => ({ ...instance, values: upgradeInstanceValues(instance.componentId, instance.values) })) })); }, []);
   useEffect(() => { localStorage.setItem("content-hub-workshop-draft", JSON.stringify(draft)); }, [draft]);
   const selectedDefinition = byId.get(selectedComponentId)!;
   const selectedInstance = draft.instances.find((instance) => instance.id === selectedInstanceId);
+  useEffect(() => {
+    const authoring = authoringSectionRef.current;
+    const panel = addedPanelRef.current;
+    if (!authoring || !panel || mode !== "builder") return;
+    const positionPanel = () => { panel.style.left = `${authoring.getBoundingClientRect().right + 16}px`; };
+    positionPanel();
+    const observer = new ResizeObserver(positionPanel);
+    observer.observe(authoring);
+    window.addEventListener("resize", positionPanel);
+    return () => { observer.disconnect(); window.removeEventListener("resize", positionPanel); };
+  }, [mode, sidebarCollapsed]);
+  useEffect(() => {
+    if (!selectedInstanceId) return;
+    requestAnimationFrame(() => {
+      document.querySelector(`[data-preview-instance="${selectedInstanceId}"]`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+      const pane = builderPaneRef.current;
+      const panel = editPanelRef.current;
+      if (!pane || !panel) return;
+      panel.open = true;
+      const top = panel.getBoundingClientRect().top - pane.getBoundingClientRect().top + pane.scrollTop - 16;
+      pane.scrollTo({ top, behavior: "smooth" });
+    });
+  }, [selectedInstanceId]);
   const currentValues = mode === "builder" ? selectedInstance?.values || newValues[selectedComponentId] : viewerValues[selectedComponentId];
   const updateValues = (values: Values) => {
     if (mode === "builder" && selectedInstance) {
@@ -192,11 +226,15 @@ export default function App() {
       setViewerValues((current) => ({ ...current, [selectedComponentId]: values }));
     }
   };
-  const addComponent = (componentId: string) => { const instance = { id: crypto.randomUUID(), componentId, values: clone(newValues[componentId]) }; setDraft((current) => ({ ...current, instances: [...current.instances, instance] })); setSelectedComponentId(componentId); setSelectedInstanceId(null); };
+  const addComponent = (componentId: string) => { const instance = { id: crypto.randomUUID(), componentId, values: clone(newValues[componentId]) }; setDraft((current) => ({ ...current, instances: [...current.instances, instance] })); setSelectedComponentId(componentId); setSelectedInstanceId(instance.id); };
   const selectInstance = (instance: Instance) => {
     setSelectedInstanceId(instance.id);
     setSelectedComponentId(instance.componentId);
-    requestAnimationFrame(() => document.querySelector(`[data-preview-instance="${instance.id}"]`)?.scrollIntoView({ behavior: "smooth", block: "center" }));
+  };
+  const deleteInstance = (instance: Instance) => {
+    setDraft((current) => ({ ...current, instances: current.instances.filter((item) => item.id !== instance.id) }));
+    if (selectedInstanceId === instance.id) setSelectedInstanceId(null);
+    setInstancePendingDelete(null);
   };
   const reorderInstance = (targetId: string) => {
     if (!draggedInstanceId || draggedInstanceId === targetId) return;
@@ -234,35 +272,38 @@ export default function App() {
   useEffect(() => {
     const cleanups: Array<() => void> = [];
     definitions.forEach((definition) => {
-      const button = Array.from(document.querySelectorAll("button")).find((element) => element.firstElementChild?.textContent === definition.name);
+      const button = document.querySelector<HTMLButtonElement>(`button[data-component-selector="${definition.id}"]`);
       const renderer = renderers[definition.id];
       if (!button || !renderer) return;
       const preview = document.createElement("div");
       preview.className = "pointer-events-none mb-2 h-64 overflow-hidden rounded border border-zinc-100 bg-zinc-50";
       preview.setAttribute("aria-hidden", "true");
       const canvas = document.createElement("div");
-      canvas.style.width = "390px";
       canvas.style.transformOrigin = "top left";
       const component = renderer(clone(definition.defaults), theme) as HTMLElement & { cleanup?: () => void };
       canvas.append(component);
       preview.append(canvas);
       button.parentElement?.classList.replace("grid-cols-3", "grid-cols-2");
       button.classList.remove("min-h-14", "px-2", "py-1.5");
-      button.classList.add("h-80", "p-2");
+      button.classList.add("h-72", "p-2");
       button.prepend(preview);
-      const scale = selectorPreviewScales[definition.id] ?? 0.34;
-      canvas.style.transform = `scale(${scale})`;
-      cleanups.push(() => { component.cleanup?.(); preview.remove(); button.classList.remove("h-80", "p-2"); button.classList.add("min-h-14", "px-2", "py-1.5"); });
+      canvas.style.width = "390px";
+      const settings = selectorPreviewSettings[definition.id] ?? { scale: 0.85 };
+      if (settings.expand) {
+        component.classList.remove("is-collapsed");
+        component.querySelector(".hub-key-info__trigger")?.setAttribute("aria-expanded", "true");
+      }
+      canvas.style.transform = `scale(${(preview.clientWidth / 390) * settings.scale})`;
+      cleanups.push(() => { component.cleanup?.(); preview.remove(); button.classList.remove("h-72", "p-2"); button.classList.add("min-h-14", "px-2", "py-1.5"); });
     });
     return () => cleanups.forEach((cleanup) => cleanup());
-  }, [mode, selectedComponentId, selectedInstanceId, theme]);
+  }, [mode, theme]);
   const title = mode === "builder" ? "Builder" : "Component viewer";
   if (fullPreview) return <div className="relative flex h-screen items-center justify-center bg-zinc-950 p-8"><Button className="absolute left-6 top-6" variant="outline" onClick={() => setFullPreview(false)}><X className="size-4" /> Return to builder</Button><div className="h-[min(860px,calc(100vh-64px))] w-[390px] overflow-hidden rounded-[42px] border-[8px] border-zinc-800 bg-white shadow-2xl"><div className="h-full overflow-y-auto">{draft.instances.map((instance) => <ComponentHost key={instance.id} componentId={instance.componentId} values={instance.values} theme={theme} />)}</div></div></div>;
-  return <div className="grid h-screen grid-cols-[248px_minmax(340px,1fr)_minmax(580px,2fr)] overflow-hidden bg-zinc-100">
-    <aside className="flex h-screen flex-col overflow-y-auto border-r border-zinc-200 bg-white p-4"><div className="mb-6 flex items-center gap-2 font-bold"><Component className="size-5" /> Content hub workshop</div><nav className="grid gap-1"><Button variant={mode === "builder" ? "default" : "ghost"} className="justify-start" onClick={() => setMode("builder")}><Wrench className="size-4" /> Builder</Button><Button variant={mode === "viewer" ? "default" : "ghost"} className="justify-start" onClick={() => setMode("viewer")}><Eye className="size-4" /> Component viewer</Button></nav></aside>
-    <section className="flex h-screen min-h-0 flex-col border-r border-zinc-200 bg-white"><header className="border-b px-5 py-4"><p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{mode === "builder" ? "Page authoring" : "Isolated catalogue"}</p><h1 className="mt-1 text-lg font-bold">{title}</h1></header><div className="min-h-0 flex-1 overflow-y-auto p-5">{mode === "builder" && <details className="mb-5 rounded-md border border-zinc-200 bg-white" open><summary className="cursor-pointer px-3 py-2 text-xs font-semibold uppercase tracking-wide text-zinc-600">Page setup</summary><div className="grid gap-3 border-t border-zinc-100 p-3"><div className="grid gap-1.5"><label className="text-xs font-semibold text-zinc-700" htmlFor="page-title">Page name</label><input id="page-title" className="h-9 rounded-md border border-zinc-200 bg-white px-3 text-sm" value={draft.pageTitle} onChange={(event) => setDraft((current) => ({ ...current, pageTitle: event.target.value }))} /></div><div className="grid grid-cols-2 gap-2"><Button variant="outline" size="sm" onClick={exportDraft}><Download className="size-3.5" /> Export JSON</Button><Button variant="outline" size="sm" onClick={() => importInputRef.current?.click()}><Upload className="size-3.5" /> Import JSON</Button><input ref={importInputRef} className="hidden" type="file" accept="application/json,.json" onChange={(event) => { void importDraft(event.target.files?.[0]); event.target.value = ""; }} /></div>{importMessage && <p className="text-xs text-zinc-500" role="status">{importMessage}</p>}</div></details>}<details className="rounded-md border border-zinc-200 bg-white" open><summary className="cursor-pointer px-3 py-2 text-xs font-semibold uppercase tracking-wide text-zinc-600">Components</summary><div className="border-t border-zinc-100 p-3"><div className="grid grid-cols-3 gap-2">{definitions.map((definition) => <button key={definition.id} className={cn("min-h-14 rounded-md border px-2 py-1.5 text-left", selectedComponentId === definition.id && !selectedInstance ? "border-zinc-900 bg-zinc-50" : "border-zinc-200 hover:bg-zinc-50")} onClick={() => { setSelectedComponentId(definition.id); if (mode === "builder") setSelectedInstanceId(null); }}><span className="block text-sm font-semibold leading-tight">{definition.name}</span><span className="mt-0.5 block text-[10px] text-zinc-500">{definition.category}</span></button>)}</div>{mode === "builder" && <Button className="mt-3 w-full" variant="outline" onClick={() => addComponent(selectedComponentId)}><Plus className="size-4" /> Add {selectedDefinition.name}</Button>}</div></details>
-      {mode === "builder" && <details className="mt-5 rounded-md border border-zinc-200 bg-white" open><summary className="cursor-pointer px-3 py-2 text-xs font-semibold uppercase tracking-wide text-zinc-600">Added to page <span className="normal-case font-normal text-zinc-500">({draft.instances.length})</span></summary><div className="grid gap-2 border-t border-zinc-100 p-3">{draft.instances.map((instance, index) => { const definition = byId.get(instance.componentId)!; const heading = instanceHeading(instance); return <button key={instance.id} draggable onDragStart={() => setDraggedInstanceId(instance.id)} onDragEnd={() => setDraggedInstanceId(null)} onDragOver={(event) => event.preventDefault()} onDrop={() => reorderInstance(instance.id)} className={cn("flex items-center gap-2 rounded-md border px-2 py-2 text-left", selectedInstanceId === instance.id ? "border-blue-600 bg-blue-50" : "border-zinc-200 bg-white hover:bg-zinc-50", draggedInstanceId === instance.id && "opacity-40")} onClick={() => selectInstance(instance)}><GripVertical className="size-4 shrink-0 text-zinc-400" aria-hidden="true" /><span className="min-w-0 flex-1 truncate text-xs"><span className="font-semibold">{index + 1}. {definition.name}</span>{heading && <span className="ml-2 text-zinc-500">{heading}</span>}</span></button>; })}</div></details>}
-      <details className="mt-5 rounded-lg border-2 border-blue-600 bg-blue-50"><summary className="cursor-pointer px-4 py-3 text-xs font-semibold uppercase tracking-wide text-blue-800">{selectedInstance ? "Editing page instance" : mode === "builder" ? "New component configuration" : "Component preview controls"}: {selectedDefinition.name}</summary><div className="border-t border-blue-200 p-4">{mode === "builder" && selectedInstance && <div className="mb-3 flex justify-end"><Button variant="destructive" size="sm" onClick={() => { setDraft((current) => ({ ...current, instances: current.instances.filter((instance) => instance.id !== selectedInstance.id) })); setSelectedInstanceId(null); }}><Trash2 className="size-4" /> Delete</Button></div>}<FieldEditor fields={selectedDefinition.fields} values={currentValues} onChange={updateValues} /></div></details></div></section>
-    <main className="flex h-screen min-h-0 flex-col overflow-y-auto p-8"><div className="mx-auto w-full max-w-4xl"><header className="mb-6 flex items-center justify-between"><div><p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">Wireframe theme</p><h2 className="mt-1 text-2xl font-bold">{mode === "builder" ? draft.pageTitle : selectedDefinition.name}</h2></div><Button variant="outline" size="sm" onClick={() => setFullPreview(true)}><MonitorSmartphone className="size-4" /> Full preview</Button></header><div className="mx-auto max-w-[390px] overflow-hidden bg-white shadow-xl">{mode === "builder" ? draft.instances.length ? draft.instances.map((instance) => <button key={instance.id} data-preview-instance={instance.id} className={cn("block w-full scroll-mt-[30vh] border-2 text-left transition", selectedInstanceId === instance.id ? "border-blue-500 bg-blue-50" : "border-transparent")} onClick={() => selectInstance(instance)}><ComponentHost componentId={instance.componentId} values={instance.values} theme={theme} /></button>) : <div className="p-10 text-center text-sm text-zinc-500">Add component from left.</div> : <ComponentHost componentId={selectedComponentId} values={currentValues} theme={theme} />}</div>{mode === "builder" && <div className="mx-auto mt-4 max-w-[390px] text-center text-xs text-zinc-500">Click component in preview to edit it. Draft autosaves locally.</div>}</div></main>
+  return <div className={cn("grid h-screen overflow-hidden bg-zinc-100", sidebarCollapsed ? "grid-cols-[64px_minmax(340px,1fr)_minmax(580px,2fr)]" : "grid-cols-[248px_minmax(340px,1fr)_minmax(580px,2fr)]")}>
+    <aside className="flex h-screen flex-col overflow-y-auto border-r border-zinc-200 bg-white p-3"><div className={cn("mb-6 flex items-center", sidebarCollapsed ? "justify-center" : "justify-between gap-2")}><div className="flex min-w-0 items-center gap-2 font-bold"><Component className="size-5 shrink-0" />{!sidebarCollapsed && <span className="truncate">Content hub workshop</span>}</div><Button type="button" size="icon" variant="ghost" className="size-8 shrink-0" aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"} title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"} onClick={() => setSidebarCollapsed((current) => !current)}>{sidebarCollapsed ? <PanelLeftOpen className="size-4" /> : <PanelLeftClose className="size-4" />}</Button></div><nav className="grid gap-1"><Button variant={mode === "builder" ? "default" : "ghost"} className={cn(sidebarCollapsed ? "justify-center px-0" : "justify-start")} aria-label="Builder" title={sidebarCollapsed ? "Builder" : undefined} onClick={() => setMode("builder")}><Wrench className="size-4" />{!sidebarCollapsed && "Builder"}</Button><Button variant={mode === "viewer" ? "default" : "ghost"} className={cn(sidebarCollapsed ? "justify-center px-0" : "justify-start")} aria-label="Component viewer" title={sidebarCollapsed ? "Component viewer" : undefined} onClick={() => setMode("viewer")}><Eye className="size-4" />{!sidebarCollapsed && "Component viewer"}</Button></nav></aside>
+    <section ref={authoringSectionRef} className="flex h-screen min-h-0 flex-col border-r border-zinc-200 bg-white"><header className="border-b px-5 py-4"><p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{mode === "builder" ? "Page authoring" : "Isolated catalogue"}</p><h1 className="mt-1 text-lg font-bold">{title}</h1></header>{mode === "builder" && <aside ref={addedPanelRef} className="fixed top-1/2 z-30 w-[min(360px,calc(100vw-88px))] -translate-y-1/2 rounded-lg border border-zinc-200 bg-white p-2 shadow-lg"><p className="px-2 pb-1 pt-0.5 text-xs font-semibold uppercase tracking-wide text-zinc-500">Added to page <span className="normal-case font-normal">({draft.instances.length})</span></p><div className="grid max-h-[70vh] gap-1 overflow-y-auto pr-0.5">{draft.instances.length ? draft.instances.map((instance, index) => { const definition = byId.get(instance.componentId)!; const heading = instanceHeading(instance); return <div key={instance.id} draggable onDragStart={() => setDraggedInstanceId(instance.id)} onDragEnd={() => setDraggedInstanceId(null)} onDragOver={(event) => event.preventDefault()} onDrop={() => reorderInstance(instance.id)} className={cn("grid w-full grid-cols-[14px_minmax(0,1fr)_28px_28px] items-center gap-1 rounded-md border px-2 py-1.5", selectedInstanceId === instance.id ? "border-sky-300 bg-sky-50" : "border-transparent hover:bg-zinc-50", draggedInstanceId === instance.id && "opacity-40")}><GripVertical className="size-3.5 shrink-0 text-zinc-400" aria-hidden="true" /><button type="button" className="min-w-0 truncate text-left text-xs" onClick={() => selectInstance(instance)}><span className="font-semibold">{index + 1}. {definition.name}</span>{heading && <span className="ml-1 text-zinc-500">{heading}</span>}</button><Button type="button" size="icon" variant="ghost" className="size-7" aria-label={`Edit ${definition.name}`} title={`Edit ${definition.name}`} onClick={() => selectInstance(instance)}><Pencil className="size-3.5" /></Button><Button type="button" size="icon" variant="ghost" className="size-7 text-red-600 hover:bg-red-50 hover:text-red-700" aria-label={`Delete ${definition.name}`} title={`Delete ${definition.name}`} onClick={() => setInstancePendingDelete(instance)}><Trash2 className="size-3.5" /></Button></div>; }) : <p className="px-2 py-1 text-xs text-zinc-500">No components yet.</p>}</div></aside>}<div ref={builderPaneRef} className="min-h-0 flex-1 overflow-y-auto p-5">{mode === "builder" && <details className="mb-5 rounded-md border border-zinc-200 bg-white" open><summary className="cursor-pointer px-3 py-2 text-xs font-semibold uppercase tracking-wide text-zinc-600">Page setup</summary><div className="grid gap-3 border-t border-zinc-100 p-3"><div className="grid gap-1.5"><label className="text-xs font-semibold text-zinc-700" htmlFor="page-title">Page name</label><input id="page-title" className="h-9 rounded-md border border-zinc-200 bg-white px-3 text-sm" value={draft.pageTitle} onChange={(event) => setDraft((current) => ({ ...current, pageTitle: event.target.value }))} /></div><div className="grid grid-cols-2 gap-2"><Button variant="outline" size="sm" onClick={exportDraft}><Download className="size-3.5" /> Export JSON</Button><Button variant="outline" size="sm" onClick={() => importInputRef.current?.click()}><Upload className="size-3.5" /> Import JSON</Button><input ref={importInputRef} className="hidden" type="file" accept="application/json,.json" onChange={(event) => { void importDraft(event.target.files?.[0]); event.target.value = ""; }} /></div>{importMessage && <p className="text-xs text-zinc-500" role="status">{importMessage}</p>}</div></details>}<details className="rounded-md border border-zinc-200 bg-white" open><summary className="cursor-pointer px-3 py-2 text-xs font-semibold uppercase tracking-wide text-zinc-600">Components</summary><div className="border-t border-zinc-100 p-3"><div className="grid grid-cols-2 gap-2">{definitions.map((definition) => <div key={definition.id} className={cn("rounded-md border p-2", selectedComponentId === definition.id && !selectedInstance ? "border-zinc-900 bg-zinc-50" : "border-zinc-200 bg-white")}><button type="button" data-component-selector={definition.id} className="block min-h-14 w-full text-left" aria-label={`Preview ${definition.name}`} onClick={() => { setSelectedComponentId(definition.id); if (mode === "builder") setSelectedInstanceId(null); }} /><div className="mt-2 flex items-start justify-between gap-2"><div className="min-w-0"><span className="block text-sm font-semibold leading-tight">{definition.name}</span><span className="mt-0.5 block text-[10px] text-zinc-500">{definition.category}</span></div>{mode === "builder" && <Button type="button" size="sm" variant="outline" className="shrink-0" onClick={() => addComponent(definition.id)}><Plus className="size-3" /> Add</Button>}</div></div>)}</div></div></details>
+      <details ref={editPanelRef} className="mt-5 rounded-lg border-2 border-blue-600 bg-blue-50" open={Boolean(selectedInstance)}><summary className="cursor-pointer px-4 py-3 text-xs font-semibold uppercase tracking-wide text-blue-800">{selectedInstance ? "Editing page instance" : mode === "builder" ? "New component configuration" : "Component preview controls"}: {selectedDefinition.name}</summary><div className="border-t border-blue-200 p-4"><FieldEditor fields={selectedDefinition.fields} values={currentValues} onChange={updateValues} /></div></details></div></section>
+    <main className="flex h-screen min-h-0 flex-col overflow-y-auto p-8"><div className="mx-auto w-full max-w-4xl"><header className="mb-6 flex items-center justify-between"><div><p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">Wireframe theme</p><h2 className="mt-1 text-2xl font-bold">{mode === "builder" ? draft.pageTitle : selectedDefinition.name}</h2></div><Button variant="outline" size="sm" onClick={() => setFullPreview(true)}><MonitorSmartphone className="size-4" /> Full preview</Button></header><div className="mx-auto max-w-[390px] overflow-hidden bg-white shadow-xl">{mode === "builder" ? draft.instances.length ? draft.instances.map((instance) => <div key={instance.id} data-preview-instance={instance.id} role="button" tabIndex={0} className={cn("relative block w-full scroll-mt-[30vh] border-2 text-left transition", selectedInstanceId === instance.id ? "border-sky-300" : "border-transparent")} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); selectInstance(instance); } }}><ComponentHost componentId={instance.componentId} values={instance.values} theme={theme} onSelect={() => selectInstance(instance)} />{selectedInstanceId === instance.id && <span aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 bg-sky-100/20 ring-1 ring-inset ring-sky-300" />}</div>) : <div className="p-10 text-center text-sm text-zinc-500">Add component from left.</div> : <ComponentHost componentId={selectedComponentId} values={currentValues} theme={theme} />}</div>{mode === "builder" && <div className="mx-auto mt-4 max-w-[390px] text-center text-xs text-zinc-500">Click component in preview to edit it. Draft autosaves locally.</div>}</div></main>{instancePendingDelete && <div className="fixed inset-0 z-50 grid place-items-center bg-zinc-950/30 p-4" role="presentation"><div className="w-full max-w-sm rounded-lg border border-zinc-200 bg-white p-5 shadow-xl" role="alertdialog" aria-modal="true" aria-labelledby="delete-title"><h2 id="delete-title" className="text-base font-bold">Delete {byId.get(instancePendingDelete.componentId)?.name}?</h2><p className="mt-2 text-sm text-zinc-600">This removes it from the page. You cannot undo this action.</p><div className="mt-5 flex justify-end gap-2"><Button variant="outline" size="sm" onClick={() => setInstancePendingDelete(null)}>Cancel</Button><Button variant="destructive" size="sm" onClick={() => deleteInstance(instancePendingDelete)}>Delete</Button></div></div></div>}
   </div>;
 }
