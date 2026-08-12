@@ -1,7 +1,7 @@
 # Feed
 
-- Purpose: Show one featured article plus an ordered editorial feed.
-- Inputs: Feed heading/date/archive link; all article labels, text, article images, author images, posted dates, engagement counts, and links are participant-defined draft values.
-- States: Featured article; one or more feed articles; missing article image uses browser image fallback; unknown label falls back to theme accent label style.
-- Constraints: Mobile-first; article order follows saved configuration; images need alternative text; date is a supplied posted label, never calculated by renderer; no content fetching or brand values in renderer.
-- Reuse: Receive theme token values through the `theme` argument. Feed labels use theme label tokens; do not fork markup by brand.
+- Purpose: Show optional scrollable filters, featured article/video, and ordered article/video feed items.
+- Inputs: Feed heading/date/archive link; filter labels; article metadata/images; YouTube URLs and optional video headings.
+- States: Filters are visual-only and toggle selected state. Featured content can be article or video. Feed items can be article or inline video.
+- Constraints: Mobile-first; order follows saved configuration. YouTube URL must be a valid YouTube link. Missing optional writing is hidden. No content fetching.
+- Reuse: Receives theme tokens. Filter selected state and all label styles use brand accent/token values.

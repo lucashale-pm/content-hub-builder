@@ -74,8 +74,14 @@ function upgradeStanceValues(values: Values): Values {
     spiceChoices: Array.isArray(values.spiceChoices) ? values.spiceChoices : Array.isArray(firstStance?.spiceChoices) ? firstStance.spiceChoices : clone(stanceDefinition.defaults.spiceChoices),
   };
 }
+function upgradeFeedValues(values: Values): Values {
+  const featured = isValues(values.featured) ? values.featured : {};
+  const feedItems = Array.isArray(values.articles) ? values.articles.map((item) => isValues(item) && !item.contentType ? { ...item, contentType: "Article" } : item) : values.articles;
+  return { ...values, featured: !featured.contentType ? { ...featured, contentType: "Article" } : featured, articles: feedItems };
+}
 function upgradeInstanceValues(componentId: string, values: Values): Values {
   if (componentId === "stance") return upgradeStanceValues(values);
+  if (componentId === "feed") return upgradeFeedValues(values);
   if (componentId === "featured-article" && !values.contentType) return { ...values, contentType: "Article" };
   return values;
 }
