@@ -1,0 +1,73 @@
+{
+  "id": "contribution-tracker",
+  "name": "Contribution tracker",
+  "category": "Community",
+  "version": 1,
+  "fields": [
+    { "id": "heading", "label": "Heading", "type": "text", "required": false },
+    { "id": "expertiseHeading", "label": "Expertise heading", "type": "text", "required": false },
+    {
+      "id": "actions",
+      "label": "Contribution actions",
+      "type": "collection",
+      "required": true,
+      "itemLabel": "Action",
+      "maxItems": 4,
+      "itemFields": [
+        { "id": "label", "label": "Label", "type": "text", "required": true },
+        { "id": "icon", "label": "Icon", "type": "select", "required": true, "options": ["review", "write", "answer", "poll"] },
+        { "id": "href", "label": "Action URL", "type": "url", "required": false }
+      ]
+    },
+    { "id": "currentRank", "label": "Current contributor rank", "type": "text", "required": true },
+    { "id": "progressText", "label": "Progress text", "type": "text", "required": false },
+    { "id": "progressPercent", "label": "Progress percentage (0-100)", "type": "text", "required": true },
+    {
+      "id": "ranks",
+      "label": "Ranks shown",
+      "type": "collection",
+      "required": true,
+      "itemLabel": "Rank",
+      "itemFields": [
+        { "id": "name", "label": "Rank name", "type": "text", "required": true },
+        { "id": "threshold", "label": "Threshold / description", "type": "text", "required": false }
+      ]
+    },
+    {
+      "id": "cards",
+      "label": "Contribution cards",
+      "type": "collection",
+      "required": false,
+      "itemLabel": "Card",
+      "maxItems": 4,
+      "itemFields": [
+        { "id": "heading", "label": "Heading", "type": "text", "required": true },
+        { "id": "body", "label": "Description", "type": "textarea", "required": false },
+        { "id": "ctaText", "label": "CTA text", "type": "text", "required": false },
+        { "id": "ctaUrl", "label": "CTA URL", "type": "url", "required": false }
+      ]
+    }
+  ],
+  "defaults": {
+    "heading": "Make your mark",
+    "expertiseHeading": "Share your expertise",
+    "actions": [
+      { "label": "Review", "icon": "review", "href": "#" },
+      { "label": "Write", "icon": "write", "href": "#" },
+      { "label": "Answer", "icon": "answer", "href": "#" },
+      { "label": "Poll", "icon": "poll", "href": "#" }
+    ],
+    "currentRank": "Silver",
+    "progressText": "240/500 to Gold",
+    "progressPercent": "48",
+    "ranks": [
+      { "name": "Bronze", "threshold": "0 contributions" },
+      { "name": "Silver", "threshold": "200 contributions" },
+      { "name": "Gold", "threshold": "500 contributions" }
+    ],
+    "cards": [
+      { "heading": "Write a Review", "body": "Rate mechanics, narrators, performance, and overall design.", "ctaText": "Start Drafting", "ctaUrl": "#" },
+      { "heading": "Start a Discussion", "body": "Post your hot takes, questions, and theories for editors and readers.", "ctaText": "New Thread", "ctaUrl": "#" }
+    ]
+  }
+}

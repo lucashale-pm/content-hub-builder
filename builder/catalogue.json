@@ -2,6 +2,11 @@
   "version": 1,
   "components": [
     {
+      "id": "contribution-tracker",
+      "source": "../components/contribution-tracker",
+      "definition": "../components/contribution-tracker/definition.json"
+    },
+    {
       "id": "rankings-table",
       "source": "../components/rankings-table",
       "definition": "../components/rankings-table/definition.json"

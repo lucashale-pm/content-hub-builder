@@ -3,6 +3,7 @@ export interface Theme {
   readonly color: {
     readonly accent: string;
     readonly rankingAccent: string;
+    readonly contributionAccent: string;
     readonly surface: string;
     readonly text: string;
     readonly background: string;

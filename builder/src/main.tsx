@@ -12,6 +12,7 @@ import "../../components/game-review/styles.css";
 import "../../components/key-info/styles.css";
 import "../../components/inline-poll/styles.css";
 import "../../components/rankings-table/styles.css";
+import "../../components/contribution-tracker/styles.css";
 import App from "./App";
 
 createRoot(document.querySelector("#root")!).render(<StrictMode><App /></StrictMode>);
