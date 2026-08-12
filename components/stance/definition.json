@@ -6,7 +6,7 @@
   "fields": [
     { "id": "heading", "label": "Section heading", "type": "text", "required": false },
     { "id": "subheading", "label": "Section subheading", "type": "text", "required": false },
-    { "id": "voteMode", "label": "Audience response choices", "type": "select", "required": false, "options": ["2 choices", "5 choices"] },
+    { "id": "voteMode", "label": "Audience responses", "type": "radio", "required": false, "options": ["2 choices", "5 choices"] },
     {
       "id": "twoChoices",
       "label": "2-choice responses",
@@ -14,6 +14,7 @@
       "required": false,
       "itemLabel": "Response",
       "maxItems": 2,
+      "fixedItems": true,
       "showWhen": { "field": "voteMode", "equals": "2 choices" },
       "itemFields": [
         { "id": "label", "label": "Label", "type": "text", "required": false },
@@ -27,6 +28,7 @@
       "required": false,
       "itemLabel": "Response",
       "maxItems": 5,
+      "fixedItems": true,
       "showWhen": { "field": "voteMode", "equals": "5 choices" },
       "itemFields": [
         { "id": "emoji", "label": "Emoji", "type": "text", "required": false },
