@@ -77,7 +77,7 @@ function upgradeStanceValues(values: Values): Values {
 function upgradeFeedValues(values: Values): Values {
   const featured = isValues(values.featured) ? values.featured : {};
   const feedItems = Array.isArray(values.articles) ? values.articles.map((item) => isValues(item) && !item.contentType ? { ...item, contentType: "Article" } : item) : values.articles;
-  return { ...values, featured: !featured.contentType ? { ...featured, contentType: "Article" } : featured, articles: feedItems };
+  return { ...values, showFilters: typeof values.showFilters === "boolean" ? values.showFilters : true, filters: Array.isArray(values.filters) ? values.filters : clone(feedDefinition.defaults.filters), featured: !featured.contentType ? { ...featured, contentType: "Article" } : featured, articles: feedItems };
 }
 function upgradeInstanceValues(componentId: string, values: Values): Values {
   if (componentId === "stance") return upgradeStanceValues(values);
@@ -144,6 +144,7 @@ export default function App() {
   const importInputRef = useRef<HTMLInputElement>(null);
   const [newValues, setNewValues] = useState<Record<string, Values>>(() => Object.fromEntries(definitions.map((definition) => [definition.id, clone(definition.defaults)])));
   const [viewerValues, setViewerValues] = useState<Record<string, Values>>(() => Object.fromEntries(definitions.map((definition) => [definition.id, clone(definition.defaults)])));
+  useEffect(() => { setDraft((current) => ({ ...current, instances: current.instances.map((instance) => ({ ...instance, values: upgradeInstanceValues(instance.componentId, instance.values) })) })); }, []);
   useEffect(() => { localStorage.setItem("content-hub-workshop-draft", JSON.stringify(draft)); }, [draft]);
   const selectedDefinition = byId.get(selectedComponentId)!;
   const selectedInstance = draft.instances.find((instance) => instance.id === selectedInstanceId);
