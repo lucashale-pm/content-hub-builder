@@ -46,6 +46,9 @@
         { "id": "author", "label": "Author name", "type": "text", "required": false },
         { "id": "role", "label": "Author role / score", "type": "text", "required": false },
         { "id": "avatarUrl", "label": "Author image URL", "type": "url", "required": false },
+        { "id": "flairText", "label": "Reviewer flair text", "type": "text", "required": false },
+        { "id": "flairColor", "label": "Reviewer flair color", "type": "color", "required": false },
+        { "id": "flairTextColor", "label": "Reviewer flair text color", "type": "radio", "required": false, "options": ["White", "Black"] },
         { "id": "statement", "label": "Stance statement", "type": "textarea", "required": false },
         { "id": "body", "label": "Supporting copy", "type": "textarea", "required": false },
         { "id": "sourceText", "label": "Source link text", "type": "text", "required": false },
@@ -59,6 +62,9 @@
           "itemLabel": "Comment",
           "itemFields": [
             { "id": "username", "label": "Username", "type": "text", "required": false },
+            { "id": "flairText", "label": "Audience flair text", "type": "text", "required": false },
+            { "id": "flairColor", "label": "Audience flair color", "type": "color", "required": false },
+            { "id": "flairTextColor", "label": "Audience flair text color", "type": "radio", "required": false, "options": ["White", "Black"] },
             { "id": "text", "label": "Comment", "type": "textarea", "required": false },
             { "id": "upvotes", "label": "Upvotes", "type": "text", "required": false }
           ]
@@ -82,7 +88,7 @@
         "sourceText": "From: The Turn-Based Renaissance · 18 min read",
         "sourceUrl": "#",
         "selectedChoice": "Agree",
-        "comments": [{ "username": "@rpg_fan_99", "text": "Absolutely agree. I can pause turn-based whenever, and it respects my time.", "upvotes": "142 upvotes" }, { "username": "@action_junkie", "text": "Strongly disagree, nothing beats real-time skill expression.", "upvotes": "43 upvotes" }]
+        "comments": [{ "username": "@rpg_fan_99", "flairText": "RPG Expert", "flairColor": "#008a80", "flairTextColor": "White", "text": "Absolutely agree. I can pause turn-based whenever, and it respects my time.", "upvotes": "142 upvotes" }, { "username": "@action_junkie", "text": "Strongly disagree, nothing beats real-time skill expression.", "upvotes": "43 upvotes" }]
       }
     ]
   }
