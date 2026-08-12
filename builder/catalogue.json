@@ -2,6 +2,11 @@
   "version": 1,
   "components": [
     {
+      "id": "featured-article",
+      "source": "../components/featured-article",
+      "definition": "../components/featured-article/definition.json"
+    },
+    {
       "id": "contribution-tracker",
       "source": "../components/contribution-tracker",
       "definition": "../components/contribution-tracker/definition.json"

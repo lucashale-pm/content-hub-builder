@@ -1,0 +1,34 @@
+{
+  "id": "featured-article",
+  "name": "Featured article",
+  "category": "Content",
+  "version": 1,
+  "fields": [
+    { "id": "heading", "label": "Section heading", "type": "text", "required": false },
+    { "id": "label", "label": "Label", "type": "text", "required": false },
+    { "id": "title", "label": "Title", "type": "textarea", "required": true },
+    { "id": "summary", "label": "Summary", "type": "textarea", "required": false },
+    { "id": "imageUrl", "label": "Feature image URL", "type": "url", "required": true },
+    { "id": "imageAlt", "label": "Feature image description", "type": "text", "required": false },
+    { "id": "author", "label": "Author", "type": "text", "required": false },
+    { "id": "avatarUrl", "label": "Author image URL", "type": "url", "required": false },
+    { "id": "posted", "label": "Posted label", "type": "text", "required": false },
+    { "id": "comments", "label": "Comment count", "type": "text", "required": false },
+    { "id": "reactions", "label": "Reaction count", "type": "text", "required": false },
+    { "id": "href", "label": "Article URL", "type": "url", "required": false }
+  ],
+  "defaults": {
+    "heading": "Featured",
+    "label": "Feature",
+    "title": "GTA 6 is shaping up to be Rockstar's most ambitious open world yet",
+    "summary": "From Vice City's changing districts to its two leads, here is everything that could make Grand Theft Auto VI the next defining sandbox.",
+    "imageUrl": "https://cdn.mos.cms.futurecdn.net/RWja8FWtZByoAbdqYrZSQ9-1920-80.jpg.webp",
+    "imageAlt": "Grand Theft Auto VI artwork showing protagonists Lucia and Jason overlooking Vice City.",
+    "author": "Maya Chen",
+    "avatarUrl": "https://cdn.mos.cms.futurecdn.net/RWja8FWtZByoAbdqYrZSQ9-1920-80.jpg.webp",
+    "posted": "Posted 3h ago",
+    "comments": "184",
+    "reactions": "2.4k",
+    "href": "#"
+  }
+}

@@ -9,6 +9,7 @@
     { "id": "date", "label": "Feed date", "type": "text", "required": true },
     { "id": "archiveLabel", "label": "Archive link label", "type": "text", "required": true },
     { "id": "archiveHref", "label": "Archive link URL", "type": "url", "required": true },
+    { "id": "showFeatured", "label": "Show featured article", "type": "toggle", "required": false },
     { "id": "featured", "label": "Featured article", "type": "object", "required": true, "fields": [
       { "id": "label", "label": "Label", "type": "text", "required": true },
       { "id": "title", "label": "Title", "type": "textarea", "required": true },
@@ -41,6 +42,7 @@
     "date": "August 11, 2026",
     "archiveLabel": "View archive",
     "archiveHref": "#archive",
+    "showFeatured": true,
     "featured": {
       "label": "Feature",
       "title": "GTA 6 is shaping up to be Rockstar's most ambitious open world yet",

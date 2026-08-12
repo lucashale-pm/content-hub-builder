@@ -64,19 +64,21 @@ export function renderFeed(values, theme = fallbackTheme) {
   header.append(heading, archive);
   feed.append(header);
 
-  const featured = values.featured || {};
-  const feature = link("hub-feed__featured", featured.href);
-  const featureImage = document.createElement("img");
-  featureImage.className = "hub-feed__feature-image";
-  featureImage.src = assetUrl(featured.imageUrl);
-  featureImage.alt = text(featured.imageAlt);
-  const featureLabel = element("span", `hub-feed__label hub-feed__label--feature ${labelClass(featured.label)}`, featured.label);
-  const imageWrap = element("div", "hub-feed__feature-media");
-  imageWrap.append(featureImage, featureLabel);
-  const featureBody = element("div", "hub-feed__feature-body");
-  featureBody.append(element("h3", "hub-feed__feature-title", featured.title), element("p", "hub-feed__summary", featured.summary), metadata(featured));
-  feature.append(imageWrap, featureBody);
-  feed.append(feature);
+  if (values.showFeatured !== false) {
+    const featured = values.featured || {};
+    const feature = link("hub-feed__featured", featured.href);
+    const featureImage = document.createElement("img");
+    featureImage.className = "hub-feed__feature-image";
+    featureImage.src = assetUrl(featured.imageUrl);
+    featureImage.alt = text(featured.imageAlt);
+    const featureLabel = element("span", `hub-feed__label hub-feed__label--feature ${labelClass(featured.label)}`, featured.label);
+    const imageWrap = element("div", "hub-feed__feature-media");
+    imageWrap.append(featureImage, featureLabel);
+    const featureBody = element("div", "hub-feed__feature-body");
+    featureBody.append(element("h3", "hub-feed__feature-title", featured.title), element("p", "hub-feed__summary", featured.summary), metadata(featured));
+    feature.append(imageWrap, featureBody);
+    feed.append(feature);
+  }
 
   const list = element("div", "hub-feed__list");
   articles(values.articles).forEach((article) => {
