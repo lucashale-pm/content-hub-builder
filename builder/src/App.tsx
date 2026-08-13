@@ -110,9 +110,19 @@ function upgradeFeedValues(values: Values): Values {
   const feedItems = Array.isArray(values.articles) ? values.articles.map((item) => isValues(item) && !item.contentType ? { ...item, contentType: "Article" } : item) : values.articles;
   return { ...values, showFilters: typeof values.showFilters === "boolean" ? values.showFilters : true, filters: Array.isArray(values.filters) ? values.filters : clone(feedDefinition.defaults.filters), featured: !featured.contentType ? { ...featured, contentType: "Article" } : featured, articles: feedItems };
 }
+function upgradeDiscoverHubsValues(values: Values): Values {
+  const defaults = Array.isArray(discoverHubsDefinition.defaults.hubs) ? discoverHubsDefinition.defaults.hubs as Values[] : [];
+  const hubs = Array.isArray(values.hubs) ? values.hubs.map((hub) => {
+    if (!isValues(hub)) return hub;
+    const fallback = defaults.find((item) => item.name === hub.name);
+    return fallback ? { ...fallback, ...hub } : hub;
+  }) : values.hubs;
+  return { ...values, hubs };
+}
 function upgradeInstanceValues(componentId: string, values: Values): Values {
   if (componentId === "stance") return upgradeStanceValues(values);
   if (componentId === "feed") return upgradeFeedValues(values);
+  if (componentId === "discover-hubs") return upgradeDiscoverHubsValues(values);
   if (componentId === "featured-article" && !values.contentType) return { ...values, contentType: "Article" };
   return values;
 }
