@@ -1,0 +1,13 @@
+.hub-products { background: var(--hub-products-background, #fff); color: var(--hub-products-ink, #1a1a1a); display: grid; gap: 16px; padding: 24px 16px; }
+.hub-products__heading { border-bottom: 2px solid var(--hub-products-accent, #171717); font-family: var(--hub-products-display-font, Figtree, sans-serif); font-size: var(--hub-text-2xl); font-weight: var(--hub-weight-bold); line-height: 1.15; margin: 0; padding-bottom: 10px; text-align: center; }
+.hub-products__list { display: grid; gap: 8px; grid-template-columns: repeat(var(--hub-product-columns, 1), minmax(0, 1fr)); }
+.hub-products__list:has(.hub-products__card:nth-child(2)) { --hub-product-columns: 2; }
+.hub-products__card { background: var(--hub-products-background, #fff); box-shadow: 0 3px 8px rgb(0 0 0 / .15); display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
+.hub-products__media { aspect-ratio: 3 / 4; background: #f4f4f5; overflow: hidden; }
+.hub-products__media img { display: block; height: 100%; object-fit: cover; width: 100%; }
+.hub-products__body { display: grid; gap: 8px; padding: 12px; }
+.hub-products__brand { color: var(--hub-products-muted, #737373); font-family: var(--hub-products-body-font, Figtree, sans-serif); font-size: var(--hub-text-xs); font-weight: var(--hub-weight-medium); margin: 0; text-transform: uppercase; }
+.hub-products__body h3 { font-family: var(--hub-products-display-font, Figtree, sans-serif); font-size: var(--hub-text-base); font-weight: var(--hub-weight-semibold); line-height: 1.25; margin: 0; }
+.hub-products__price { font-family: var(--hub-products-body-font, Figtree, sans-serif); font-size: var(--hub-text-sm); font-weight: var(--hub-weight-semibold); margin: 0; }
+.hub-products__cta { background: var(--hub-products-accent, #171717); color: var(--hub-products-background, #fff); display: block; font-family: var(--hub-products-body-font, Figtree, sans-serif); font-size: var(--hub-text-xs); font-weight: var(--hub-weight-bold); margin-top: auto; padding: 12px 8px; text-align: center; text-decoration: none; text-transform: uppercase; }
+.hub-products__cta:focus-visible { outline: 3px solid var(--hub-products-accent, #171717); outline-offset: 2px; }

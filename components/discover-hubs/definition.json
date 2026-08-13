@@ -1,0 +1,40 @@
+{
+  "id": "discover-hubs",
+  "name": "Discover hubs",
+  "category": "Discovery",
+  "version": 1,
+  "fields": [
+    { "id": "eyebrow", "label": "Eyebrow", "type": "text", "required": false },
+    { "id": "heading", "label": "Heading", "type": "text", "required": false },
+    { "id": "hubs", "label": "Game hubs", "type": "collection", "itemLabel": "Game hub", "maxItems": 12, "itemFields": [
+      { "id": "name", "label": "Game name", "type": "text", "required": false },
+      { "id": "imageUrl", "label": "Roundel image URL", "type": "url", "required": false },
+      { "id": "imageAlt", "label": "Roundel image description", "type": "text", "required": false },
+      { "id": "isNew", "label": "Show new-content dot", "type": "toggle", "required": false },
+      { "id": "publisher", "label": "Publisher / developer", "type": "text", "required": false },
+      { "id": "meta", "label": "Game metadata", "type": "text", "required": false },
+      { "id": "score", "label": "Score", "type": "text", "required": false },
+      { "id": "scoreLabel", "label": "Score label", "type": "text", "required": false },
+      { "id": "latestLabel", "label": "Latest label", "type": "text", "required": false },
+      { "id": "latestTitle", "label": "Latest content title", "type": "textarea", "required": false },
+      { "id": "latestAuthor", "label": "Latest content author", "type": "text", "required": false },
+      { "id": "latestPosted", "label": "Latest content posted label", "type": "text", "required": false },
+      { "id": "topics", "label": "Topics", "type": "collection", "itemLabel": "Topic", "maxItems": 6, "itemFields": [
+        { "id": "label", "label": "Topic label", "type": "text", "required": false },
+        { "id": "count", "label": "Topic count", "type": "text", "required": false }
+      ] },
+      { "id": "ctaText", "label": "Hub button text", "type": "text", "required": false },
+      { "id": "ctaUrl", "label": "Hub button URL", "type": "url", "required": false }
+    ] }
+  ],
+  "defaults": {
+    "eyebrow": "Game hubs",
+    "heading": "Tap to Explore",
+    "hubs": [
+      { "name": "Nightreign", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUERPsCDI_bEZOJ7yDIrcGzsTBPK-QSvfGeogSxH6XwMERU4Gsvze2Xr6oC1SOJoPegfb3Xw&s=10", "imageAlt": "Elden Ring: Nightreign", "isNew": true, "publisher": "FromSoftware", "meta": "Action RPG · PS5, Xbox, PC", "score": "9.2", "scoreLabel": "PCG", "latestLabel": "Latest", "latestTitle": "Patch 1.3 drops new Abyssal Dungeon mode — Faith builds now top-tier", "latestAuthor": "Maya Chen", "latestPosted": "2h ago", "topics": [{ "label": "Reviews", "count": "1" }, { "label": "Guides", "count": "12" }, { "label": "Builds", "count": "8" }, { "label": "News", "count": "47" }, { "label": "Community", "count": "2.1k" }], "ctaText": "Enter Nightreign Hub →", "ctaUrl": "#" },
+      { "name": "Metaphor", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGgqNSEZhkXGcvEFXTLhTJ-U_56C9fsqHILGcs1M0focYuKJkPvblL88XsB2y1jPsEDOjXfQ&s=10", "imageAlt": "Metaphor: ReFantazio", "isNew": true, "publisher": "Studio Zero", "meta": "JRPG · PS5, Xbox, PC", "score": "9", "scoreLabel": "GR+", "latestLabel": "Latest", "latestTitle": "The best Archetypes to use in your next run", "latestAuthor": "Jordan Lee", "latestPosted": "1d ago", "topics": [{ "label": "Reviews", "count": "2" }, { "label": "Guides", "count": "21" }, { "label": "News", "count": "19" }], "ctaText": "Enter Metaphor Hub →", "ctaUrl": "#" },
+      { "name": "Avowed", "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjoeSJD-maaNd40HZzP9bXE7K-9hLPQmo1FrGv1QFEZUBiTqT_xZxbKhBoTD__ETcvFlLFyg&s=10", "imageAlt": "Avowed", "isNew": true, "publisher": "Obsidian Entertainment", "meta": "Action RPG · Xbox, PC", "score": "8", "scoreLabel": "GR+", "latestLabel": "Latest", "latestTitle": "Every companion quest and decision explained", "latestAuthor": "Raj Patel", "latestPosted": "3d ago", "topics": [{ "label": "Guides", "count": "18" }, { "label": "News", "count": "30" }], "ctaText": "Enter Avowed Hub →", "ctaUrl": "#" },
+      { "name": "Hades II", "imageUrl": "https://i.ytimg.com/vi/YrtCnL62pB8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAtAoVLs1BZrYCcmeM1rww0vdcCkg", "imageAlt": "Hades II", "isNew": false, "publisher": "Supergiant Games", "meta": "Roguelike · PC", "score": "9", "scoreLabel": "PCG", "latestLabel": "Latest", "latestTitle": "Everything to know before the next major update", "latestAuthor": "Maya Chen", "latestPosted": "5d ago", "topics": [{ "label": "Reviews", "count": "1" }, { "label": "Guides", "count": "8" }], "ctaText": "Enter Hades II Hub →", "ctaUrl": "#" }
+    ]
+  }
+}

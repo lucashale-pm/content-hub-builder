@@ -1,0 +1,41 @@
+{
+  "id": "products",
+  "name": "Products",
+  "category": "Commerce",
+  "version": 1,
+  "fields": [
+    { "id": "heading", "label": "Section heading", "type": "text", "required": false },
+    { "id": "products", "label": "Products", "type": "collection", "itemLabel": "Product", "maxItems": 2, "itemFields": [
+      { "id": "imageUrl", "label": "Product image URL", "type": "url", "required": false },
+      { "id": "imageAlt", "label": "Product image description", "type": "text", "required": false },
+      { "id": "brand", "label": "Brand / publisher", "type": "text", "required": false },
+      { "id": "title", "label": "Product name", "type": "text", "required": false },
+      { "id": "price", "label": "Price", "type": "text", "required": false },
+      { "id": "ctaText", "label": "Button text", "type": "text", "required": false },
+      { "id": "ctaUrl", "label": "Button URL", "type": "url", "required": false }
+    ] }
+  ],
+  "defaults": {
+    "heading": "Secure Your Pre-Order",
+    "products": [
+      {
+        "imageUrl": "https://cdn.mos.cms.futurecdn.net/RWja8FWtZByoAbdqYrZSQ9-1920-80.jpg.webp",
+        "imageAlt": "Grand Theft Auto VI game artwork",
+        "brand": "Rockstar Games",
+        "title": "Grand Theft Auto VI (PS5)",
+        "price": "$79.99",
+        "ctaText": "Shop now",
+        "ctaUrl": "#"
+      },
+      {
+        "imageUrl": "https://cdn.mos.cms.futurecdn.net/RWja8FWtZByoAbdqYrZSQ9-1920-80.jpg.webp",
+        "imageAlt": "Grand Theft Auto VI game artwork",
+        "brand": "Rockstar Games",
+        "title": "Grand Theft Auto VI (Xbox)",
+        "price": "$79.99",
+        "ctaText": "Shop now",
+        "ctaUrl": "#"
+      }
+    ]
+  }
+}

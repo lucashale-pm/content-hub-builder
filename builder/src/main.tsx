@@ -8,6 +8,8 @@ import "../../components/steam-data/styles.css";
 import "../../components/vertical-video/styles.css";
 import "../../components/page-content/styles.css";
 import "../../components/image-gallery/styles.css";
+import "../../components/products/styles.css";
+import "../../components/discover-hubs/styles.css";
 import "../../components/timeline/styles.css";
 import "../../components/game-review/styles.css";
 import "../../components/key-info/styles.css";
