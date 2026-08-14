@@ -1,4 +1,4 @@
-# Direct on page content
+# On Page
 
 - Purpose: Add standalone editorial copy directly to a hub page.
 - Inputs: Optional heading, optional subheading, zero or more paragraphs, and optional button text/URL.

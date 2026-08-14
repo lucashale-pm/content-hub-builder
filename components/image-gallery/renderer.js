@@ -8,6 +8,7 @@ export function renderImageGallery(values, theme) {
   section.style.setProperty("--hub-gallery-ink", theme?.color?.ink || "#1a1a1a");
   section.style.setProperty("--hub-gallery-accent", theme?.color?.accent || "#ff6600");
   section.style.setProperty("--hub-gallery-display-font", theme?.font?.display || "Figtree, sans-serif");
+  section.style.setProperty("--hub-gallery-muted", theme?.color?.muted || "#737373");
 
   const heading = text(values.heading);
   if (heading) {
@@ -37,23 +38,26 @@ export function renderImageGallery(values, theme) {
     });
     gallery.append(track);
 
+    const controls = document.createElement("div");
+    controls.className = "hub-image-gallery__controls";
+    const metrics = document.createElement("div");
+    metrics.className = "hub-image-gallery__metrics";
+    [["comments", "💬"], ["reactions", "♡"]].forEach(([field, icon]) => {
+      if (!text(values[field])) return;
+      const metric = document.createElement("span"); metric.className = "hub-image-gallery__metric"; metric.setAttribute("aria-label", `${text(values[field])} ${field}`);
+      const metricIcon = document.createElement("span"); metricIcon.className = "hub-image-gallery__metric-icon"; metricIcon.textContent = icon;
+      metric.append(metricIcon, document.createTextNode(text(values[field]))); metrics.append(metric);
+    });
+    if (metrics.childElementCount) controls.append(metrics);
+
     if (images.length > 1) {
-      const controls = document.createElement("div");
-      controls.className = "hub-image-gallery__controls";
-      controls.setAttribute("aria-label", "Gallery controls");
-      const previous = document.createElement("button");
-      previous.className = "hub-image-gallery__arrow";
-      previous.type = "button";
-      previous.setAttribute("aria-label", "Previous image");
-      previous.textContent = "←";
+      const count = document.createElement("span");
+      count.className = "hub-image-gallery__count";
+      count.setAttribute("aria-live", "polite");
+      gallery.append(count);
       const dots = document.createElement("div");
       dots.className = "hub-image-gallery__dots";
       dots.setAttribute("aria-label", "Choose gallery image");
-      const next = document.createElement("button");
-      next.className = "hub-image-gallery__arrow";
-      next.type = "button";
-      next.setAttribute("aria-label", "Next image");
-      next.textContent = "→";
 
       const dotButtons = images.map((_, index) => {
         const dot = document.createElement("button");
@@ -71,16 +75,13 @@ export function renderImageGallery(values, theme) {
           dot.classList.toggle("is-active", isActive);
           dot.setAttribute("aria-current", isActive ? "true" : "false");
         });
-        previous.disabled = activeIndex === 0;
-        next.disabled = activeIndex === images.length - 1;
+        count.textContent = `${activeIndex + 1} / ${images.length}`;
       };
-      previous.addEventListener("click", () => track.scrollBy({ left: -track.clientWidth, behavior: "smooth" }));
-      next.addEventListener("click", () => track.scrollBy({ left: track.clientWidth, behavior: "smooth" }));
       track.addEventListener("scroll", setActive, { passive: true });
       setActive();
-      controls.append(previous, dots, next);
-      gallery.append(controls);
+      controls.append(dots);
     }
+    if (controls.childElementCount) gallery.append(controls);
     section.append(gallery);
   }
   section.hidden = !heading && !images.length;

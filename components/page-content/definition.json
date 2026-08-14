@@ -1,6 +1,6 @@
 {
   "id": "page-content",
-  "name": "Direct on page content",
+  "name": "On Page",
   "category": "Editorial",
   "version": 2,
   "renderer": "./renderer.js",

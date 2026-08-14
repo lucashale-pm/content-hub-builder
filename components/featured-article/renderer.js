@@ -53,21 +53,28 @@ export function renderFeaturedArticle(values, theme) {
   }
   const article = document.createElement(text(values.href) ? "a" : "article"); article.className = "hub-featured-article__card";
   if (article instanceof HTMLAnchorElement) article.href = text(values.href);
+  if (text(values.author) || text(values.posted)) {
+    const postHeader = document.createElement("div"); postHeader.className = "hub-featured-article__post-header";
+    if (text(values.avatarUrl) && text(values.author)) { const avatar = document.createElement("img"); avatar.className = "hub-featured-article__post-avatar"; avatar.src = text(values.avatarUrl); avatar.alt = ""; postHeader.append(avatar); }
+    const identity = document.createElement("div"); identity.className = "hub-featured-article__post-identity";
+    if (text(values.author)) { const author = document.createElement("strong"); author.textContent = text(values.author); identity.append(author); }
+    if (text(values.posted)) { const posted = document.createElement("span"); posted.textContent = text(values.posted); identity.append(posted); }
+    if (identity.childElementCount) postHeader.append(identity);
+    const more = document.createElement("span"); more.className = "hub-featured-article__post-more"; more.textContent = "•••"; more.setAttribute("aria-hidden", "true"); postHeader.append(more);
+    article.append(postHeader);
+  }
   if (text(values.imageUrl)) { const media = document.createElement("div"); media.className = "hub-featured-article__media"; const image = document.createElement("img"); image.src = text(values.imageUrl); image.alt = text(values.imageAlt); media.append(image); if (text(values.label)) { const label = document.createElement("span"); label.className = "hub-featured-article__label"; label.textContent = text(values.label); media.append(label); } article.append(media); }
+  const engagement = document.createElement("div"); engagement.className = "hub-featured-article__engagement";
+  [["comments", "💬"], ["reactions", "♡"]].forEach(([name, icon]) => {
+    if (!text(values[name])) return;
+    const metric = document.createElement("span"); metric.className = `hub-featured-article__${name}`; metric.setAttribute("aria-label", `${text(values[name])} ${name}`);
+    const metricIcon = document.createElement("span"); metricIcon.className = "hub-featured-article__engagement-icon"; metricIcon.textContent = icon;
+    metric.append(metricIcon, document.createTextNode(text(values[name]))); engagement.append(metric);
+  });
+  if (engagement.childElementCount) article.append(engagement);
   const body = document.createElement("div"); body.className = "hub-featured-article__body";
   if (text(values.title)) { const title = document.createElement("h3"); title.textContent = text(values.title); body.append(title); }
   if (text(values.summary)) { const summary = document.createElement("p"); summary.className = "hub-featured-article__summary"; summary.textContent = text(values.summary); body.append(summary); }
-  const metaParts = [["author", values.author], ["posted", values.posted], ["comments", values.comments], ["reactions", values.reactions]].filter(([, value]) => text(value));
-  if (metaParts.length) {
-    const meta = document.createElement("div"); meta.className = "hub-featured-article__meta";
-    if (text(values.avatarUrl) && text(values.author)) { const avatar = document.createElement("img"); avatar.className = "hub-featured-article__avatar"; avatar.src = text(values.avatarUrl); avatar.alt = ""; meta.append(avatar); }
-    metaParts.forEach(([name, value]) => {
-      const item = document.createElement("span"); item.className = `hub-featured-article__${name}`;
-      if (name === "comments" || name === "reactions") { const icon = document.createElement("img"); icon.className = "hub-featured-article__metric-icon"; icon.src = `https://cdn.jsdelivr.net/npm/lucide-static@0.468.0/icons/${name === "comments" ? "message-circle" : "heart"}.svg`; icon.alt = ""; item.append(icon); }
-      item.append(document.createTextNode(text(value))); meta.append(item);
-    });
-    body.append(meta);
-  }
   article.append(body); section.append(article);
   section.hidden = !heading && !text(values.title) && !text(values.imageUrl);
   return section;

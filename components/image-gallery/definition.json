@@ -2,10 +2,12 @@
   "id": "image-gallery",
   "name": "Image gallery",
   "category": "Media",
-  "version": 1,
+  "version": 3,
   "renderer": "./renderer.js",
   "fields": [
     { "id": "heading", "label": "Heading", "type": "text", "required": false },
+    { "id": "comments", "label": "Comment count", "type": "text", "required": false },
+    { "id": "reactions", "label": "Reaction count", "type": "text", "required": false },
     { "id": "images", "label": "Images", "type": "collection", "itemLabel": "Image", "maxItems": 6, "required": true, "itemFields": [
       { "id": "imageUrl", "label": "Image URL", "type": "url", "required": true },
       { "id": "imageAlt", "label": "Image description", "type": "text", "required": false }
@@ -13,6 +15,8 @@
   ],
   "defaults": {
     "heading": "Grand Theft Auto VI gallery",
+    "comments": "184",
+    "reactions": "2.4k",
     "images": [
       { "imageUrl": "https://cdn.mos.cms.futurecdn.net/TbbGTvm9FSb2HURbzjwjob-750-80.jpg.webp", "imageAlt": "Grand Theft Auto VI promotional artwork." },
       { "imageUrl": "https://cdn.mos.cms.futurecdn.net/Zq6E8sCZxZUE397u7sGsFd-750-80.jpg.webp", "imageAlt": "Grand Theft Auto VI promotional artwork." },
