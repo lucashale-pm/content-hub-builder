@@ -51,6 +51,9 @@ Run `npm run build` after every code change. Stop local dev servers when asked.
 ## Git and publishing
 
 - Work locally by default. Do not commit or push unless user explicitly asks to push/live/commit.
-- Repository branch is `main`; GitHub Pages deploys from it.
+- Remote repository: `https://github.com/lucashale-pm/content-hub-builder.git` (`origin`).
+- Repository branch is `main`; GitHub Pages deploys automatically on every push to it.
+- Deployment workflow: `.github/workflows/deploy-pages.yml`. It runs `npm ci` and `npm run build` in `builder/`, then publishes `builder/dist`.
+- Node version is `22` (`.nvmrc` and deployment workflow). Do not publish `builder/node_modules` or `builder/dist` manually.
 - Before committing, preserve unrelated user changes and inspect `git status`.
-- When pushing, commit only task files and report commit hash.
+- When requested to publish: run `npm run build` in `builder/`, commit only approved task files, then run `git push origin main`. Report commit hash; GitHub Actions completes Pages deployment after push.
