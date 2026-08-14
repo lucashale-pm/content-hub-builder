@@ -16,3 +16,11 @@
 .hub-featured-article__comments, .hub-featured-article__reactions { align-items: center; display: inline-flex; gap: 3px; }
 .hub-featured-article__metric-icon { display: block; height: 12px; opacity: .7; width: 12px; }
 .hub-featured-article__card:focus-visible { outline: 3px solid var(--hub-featured-accent, #ff6600); outline-offset: -3px; }
+.hub-featured-article.is-standard { gap: 0; padding: 24px 16px; }
+.hub-featured-article__standard { align-items: start; color: inherit; display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr) 80px; text-decoration: none; }
+.hub-featured-article__standard-content { display: grid; gap: 7px; min-width: 0; }
+.hub-featured-article__standard-label { --hub-standard-label: var(--hub-featured-accent, #ff6600); background: color-mix(in srgb, var(--hub-standard-label) 12%, white); border: 1px solid color-mix(in srgb, var(--hub-standard-label) 28%, white); border-radius: 4px; color: var(--hub-standard-label); font-family: var(--hub-featured-body-font, Figtree, sans-serif); font-size: var(--hub-text-xs); font-weight: var(--hub-weight-bold); justify-self: start; letter-spacing: .04em; padding: 4px 6px; text-transform: uppercase; }
+.hub-featured-article__standard-content h3 { font-family: var(--hub-featured-display-font, Figtree, sans-serif); font-size: var(--hub-text-lg); font-weight: var(--hub-weight-bold); line-height: 1.15; margin: 0; }
+.hub-featured-article__standard-thumbnail { aspect-ratio: 1 / 1; border-radius: 6px; display: block; height: 80px; object-fit: cover; width: 80px; }
+.hub-featured-article__standard-meta { gap: 6px; }.hub-featured-article__standard-metric-icon { font-size: 10px; margin-right: 2px; }.hub-featured-article__standard .hub-featured-article__comments, .hub-featured-article__standard .hub-featured-article__reactions { gap: 0; }.hub-featured-article__standard .hub-featured-article__comments::before, .hub-featured-article__standard .hub-featured-article__reactions::before { content: none; }
+.hub-featured-article__standard:focus-visible { outline: 3px solid var(--hub-featured-accent, #ff6600); outline-offset: 3px; }

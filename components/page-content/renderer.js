@@ -7,6 +7,7 @@ export function renderPageContent(values, theme) {
   section.style.setProperty("--hub-content-background", theme?.color?.background || "#ffffff");
   section.style.setProperty("--hub-content-ink", theme?.color?.ink || "#1a1a1a");
   section.style.setProperty("--hub-content-muted", theme?.color?.muted || "#737373");
+  section.style.setProperty("--hub-content-accent", theme?.color?.accent || "#171717");
   section.style.setProperty("--hub-content-display-font", theme?.font?.display || "Figtree, sans-serif");
   section.style.setProperty("--hub-content-body-font", theme?.font?.body || "Figtree, sans-serif");
 
@@ -31,6 +32,14 @@ export function renderPageContent(values, theme) {
     element.textContent = paragraph;
     section.append(element);
   });
-  section.hidden = !heading && !subheading && !paragraphs.length;
+  const ctaText = text(values.ctaText);
+  if (ctaText) {
+    const cta = document.createElement(text(values.ctaUrl) ? "a" : "span");
+    cta.className = "hub-page-content__cta";
+    cta.textContent = ctaText;
+    if (cta instanceof HTMLAnchorElement) cta.href = text(values.ctaUrl);
+    section.append(cta);
+  }
+  section.hidden = !heading && !subheading && !paragraphs.length && !ctaText;
   return section;
 }

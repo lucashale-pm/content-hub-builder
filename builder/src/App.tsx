@@ -18,6 +18,7 @@ import countdownDefinition from "../../components/countdown/definition.json";
 import editorHighlightDefinition from "../../components/editor-highlight/definition.json";
 import productsDefinition from "../../components/products/definition.json";
 import discoverHubsDefinition from "../../components/discover-hubs/definition.json";
+import fanHubDefinition from "../../components/fan-hub/definition.json";
 // Component renderers remain source-owned. React only hosts their DOM output.
 // @ts-ignore
 import { renderHero } from "../../components/hero/renderer.js";
@@ -55,6 +56,9 @@ import { renderEditorHighlight } from "../../components/editor-highlight/rendere
 import { renderProducts } from "../../components/products/renderer.js";
 // @ts-ignore
 import { renderDiscoverHubs } from "../../components/discover-hubs/renderer.js";
+// @ts-ignore
+import { renderFanHub } from "../../components/fan-hub/renderer.js";
+// @ts-ignore
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { wireframeTheme } from "../../themes/wireframe";
@@ -75,6 +79,7 @@ const definitions = [
   imageGalleryDefinition,
   productsDefinition,
   discoverHubsDefinition,
+  fanHubDefinition,
   inlinePollDefinition,
   rankingsTableDefinition,
   timelineDefinition,
@@ -86,11 +91,11 @@ const definitions = [
   contributionTrackerDefinition,
 ] as Definition[];
 const byId = new Map(definitions.map((definition) => [definition.id, definition]));
-const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent, "image-gallery": renderImageGallery, products: renderProducts, "discover-hubs": renderDiscoverHubs, timeline: renderTimeline, "game-review": renderGameReview, "key-info": renderKeyInfo, "inline-poll": renderInlinePoll, "rankings-table": renderRankingsTable, "contribution-tracker": renderContributionTracker, "featured-article": renderFeaturedArticle, stance: renderStance, countdown: renderCountdown, "editor-highlight": renderEditorHighlight };
+const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent, "image-gallery": renderImageGallery, products: renderProducts, "discover-hubs": renderDiscoverHubs, "fan-hub": renderFanHub, timeline: renderTimeline, "game-review": renderGameReview, "key-info": renderKeyInfo, "inline-poll": renderInlinePoll, "rankings-table": renderRankingsTable, "contribution-tracker": renderContributionTracker, "featured-article": renderFeaturedArticle, stance: renderStance, countdown: renderCountdown, "editor-highlight": renderEditorHighlight };
 const themes = { wireframe: wireframeTheme };
 const selectorPreviewSettings: Record<string, { scale: number; expand?: boolean }> = {
   hero: { scale: 1 }, countdown: { scale: 0.96 }, "featured-article": { scale: 0.98 }, feed: { scale: 0.96 },
-  "page-content": { scale: 1 }, "vertical-video": { scale: 0.94 }, "image-gallery": { scale: 1 }, products: { scale: 0.9 }, "discover-hubs": { scale: 0.88 }, "inline-poll": { scale: 0.98 },
+  "page-content": { scale: 1 }, "vertical-video": { scale: 0.94 }, "image-gallery": { scale: 1 }, products: { scale: 0.9 }, "discover-hubs": { scale: 0.88 }, "fan-hub": { scale: 0.98 }, "inline-poll": { scale: 0.98 },
   "rankings-table": { scale: 0.94 }, timeline: { scale: 0.9 }, "game-review": { scale: 1 }, "key-info": { scale: 0.94, expand: true },
   "steam-data": { scale: 0.94 }, "editor-highlight": { scale: 0.92 }, stance: { scale: 0.92 }, "contribution-tracker": { scale: 0.92 },
 };
@@ -119,11 +124,14 @@ function upgradeDiscoverHubsValues(values: Values): Values {
   }) : values.hubs;
   return { ...values, hubs };
 }
+function upgradeFeaturedArticleValues(values: Values): Values {
+  return { ...values, contentType: values.contentType || "Article", presentation: values.presentation === "Standard" ? "Standard" : "Featured" };
+}
 function upgradeInstanceValues(componentId: string, values: Values): Values {
   if (componentId === "stance") return upgradeStanceValues(values);
   if (componentId === "feed") return upgradeFeedValues(values);
   if (componentId === "discover-hubs") return upgradeDiscoverHubsValues(values);
-  if (componentId === "featured-article" && !values.contentType) return { ...values, contentType: "Article" };
+  if (componentId === "featured-article") return upgradeFeaturedArticleValues(values);
   return values;
 }
 function storedDraft(): Draft { try { const draft = JSON.parse(localStorage.getItem("content-hub-workshop-draft") || "") as Draft; return { ...draft, brand: "wireframe", instances: Array.isArray(draft.instances) ? draft.instances.map((instance) => ({ ...instance, values: upgradeInstanceValues(instance.componentId, instance.values) })) : [] }; } catch { return initialDraft(); } }

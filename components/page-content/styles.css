@@ -3,4 +3,6 @@
 .hub-page-content__heading { font: 700 26px/1.08 var(--hub-content-display-font, Figtree, sans-serif); margin: 0; }
 .hub-page-content__subheading { color: currentColor; font: 600 17px/1.35 var(--hub-content-body-font, Figtree, sans-serif); margin: 0; }
 .hub-page-content__paragraph { font: 400 16px/1.5 var(--hub-content-body-font, Figtree, sans-serif); margin: 0; }
+.hub-page-content__cta { background: var(--hub-content-accent, #171717); border: 1px solid var(--hub-content-accent, #171717); border-radius: 6px; color: #fff; display: block; font-family: var(--hub-content-body-font, Figtree, sans-serif); font-size: var(--hub-text-sm); font-weight: var(--hub-weight-bold); line-height: 1; margin-top: 4px; min-height: 42px; padding: 13px 16px; text-align: center; text-decoration: none; }
+.hub-page-content__cta:focus-visible { outline: 3px solid var(--hub-content-ink, #171717); outline-offset: 3px; }
 .hub-page-content__heading { font-size: var(--hub-text-2xl); font-weight: var(--hub-weight-bold); }.hub-page-content__subheading { font-size: var(--hub-text-lg); font-weight: var(--hub-weight-semibold); }

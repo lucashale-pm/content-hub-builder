@@ -1,0 +1,39 @@
+{
+  "id": "fan-hub",
+  "name": "Fan hub link",
+  "category": "Discovery",
+  "version": 4,
+  "renderer": "./renderer.js",
+  "fields": [
+    { "id": "gameTitle", "label": "Game title", "type": "text", "required": true },
+    { "id": "hubUrl", "label": "Fan hub URL", "type": "url", "required": false },
+    { "id": "ctaText", "label": "Hub button text", "type": "text", "required": false },
+    { "id": "storiesLabel", "label": "Stories heading", "type": "text", "required": false },
+    { "id": "articles", "label": "Hub article listings", "type": "collection", "itemLabel": "Article listing", "maxItems": 4, "itemFields": [
+      { "id": "imageUrl", "label": "Listing image URL", "type": "url", "required": false },
+      { "id": "imageAlt", "label": "Listing image description", "type": "text", "required": false },
+      { "id": "label", "label": "Content label", "type": "text", "required": false },
+      { "id": "headline", "label": "Article headline", "type": "textarea", "required": false },
+      { "id": "author", "label": "Author", "type": "text", "required": false },
+      { "id": "avatarUrl", "label": "Author image URL", "type": "url", "required": false },
+      { "id": "posted", "label": "Posted label", "type": "text", "required": false },
+      { "id": "comments", "label": "Comment count", "type": "text", "required": false },
+      { "id": "reactions", "label": "Reaction count", "type": "text", "required": false },
+      { "id": "href", "label": "Article URL", "type": "url", "required": false }
+    ] },
+    { "id": "scrollLabel", "label": "Scroll button label", "type": "text", "required": false }
+  ],
+  "defaults": {
+    "gameTitle": "The Elder Scrolls V: Skyrim",
+    "hubUrl": "#skyrim-hub",
+    "ctaText": "Explore Skyrim hub",
+    "storiesLabel": "Latest from Skyrim",
+    "articles": [
+      { "imageUrl": "https://cdn.mos.cms.futurecdn.net/KqM9fXo6MgAjhSUaxbCrWX-650-80.png.webp", "imageAlt": "Skyrim landscape", "label": "Mods", "headline": "Best Skyrim mods to make your next playthrough feel brand new", "author": "Maya Chen", "avatarUrl": "./assets/maya-chen.png", "posted": "Updated today", "comments": "86", "reactions": "1.8k", "href": "#skyrim-mods" },
+      { "imageUrl": "https://cdn.mos.cms.futurecdn.net/PjhveTjTLLAvSuSeZsjGsJ-1920-80.jpg", "imageAlt": "Fantasy RPG scene", "label": "Guide", "headline": "Where to find every rare item and hidden quest in Skyrim", "author": "Raj Patel", "avatarUrl": "./assets/raj-patel.png", "posted": "2 days ago", "comments": "42", "reactions": "920", "href": "#skyrim-guide" },
+      { "imageUrl": "https://cdn.mos.cms.futurecdn.net/3mV3FHFfPKcMq2BRAAKX2Q-650-80.jpg.webp", "imageAlt": "Fantasy character", "label": "Features", "headline": "Why Skyrim still owns the open-world RPG fantasy", "author": "Jordan Lee", "avatarUrl": "./assets/jordan-lee.png", "posted": "4 days ago", "comments": "214", "reactions": "3.1k", "href": "#skyrim-feature" },
+      { "imageUrl": "https://cdn.mos.cms.futurecdn.net/nkNWnPtjgMV92BegQ7eEnU-650-80.jpg.webp", "imageAlt": "Fantasy action scene", "label": "News", "headline": "The next Elder Scrolls update has players returning to Tamriel", "author": "Maya Chen", "avatarUrl": "./assets/maya-chen.png", "posted": "1 week ago", "comments": "63", "reactions": "1.2k", "href": "#skyrim-news" }
+    ],
+    "scrollLabel": "Show more Skyrim stories"
+  }
+}

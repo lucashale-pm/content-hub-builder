@@ -19,8 +19,10 @@ export function renderFeaturedArticle(values, theme) {
   section.style.setProperty("--hub-featured-display-font", theme?.font?.display || "Figtree, sans-serif");
   section.style.setProperty("--hub-featured-body-font", theme?.font?.body || "Figtree, sans-serif");
   const heading = text(values.heading);
-  if (heading) { const title = document.createElement("h2"); title.className = "hub-featured-article__heading"; title.textContent = heading; section.append(title); }
   const isVideo = values.contentType === "YouTube video";
+  const isStandard = !isVideo && values.presentation === "Standard";
+  section.classList.toggle("is-standard", isStandard);
+  if (heading && !isStandard) { const title = document.createElement("h2"); title.className = "hub-featured-article__heading"; title.textContent = heading; section.append(title); }
   if (isVideo) {
     const subheading = text(values.subheading);
     if (subheading) { const copy = document.createElement("p"); copy.className = "hub-featured-article__subheading"; copy.textContent = subheading; section.append(copy); }
@@ -28,6 +30,25 @@ export function renderFeaturedArticle(values, theme) {
     const embedUrl = youtubeEmbedUrl(source);
     if (embedUrl) { const video = document.createElement("iframe"); video.className = "hub-featured-article__video"; video.src = embedUrl; video.title = heading || "Featured YouTube video"; video.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"; video.allowFullscreen = true; section.append(video); }
     section.hidden = !heading && !subheading && !embedUrl;
+    return section;
+  }
+  if (isStandard) {
+    const article = document.createElement(text(values.href) ? "a" : "article"); article.className = "hub-featured-article__standard";
+    if (article instanceof HTMLAnchorElement) article.href = text(values.href);
+    const body = document.createElement("div"); body.className = "hub-featured-article__standard-content";
+    if (text(values.label)) { const label = document.createElement("span"); label.className = "hub-featured-article__standard-label"; label.textContent = text(values.label); body.append(label); }
+    if (text(values.title)) { const title = document.createElement("h3"); title.textContent = text(values.title); body.append(title); }
+    const metaParts = [["author", values.author], ["posted", values.posted], ["comments", values.comments], ["reactions", values.reactions]].filter(([, value]) => text(value));
+    if (metaParts.length) {
+      const meta = document.createElement("div"); meta.className = "hub-featured-article__meta hub-featured-article__standard-meta";
+      if (text(values.avatarUrl) && text(values.author)) { const avatar = document.createElement("img"); avatar.className = "hub-featured-article__avatar"; avatar.src = text(values.avatarUrl); avatar.alt = ""; meta.append(avatar); }
+      metaParts.forEach(([name, value]) => { const item = document.createElement("span"); item.className = `hub-featured-article__${name}`; if (name === "comments" || name === "reactions") { const icon = document.createElement("span"); icon.className = "hub-featured-article__standard-metric-icon"; icon.textContent = name === "comments" ? "💬" : "♡"; item.append(icon); } item.append(document.createTextNode(text(value))); meta.append(item); });
+      body.append(meta);
+    }
+    article.append(body);
+    if (text(values.imageUrl)) { const image = document.createElement("img"); image.className = "hub-featured-article__standard-thumbnail"; image.src = text(values.imageUrl); image.alt = text(values.imageAlt); article.append(image); }
+    section.append(article);
+    section.hidden = !text(values.title) && !text(values.imageUrl);
     return section;
   }
   const article = document.createElement(text(values.href) ? "a" : "article"); article.className = "hub-featured-article__card";

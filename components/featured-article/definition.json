@@ -1,10 +1,11 @@
 {
   "id": "featured-article",
-  "name": "Featured content",
+  "name": "Standard content",
   "category": "Content",
-  "version": 1,
+  "version": 2,
   "fields": [
     { "id": "contentType", "label": "Content type", "type": "radio", "required": false, "options": ["Article", "YouTube video"] },
+    { "id": "presentation", "label": "Article presentation", "type": "radio", "required": false, "options": ["Featured", "Standard"], "showWhen": { "field": "contentType", "equals": "Article" } },
     { "id": "heading", "label": "Section heading", "type": "text", "required": false },
     { "id": "subheading", "label": "Video subheading", "type": "textarea", "required": false, "showWhen": { "field": "contentType", "equals": "YouTube video" } },
     { "id": "videoUrl", "label": "YouTube URL", "type": "url", "required": false, "showWhen": { "field": "contentType", "equals": "YouTube video" } },
@@ -22,6 +23,7 @@
   ],
   "defaults": {
     "contentType": "Article",
+    "presentation": "Featured",
     "heading": "Featured",
     "subheading": "",
     "label": "Feature",
