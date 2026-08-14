@@ -18,15 +18,15 @@ Each builder component remains in `../components/<component-name>/`. Add a brows
 
 The builder owns composition, draft persistence, sharing, and ordering. Components own their own field semantics and visual output.
 
-## Current catalogue seed
+## Legacy catalogue seed
 
-`catalogue.json` records the existing `article-card` and `content-carousel` components as the initial registry seed. It is configuration only; it does not replace their TypeScript contracts.
+`catalogue.json` is a historical registry seed and is not imported by the current workshop runtime. The live registry is the explicit definition and renderer registration in `src/App.tsx`, with component styles imported in `src/main.tsx`. Do not add new components to `catalogue.json`.
 
 ## Planned runtime files
 
 - `index.html`: static application entry point
 - `app.js`: builder state, persistence, sharing, and drag/reorder behavior
 - `styles.css`: desktop authoring shell and mobile preview frame
-- `catalogue.json`: registered component metadata
+- `catalogue.json`: legacy reference only; not runtime metadata
 
 Keep all URLs relative because GitHub Pages serves project sites below a repository path.
