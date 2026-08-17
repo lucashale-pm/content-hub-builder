@@ -1,7 +1,7 @@
 {
   "id": "image-gallery",
   "name": "Image gallery",
-  "category": "Media",
+  "category": "Video",
   "version": 3,
   "renderer": "./renderer.js",
   "fields": [
