@@ -1,0 +1,38 @@
+{
+  "id": "reddit-style-card",
+  "name": "Community article card",
+  "category": "Content",
+  "version": 1,
+  "fields": [
+    { "id": "hubName", "label": "Hub name", "type": "text", "required": true },
+    { "id": "hubIconUrl", "label": "Hub logo URL", "type": "url", "required": false },
+    { "id": "published", "label": "Published label", "type": "text", "required": false },
+    { "id": "followLabel", "label": "Follow button text", "type": "text", "required": false },
+    { "id": "title", "label": "Article title", "type": "textarea", "required": true },
+    { "id": "summary", "label": "Article summary", "type": "textarea", "required": false },
+    { "id": "imageUrl", "label": "Optional article image URL", "type": "url", "required": false },
+    { "id": "imageAlt", "label": "Article image description", "type": "text", "required": false },
+    { "id": "authorName", "label": "Author name", "type": "text", "required": true },
+    { "id": "authorRole", "label": "Author role", "type": "text", "required": false },
+    { "id": "authorAvatarUrl", "label": "Author image URL", "type": "url", "required": false },
+    { "id": "reactions", "label": "Reaction count", "type": "text", "required": false },
+    { "id": "comments", "label": "Comment count", "type": "text", "required": false },
+    { "id": "href", "label": "Article URL", "type": "url", "required": false }
+  ],
+  "defaults": {
+    "hubName": "Elden Ring",
+    "hubIconUrl": "https://cdn.mos.cms.futurecdn.net/MAmwjhEzKXZmt33oLSRpqd-650-80.jpg.webp",
+    "published": "1 hr ago",
+    "followLabel": "Follow",
+    "title": "The Elden Ring detail I still cannot stop thinking about",
+    "summary": "One small choice in the Lands Between changes how this whole quest line feels. Here is why it has stayed with me.",
+    "imageUrl": "",
+    "imageAlt": "",
+    "authorName": "Maya Chen",
+    "authorRole": "RPG Editor",
+    "authorAvatarUrl": "./assets/maya-chen.png",
+    "reactions": "2.4k",
+    "comments": "184",
+    "href": "#"
+  }
+}
