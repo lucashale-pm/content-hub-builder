@@ -1,0 +1,25 @@
+.hub-reddit-card { background: var(--hub-reddit-surface, #fff); color: var(--hub-reddit-ink, #171717); font-family: var(--hub-reddit-font, Arial, sans-serif); padding: 20px 16px; }
+.hub-reddit-card__article { color: inherit; display: grid; gap: 14px; text-decoration: none; }
+.hub-reddit-card__header, .hub-reddit-card__byline, .hub-reddit-card__engagement { align-items: center; display: flex; }
+.hub-reddit-card__header { gap: 8px; }
+.hub-reddit-card__hub-icon { background: #e4e4e7; border-radius: 50%; height: 26px; object-fit: cover; width: 26px; }
+.hub-reddit-card__hub-icon--fallback { align-items: center; display: inline-flex; font-size: 12px; font-weight: 700; justify-content: center; }
+.hub-reddit-card__identity { display: flex; font-size: var(--hub-text-xs); gap: 5px; min-width: 0; }
+.hub-reddit-card__hub-name { white-space: nowrap; }
+.hub-reddit-card__published { color: var(--hub-reddit-muted, #737373); }
+.hub-reddit-card__published::before { content: "· "; }
+.hub-reddit-card__follow { border: 1px solid var(--hub-reddit-border, #d4d4d8); border-radius: 999px; color: var(--hub-reddit-ink, #171717); font-size: var(--hub-text-xs); font-weight: 700; margin-left: auto; padding: 6px 12px; }
+.hub-reddit-card__body { display: grid; gap: 8px; }
+.hub-reddit-card__title { font-family: var(--hub-reddit-font, Arial, sans-serif); font-size: var(--hub-text-xl); font-weight: 700; line-height: 1.16; margin: 0; }
+.hub-reddit-card__summary { color: var(--hub-reddit-muted, #737373); display: -webkit-box; font-size: var(--hub-text-base); line-height: 1.35; margin: 0; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+.hub-reddit-card__image { aspect-ratio: 16 / 9; border-radius: 8px; display: block; object-fit: cover; width: 100%; }
+.hub-reddit-card__byline { gap: 8px; }
+.hub-reddit-card__author-avatar { border-radius: 50%; height: 28px; object-fit: cover; width: 28px; }
+.hub-reddit-card__byline > div:not(.hub-reddit-card__engagement) { align-items: baseline; display: flex; flex-wrap: wrap; font-size: var(--hub-text-xs); gap: 4px; }
+.hub-reddit-card__role { color: var(--hub-reddit-muted, #737373); }
+.hub-reddit-card__author { font-size: var(--hub-text-xs); }
+.hub-reddit-card__role::before { content: "· "; }
+.hub-reddit-card__engagement { color: var(--hub-reddit-muted, #737373); flex-wrap: nowrap; font-size: var(--hub-text-xs); gap: 10px; white-space: nowrap; }
+.hub-reddit-card__metric { align-items: center; display: inline-flex; gap: 4px; }
+.hub-reddit-card__metric-icon { height: 14px; width: 14px; }
+.hub-reddit-card__article:focus-visible { outline: 3px solid var(--hub-reddit-accent, #171717); outline-offset: 3px; }

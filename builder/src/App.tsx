@@ -40,6 +40,7 @@ import editorHighlightDefinition from '../../components/editor-highlight/definit
 import productsDefinition from '../../components/products/definition.json';
 import discoverHubsDefinition from '../../components/discover-hubs/definition.json';
 import fanHubDefinition from '../../components/fan-hub/definition.json';
+import redditStyleCardDefinition from '../../components/reddit-style-card/definition.json';
 // Component renderers remain source-owned. React only hosts their DOM output.
 // @ts-ignore
 import { renderHero } from '../../components/hero/renderer.js';
@@ -79,6 +80,8 @@ import { renderProducts } from '../../components/products/renderer.js';
 import { renderDiscoverHubs } from '../../components/discover-hubs/renderer.js';
 // @ts-ignore
 import { renderFanHub } from '../../components/fan-hub/renderer.js';
+// @ts-ignore
+import { renderRedditStyleCard } from '../../components/reddit-style-card/renderer.js';
 // @ts-ignore
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -128,6 +131,7 @@ const definitions = [
   editorHighlightDefinition,
   stanceDefinition,
   contributionTrackerDefinition,
+  redditStyleCardDefinition,
 ] as Definition[];
 const byId = new Map(definitions.map((definition) => [definition.id, definition]));
 const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = {
@@ -150,6 +154,7 @@ const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement>
   stance: renderStance,
   countdown: renderCountdown,
   'editor-highlight': renderEditorHighlight,
+  'reddit-style-card': renderRedditStyleCard,
 };
 const themes = { wireframe: wireframeTheme };
 const selectorPreviewSettings: Record<string, { scale: number; expand?: boolean }> = {
