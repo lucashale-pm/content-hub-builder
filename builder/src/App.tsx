@@ -941,7 +941,7 @@ export default function App() {
         <div className="mb-6 flex items-center gap-2 font-bold"><Component className="size-5 shrink-0" /><span className="truncate">Content hub workshop</span></div>
         <nav className="grid gap-1" aria-label="Builder components">
           <Button variant={activePanel === 'add' ? 'default' : 'ghost'} className="justify-start" onClick={() => setActivePanel('add')}><Plus className="size-4" /> Add new component</Button>
-          <Button variant={activePanel === 'outline' ? 'default' : 'ghost'} className="justify-start" onClick={() => setActivePanel('outline')}><GripVertical className="size-4" /> Page outline <span className="ml-auto text-xs">{draft.instances.length}</span></Button>
+          <Button variant={activePanel === 'outline' ? 'default' : 'ghost'} className="justify-start" onClick={() => setActivePanel('outline')}><GripVertical className="size-4" /> Page outline</Button>
           <Button variant={activePanel === 'edit' ? 'default' : 'ghost'} className="justify-start" onClick={() => setActivePanel('edit')} disabled={!selectedInstance}><Pencil className="size-4" /> Edit component</Button>
         </nav>
       </aside>
