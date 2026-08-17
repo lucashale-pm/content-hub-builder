@@ -11,4 +11,12 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: { alias: { "@": path.resolve(root, "./src") } },
   server: { fs: { allow: [path.resolve(root, "..")] } },
+  build: {
+    rollupOptions: {
+      input: {
+        builder: path.resolve(root, "index.html"),
+        componentViewer: path.resolve(root, "component-viewer/index.html"),
+      },
+    },
+  },
 });

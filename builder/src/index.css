@@ -1,9 +1,44 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root { font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #18181b; background: #f4f4f5; }
-* { box-sizing: border-box; }
-body { margin: 0; min-width: 1120px; }
-button, input, select, textarea { font: inherit; }
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  color: #18181b;
+  background: #f4f4f5;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 1120px;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[role='button']:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+.hub-editor-help {
+  color: #52525b;
+  font-size: 11px;
+  line-height: 1.35;
+}
 
 /* Fallback values. Component type rules consume these semantic tokens. */
-[data-component] { --hub-type-display: 48px; --hub-type-h2: 24px; --hub-type-h3: 20px; --hub-type-body: 16px; --hub-type-small: 14px; --hub-type-label: 12px; }
+[data-component] {
+  --hub-type-display: 48px;
+  --hub-type-h2: 24px;
+  --hub-type-h3: 20px;
+  --hub-type-body: 16px;
+  --hub-type-small: 14px;
+  --hub-type-label: 12px;
+}
