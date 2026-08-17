@@ -59,6 +59,10 @@ import { renderDiscoverHubs } from "../../components/discover-hubs/renderer.js";
 // @ts-ignore
 import { renderFanHub } from "../../components/fan-hub/renderer.js";
 // @ts-ignore
+import videoRadarDefinition from "../../components/video-radar/definition.json";
+// @ts-ignore
+import { renderVideoRadar } from "../../components/video-radar/renderer.js";
+// @ts-ignore
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { wireframeTheme } from "../../themes/wireframe";
@@ -80,6 +84,7 @@ const definitions = [
   productsDefinition,
   discoverHubsDefinition,
   fanHubDefinition,
+  videoRadarDefinition,
   inlinePollDefinition,
   rankingsTableDefinition,
   timelineDefinition,
@@ -91,11 +96,11 @@ const definitions = [
   contributionTrackerDefinition,
 ] as Definition[];
 const byId = new Map(definitions.map((definition) => [definition.id, definition]));
-const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent, "image-gallery": renderImageGallery, products: renderProducts, "discover-hubs": renderDiscoverHubs, "fan-hub": renderFanHub, timeline: renderTimeline, "game-review": renderGameReview, "key-info": renderKeyInfo, "inline-poll": renderInlinePoll, "rankings-table": renderRankingsTable, "contribution-tracker": renderContributionTracker, "featured-article": renderFeaturedArticle, stance: renderStance, countdown: renderCountdown, "editor-highlight": renderEditorHighlight };
+const renderers: Record<string, (values: Values, theme: unknown) => HTMLElement> = { hero: renderHero, feed: renderFeed, "steam-data": renderSteamData, "vertical-video": renderVerticalVideo, "page-content": renderPageContent, "image-gallery": renderImageGallery, products: renderProducts, "discover-hubs": renderDiscoverHubs, "fan-hub": renderFanHub, "video-radar": renderVideoRadar, timeline: renderTimeline, "game-review": renderGameReview, "key-info": renderKeyInfo, "inline-poll": renderInlinePoll, "rankings-table": renderRankingsTable, "contribution-tracker": renderContributionTracker, "featured-article": renderFeaturedArticle, stance: renderStance, countdown: renderCountdown, "editor-highlight": renderEditorHighlight };
 const themes = { wireframe: wireframeTheme };
 const selectorPreviewSettings: Record<string, { scale: number; expand?: boolean }> = {
   hero: { scale: 1 }, countdown: { scale: 0.96 }, "featured-article": { scale: 0.98 }, feed: { scale: 0.96 },
-  "page-content": { scale: 1 }, "vertical-video": { scale: 0.94 }, "image-gallery": { scale: 1 }, products: { scale: 0.9 }, "discover-hubs": { scale: 0.88 }, "fan-hub": { scale: 0.98 }, "inline-poll": { scale: 0.98 },
+  "page-content": { scale: 1 }, "vertical-video": { scale: 0.94 }, "video-radar": { scale: 0.96 }, "image-gallery": { scale: 1 }, products: { scale: 0.9 }, "discover-hubs": { scale: 0.88 }, "fan-hub": { scale: 0.98 }, "inline-poll": { scale: 0.98 },
   "rankings-table": { scale: 0.94 }, timeline: { scale: 0.9 }, "game-review": { scale: 1 }, "key-info": { scale: 0.94, expand: true },
   "steam-data": { scale: 0.94 }, "editor-highlight": { scale: 0.92 }, stance: { scale: 0.92 }, "contribution-tracker": { scale: 0.92 },
 };

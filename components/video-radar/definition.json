@@ -1,0 +1,27 @@
+{
+  "id": "video-radar",
+  "name": "Video radar",
+  "category": "Live data",
+  "version": 1,
+  "renderer": "./renderer.js",
+  "fields": [
+    { "id": "heading", "label": "Heading", "type": "text", "required": true },
+    { "id": "feedEndpoint", "label": "Local feed endpoint", "type": "url", "required": true },
+    { "id": "sourceUrl", "label": "Feed source URL", "type": "url", "required": true },
+    { "id": "itemCount", "label": "Videos to show", "type": "select", "required": true, "options": ["3", "4", "5"] },
+    { "id": "showDescriptions", "label": "Show clip descriptions", "type": "toggle", "required": false }
+  ],
+  "defaults": {
+    "heading": "GamesRadar+ video radar",
+    "feedEndpoint": "/live-data/gamesradar-videos",
+    "sourceUrl": "https://airedale.futurecdn.net/feeds/feed_1782389430417.yahoo-video",
+    "itemCount": "4",
+    "showDescriptions": false,
+    "fallbackItems": [
+      { "title": "What game genres are women \"allowed\" to play? | G+RLS EP3", "description": "GamesRadar+ panel explores gaming spaces and barriers facing women players.", "videoUrl": "https://cdn.jwplayer.com/videos/WM0egdQ8-Yc50y07K.mp4", "imageUrl": "https://cdn.jwplayer.com/v2/media/WM0egdQ8/poster.jpg", "duration": "43:36", "category": "News" },
+      { "title": "Marvel Tokon top 5 special moves", "description": "PlayStation tag team fighter has some incredible moves.", "videoUrl": "https://cdn.jwplayer.com/videos/zVcJaDsC-Yc50y07K.mp4", "imageUrl": "https://cdn.jwplayer.com/v2/media/zVcJaDsC/poster.jpg", "duration": "0:48", "category": "News" },
+      { "title": "We won't have to wait 7 years for the next Kingdom Come RPG", "description": "Good news for Kingdom Come Deliverance fans.", "videoUrl": "https://cdn.jwplayer.com/videos/8LKGAjV2-Yc50y07K.mp4", "imageUrl": "https://cdn.jwplayer.com/v2/media/8LKGAjV2/poster.jpg", "duration": "0:54", "category": "News" },
+      { "title": "We may know the name of The Elder Scrolls 6 thanks to a Starfield Easter egg", "description": "A new clue could point to Elder Scrolls 6's name.", "videoUrl": "https://cdn.jwplayer.com/videos/1gwJC0uV-Yc50y07K.mp4", "imageUrl": "https://cdn.jwplayer.com/v2/media/1gwJC0uV/poster.jpg", "duration": "1:01", "category": "News" }
+    ]
+  }
+}
