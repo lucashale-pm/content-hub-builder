@@ -864,7 +864,6 @@ export default function App() {
     return false;
   };
   const exportDraft = () => {
-    if (!guardValid('download this page')) return;
     const file = new Blob([JSON.stringify(draft, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(file);
     const link = document.createElement('a');
